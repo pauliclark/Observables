@@ -1,0 +1,20 @@
+{
+  "name": "Observables",
+  "version": "1.0.0",
+  "description": "Package of Observable parameters",
+  "main": "index.js",
+  "type": "module",
+  "repository": "https://github.com/pauliclark/Observables.git",
+  "author": "pauliclark <paul@venuescanner.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest"
+  },
+  "dependencies": {
+    "jest": "^27.0.6"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0"
+  }
+}
