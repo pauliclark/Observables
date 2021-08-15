@@ -12,7 +12,7 @@ class Prop extends PropEvents {
         return this
       },
       set: (v) => {
-        return this.set(v)
+        this.set(v)
       }
     })
   }
@@ -27,11 +27,12 @@ class Prop extends PropEvents {
   }
 
   get () {
+    // console.log("get")
     return this.value
   }
 
   format () {
-    return this.value === null ? '' : this.value
+    return this.value === null ? '' : this.value.toString()
   }
 
   parse (value) {
@@ -43,14 +44,24 @@ class Prop extends PropEvents {
   }
 
   toString () {
-    return this.get()
+    return this.format()
   }
 
   valueOf () {
+      // console.log(this.value)
     return this.get()
   }
   
-  toPrimitive () {
+  [Symbol.toPrimitive] (hint) {
+    // console.log(hint)
+    switch(hint) {
+      case 'number': 
+        return this.value * 1
+      case 'string': 
+        return this.value.toString()
+      case 'default': 
+        return this.value
+    }
     return this.get()
   }
 

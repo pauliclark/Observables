@@ -12,11 +12,15 @@ class PropEvents {
       }
     })
   }
-  static isObservable = true
+  isObservable = true
   on (eventName, callback) {
     if (!(Object.values(events).includes(eventName))) throw new Error(`${eventName} is not a valid event`)
     if (!(callback instanceof Function)) throw new Error('Event listener is not a function')
     this.eventCallbacks[eventName].push(callback)
+  }
+  off (eventName, callback) {
+    const idx = this.eventCallbacks[eventName].indexOf(callback)
+    if (idx>=0) this.eventCallbacks[eventName].splice(idx,1)
   }
 
   bubble (eventName, target) {
@@ -27,7 +31,8 @@ class PropEvents {
     if (!this.eventCallbacks[eventName]) throw new Error(`Cannot process event ${eventName}`)
     for (let c = this.eventCallbacks[eventName].length - 1; c >= 0; c--) {
       try {
-        const response = await this.eventCallbacks[eventName][c](target)
+        console.log(eventName,target.toJSON())
+        const response = await this.eventCallbacks[eventName][c](target,bubble)
         if (response === false) this.eventCallbacks[eventName].splice(c, 1)
       } catch (e) {
         this.eventCallbacks[eventName].splice(c, 1)
