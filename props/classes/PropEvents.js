@@ -2,12 +2,13 @@ import events from './events.js'
 class PropEvents {
   constructor (parent) {
     this.parent = parent
+    this._event = {}
     this.eventCallbacks = Object.values(events).reduce((acc, key) => {
       acc[key] = []
       return acc
     }, {})
     Object.values(events).forEach(eventName => {
-      this[eventName] = (target = this) => {
+      this._event[eventName] = (target = this) => {
         this.processEvent(eventName, target)
       }
     })
@@ -31,7 +32,7 @@ class PropEvents {
     if (!this.eventCallbacks[eventName]) throw new Error(`Cannot process event ${eventName}`)
     for (let c = this.eventCallbacks[eventName].length - 1; c >= 0; c--) {
       try {
-        // console.log(eventName,target.toJSON())
+        console.log(eventName,target.toJSON())
         const response = await this.eventCallbacks[eventName][c](target,bubble)
         if (response === false) this.eventCallbacks[eventName].splice(c, 1)
       } catch (e) {

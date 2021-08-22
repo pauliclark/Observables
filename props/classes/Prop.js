@@ -12,22 +12,23 @@ class Prop extends PropEvents {
           return this
         },
         set: (v) => {
-          this.set(v)
+          this._set(v)
         }
       })
     }
     if (this.setOptions) {
       this.setOptions(options)
     }
-    this.set(value, { preventEvent: true })
+    this._set(value, { preventEvent: true })
   }
 
-  set (value, { preventEvent = false } = {}) {
+  _set (value, { preventEvent = false } = {}) {
     const oldValue = this.value
     const newValue = this.parse(value)
     this.value = newValue
     if (!preventEvent && newValue !== oldValue) {
-      this[CHANGE]()
+      console.log({ CHANGE })
+      this._event[CHANGE]()
     }
   }
 

@@ -3,19 +3,7 @@
 import OBJECT from '../props/Object.js'
 import { CHANGE } from '../props/classes/events.js'
 import { fn } from 'jest-mock'
-export { default as PROPEVENTS } from '../props/classes/PropEvents.js'
-export { default as EVENTS } from '../props/classes/events.js'
-const waitFor = check => {
-  return new Promise((resolve, reject) => {
-    const timedCheck = () => {
-      setTimeout(() => {
-        if (check()) return resolve()
-        timedCheck()
-      }, 20)
-    }
-    timedCheck()
-  })
-}
+import waitFor from './waitFor.js'
 test('Compare model strings', () => {
   const model = new OBJECT({
     name: 'Paul',

@@ -75,12 +75,12 @@ class OBJECT extends PropEvents {
     if (values) {
       Object.keys(values).forEach(prop => {
         // if (prop === 'today') console.log({ today: values[prop] })
-        this[prop].set(values[prop], { preventEvent })
+        this[prop]._set(values[prop], { preventEvent })
       })
     }
   }
 
-  set (value, { preventEvent = false } = {}) {
+  _set (value, { preventEvent = false } = {}) {
     this.assign(value, { preventEvent })
   }
 

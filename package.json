@@ -10,7 +10,7 @@
   "private": false,
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest",
-    "test:file": "NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest \"array\\.test\\.js\""
+    "test:file": "NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest \"date\\.test\\.js\""
   },
   "dependencies": {
     "luxon": "^2.0.2"

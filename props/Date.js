@@ -1,6 +1,7 @@
 
 import Prop from './classes/Prop.js'
 import { DateTime } from 'luxon'
+import { CHANGE } from './classes/events.js'
 const defaultParser = 'fromJSDate'
 const parseMatcher = [
   {
@@ -88,22 +89,41 @@ const luxonMethods = [
   'toRelative',
   'toRelativeCalendar'
 ]
-const luxonExpose = luxonMethods.reduce((acc, val) => {
-  if (val instanceof Array) {
-    acc[val[0]] = val[1]
-  } else {
-    acc[val] = val
-  }
-  return acc
-}, {})
 class DATE extends Prop {
   setOptions (options) {
     this.options = { ...defaultOptions, ...options }
-    Object.entries(luxonExpose).forEach((localMethod, luxonMethod) => {
-      this[localMethod] = (...args) => {
-        return this.value[luxonMethod](...args)
+    luxonMethods.forEach(method => {
+      if (method instanceof Array) {
+        const [localMethod, dateMethod] = method
+        this[localMethod] = (...args) => {
+          return this.value[dateMethod](...args)
+        }
+      } else {
+        this[method] = (...args) => {
+          const oldValue = this.value
+          const newValue = this.value[method](...args)
+          if (newValue instanceof DateTime) {
+            this.value = newValue
+            console.log(oldValue.toJSDate(), newValue.toJSDate(), newValue.equals(oldValue))
+            if (!newValue.equals(oldValue)) {
+              // console.log(CHANGE)
+              this._event[CHANGE]()
+            }
+          }
+          // console.log(newValue)
+          return newValue
+        }
       }
     })
+  }
+
+  _set (value, { preventEvent = false } = {}) {
+    const oldValue = this.value
+    const newValue = this.parse(value)
+    this.value = newValue
+    if (!preventEvent && !newValue.equals(oldValue)) {
+      this._event[CHANGE]()
+    }
   }
 
   parse (value) {
