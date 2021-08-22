@@ -27,7 +27,7 @@ class Prop extends PropEvents {
     const newValue = this.parse(value)
     this.value = newValue
     if (!preventEvent && newValue !== oldValue) {
-      console.log({ CHANGE })
+      // console.log({ CHANGE })
       this._event[CHANGE]()
     }
   }

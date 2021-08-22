@@ -99,7 +99,7 @@ class ARRAY extends PropEvents {
   }
 
   changed () {
-    this[CHANGE]()
+    this._event[CHANGE]()
   }
 
   push (props, preventDefault = false) {

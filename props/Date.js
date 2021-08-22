@@ -104,7 +104,7 @@ class DATE extends Prop {
           const newValue = this.value[method](...args)
           if (newValue instanceof DateTime) {
             this.value = newValue
-            console.log(oldValue.toJSDate(), newValue.toJSDate(), newValue.equals(oldValue))
+            // console.log(oldValue.toJSDate(), newValue.toJSDate(), newValue.equals(oldValue))
             if (!newValue.equals(oldValue)) {
               // console.log(CHANGE)
               this._event[CHANGE]()
