@@ -81,12 +81,7 @@ class OBJECT extends PropEvents {
   }
 
   set (value, { preventEvent = false } = {}) {
-    const oldValue = this.value
-    const newValue = this.parse(value && value.valueOf ? value.valueOf() : value)
-    this.value = newValue
-    if (!preventEvent && newValue !== oldValue) {
-      this[CHANGE]()
-    }
+    this.assign(value, { preventEvent })
   }
 
   buildFromSchema (schema) {
