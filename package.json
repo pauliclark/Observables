@@ -10,9 +10,11 @@
   "private": false,
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest",
-    "test:file": "NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest \"model\\.test\\.js\""
+    "test:file": "NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest \"array\\.test\\.js\""
   },
-  "dependencies": {},
+  "dependencies": {
+    "luxon": "^2.0.2"
+  },
   "devDependencies": {
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",

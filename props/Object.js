@@ -49,15 +49,16 @@ class OBJECT extends PropEvents {
     const [schema, schemaValues] = schemaBuilder(sourceSchema)
     // console.log(schemaValues)
     this.schema = schema
-    if (parent && name) {
-      parent[name] = this
-      this.parent = parent
-      this.name = name
-    }
+    // if (parent && name) {
+    //   parent[name] = this
+    //   this.parent = parent
+    //   this.name = name
+    // }
     this.buildFromSchema(schema)
     this.assign(values || schemaValues)
 
-    if (parent) {
+    if (parent && name) {
+      this.name = name
       Object.defineProperty(parent, name, {
         get: () => {
           return this
@@ -69,11 +70,12 @@ class OBJECT extends PropEvents {
     }
   }
 
-  assign (values) {
+  assign (values, { preventEvent = false } = {}) {
     // console.log(values)
     if (values) {
       Object.keys(values).forEach(prop => {
-        this[prop] = values[prop]
+        // if (prop === 'today') console.log({ today: values[prop] })
+        this[prop].set(values[prop], { preventEvent })
       })
     }
   }
@@ -95,7 +97,7 @@ class OBJECT extends PropEvents {
       // console.log(Prop, Value)
       if (Prop) {
         if (typesFoundInSchema.includes(Prop)) {
-          this._values[key] = new Prop({
+          this._values[key] = new Prop(null, {
             parent: this,
             name: key
           })

@@ -2,10 +2,10 @@ import { CHANGE } from './events.js'
 import PropEvents from './PropEvents.js'
 
 class Prop extends PropEvents {
-  constructor ({ parent, name, value }) {
+  constructor (value, { parent, name, options = {} } = {}) {
     super(parent)
     this.name = name
-    this.value = value
+    // console.log(value)
     if (parent) {
       Object.defineProperty(parent, name, {
         get: () => {
@@ -16,11 +16,15 @@ class Prop extends PropEvents {
         }
       })
     }
+    if (this.setOptions) {
+      this.setOptions(options)
+    }
+    this.set(value, { preventEvent: true })
   }
 
   set (value, { preventEvent = false } = {}) {
     const oldValue = this.value
-    const newValue = this.parse(value && value.valueOf ? value.valueOf() : value)
+    const newValue = this.parse(value)
     this.value = newValue
     if (!preventEvent && newValue !== oldValue) {
       this[CHANGE]()
@@ -64,6 +68,7 @@ class Prop extends PropEvents {
   }
 
   toJSON () {
+    // console.log(this.value)
     return this.valueOf()
   }
 }

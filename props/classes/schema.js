@@ -35,7 +35,7 @@ const getProp = obj => {
 const schema = s => {
   if (s instanceof Array) {
     if (!s.length) throw new SchemaError('An Array in a schema must contain a sub-schema for the containing objects')
-    return [schema(s[0])]
+    return s.map(i => schema(i))
   }
   const structure = Object.keys(s).reduce((acc, key) => {
     const { Prop, Value } = getProp(s[key])
@@ -48,6 +48,9 @@ const schema = s => {
   return structure
 }
 const TypeSchema = s => {
+  if (s instanceof Array) {
+    return s.map(TypeSchema)
+  }
   return Object.keys(s).reduce((acc, key) => {
     if (s[key] instanceof Array) {
       acc[key] = s[key].map(TypeSchema)
@@ -63,6 +66,9 @@ const TypeSchema = s => {
   }, {})
 }
 const ValueSchema = s => {
+  if (s instanceof Array) {
+    return s.map(ValueSchema)
+  }
   return Object.keys(s).reduce((acc, key) => {
     if (s[key]) {
       if (s[key] instanceof Array) {
