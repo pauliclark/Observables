@@ -5,16 +5,12 @@
  */
 
 import OBJECT from '../props/Object.js'
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
 import { render } from 'react-dom'
+// eslint-disable-next-line no-unused-vars
 import ObjectAge from './components/ObjectAge.js'
 import { act } from 'react-dom/test-utils'
-import { CHANGE } from '../props/classes/events.js'
-import { fn } from 'jest-mock'
-// import { JSDOM } from 'jsdom'
-import { setGlobal } from 'jest-util'
-export { default as PROPEVENTS } from '../props/classes/PropEvents.js'
-export { default as EVENTS } from '../props/classes/events.js'
 const waitFor = check => {
   return new Promise((resolve, reject) => {
     if (check instanceof Function) {
@@ -31,8 +27,6 @@ const waitFor = check => {
   })
 }
 let container = null
-// const { window } = new JSDOM()
-// const { document } = window
 beforeEach(() => {
   // setup a DOM element as a render target
   container = document.createElement('div')
@@ -50,21 +44,15 @@ it('React render value', async () => {
     <ObjectAge model={model}/>,
     container
   )
-  // console.log(container)
-  // expect(container.textContent).toBe('Paul 21')
-  // const tree = component.toJSON()
-  // expect(tree.children[0]).toBe('Paul')
-  // expect(tree.children[2]).toBe('21')
+  expect(container.textContent).toBe('Paul21')
+  const childrenContent = [].slice.call(container.children).map(e => e.textContent)
+  expect(childrenContent[0]).toBe('Paul')
+  expect(childrenContent[1]).toBe('21')
   await waitFor(1000)
-  // act(() => {
-  //   model.details.age = 22
-  // })
-  // await waitFor(1000)
-  // // await waitFor(() => {
-  // //   const newtree = component.toJSON()
-  // //   return newtree.children[2] === '22'
-  // // })
-  // const newtree = component.toJSON()
-  // expect(newtree.children[2]).toBe('22')
-  // console.log(newtree)
+  act(() => {
+    model.details.age = 22
+  })
+  await waitFor(100)
+  const newChildrenContent = [].slice.call(container.children).map(e => e.textContent)
+  expect(newChildrenContent[1]).toBe('22')
 })

@@ -5,7 +5,7 @@ const stateOnEffect = (observable = {}, { useState, useEffect }) => {
   const [value, setValue] = useState(observable.toJSON())
   // console.log(value)
   useEffect(() => {
-    console.log({ watcher: observable.toJSON() })
+    // console.log({ watcher: observable.toJSON() })
     const watcher = () => {
       setValue(observable.toJSON())
     }

@@ -9,7 +9,8 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest",
+    "test:file": "NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest \"model\\.test\\.js\""
   },
   "dependencies": {},
   "devDependencies": {
@@ -29,7 +30,7 @@
     "regenerator-runtime": "^0.13.9"
   },
   "jest": {
-    "testEnvironment": "node",
+    "testEnvironment": "jsdom",
     "setupFilesAfterEnv": [
       "./tests/setupTests.js"
     ]

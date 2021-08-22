@@ -2,19 +2,20 @@ import { CHANGE } from './events.js'
 import PropEvents from './PropEvents.js'
 
 class Prop extends PropEvents {
-  constructor (parent, name, value) {
+  constructor ({ parent, name, value }) {
     super(parent)
-    this.parent = parent
     this.name = name
     this.value = value
-    Object.defineProperty(parent, name, {
-      get: () => {
-        return this
-      },
-      set: (v) => {
-        this.set(v)
-      }
-    })
+    if (parent) {
+      Object.defineProperty(parent, name, {
+        get: () => {
+          return this
+        },
+        set: (v) => {
+          this.set(v)
+        }
+      })
+    }
   }
 
   set (value, { preventEvent = false } = {}) {
@@ -27,7 +28,6 @@ class Prop extends PropEvents {
   }
 
   get () {
-    // console.log("get")
     return this.value
   }
 
@@ -48,18 +48,16 @@ class Prop extends PropEvents {
   }
 
   valueOf () {
-      // console.log(this.value)
     return this.get()
   }
-  
+
   [Symbol.toPrimitive] (hint) {
-    // console.log(hint)
-    switch(hint) {
-      case 'number': 
+    switch (hint) {
+      case 'number':
         return this.value * 1
-      case 'string': 
+      case 'string':
         return this.value.toString()
-      case 'default': 
+      case 'default':
         return this.value
     }
     return this.get()

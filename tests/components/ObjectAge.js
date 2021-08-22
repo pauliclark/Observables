@@ -6,9 +6,10 @@ const ObjectAge = ({ model }) => {
   const age = stateOnEffect(model.details.age, { useState, useEffect })
   const name = stateOnEffect(model.name, { useState, useEffect })
   return (
-    <strong>
-      {name} {age}
-    </strong>
+    <>
+    <strong>{name}</strong>
+    <li>{age}</li>
+    </>
   )
 }
 
