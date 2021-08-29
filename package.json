@@ -1,6 +1,6 @@
 {
-  "name": "Observables",
-  "version": "1.0.0",
+  "name": "observabubble",
+  "version": "0.0.1",
   "description": "Package of Observable parameters",
   "main": "index.js",
   "type": "module",
