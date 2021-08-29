@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "repository": "https://github.com/pauliclark/Observables.git",
+  "homepage": "https://pauliclark.github.io/Observables/",
   "author": "pauliclark <paul@venuescanner.com>",
   "license": "MIT",
   "private": false,
