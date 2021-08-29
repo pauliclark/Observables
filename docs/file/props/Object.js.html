@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">props/Object.js | Observables</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Package of Observable parameters"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Observables"><meta property="twitter:description" content="Package of Observable parameters"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/pauliclark/Observables.git"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Array.js~ARRAY.html">ARRAY</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Boolean.js~BOOLEAN.html">BOOLEAN</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Decimal.js~DECIMAL.html">DECIMAL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Integer.js~INTEGER.html">INTEGER</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Object.js~OBJECT.html">OBJECT</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Reference.js~REFERENCE.html">REFERENCE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/String.js~STRING.html">STRING</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Text.js~TEXT.html">TEXT</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-typesFoundInSchema">typesFoundInSchema</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#classes">classes</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/classes/SchemaError.js~SchemaError.html">SchemaError</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-TypesAndValues">TypesAndValues</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#containers">containers</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-referenceModel">referenceModel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-register">register</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-store">store</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#events">events</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CHANGE">CHANGE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LOAD">LOAD</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#react">react</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-mountedState">mountedState</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-stateOnEffect">stateOnEffect</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#sample">sample</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/sample/User.js~User.html">User</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/sample/UserReference.js~UserRef.html">UserRef</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">props/Object.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import props, { typesFoundInSchema } from &apos;./index.js&apos;
+import { CHANGE } from &apos;./events/events.js&apos;
+import PropEvents from &apos;./classes/PropEvents.js&apos;
+import schemaBuilder from &apos;./classes/schema.js&apos;
+import INTEGER from &apos;./Integer.js&apos;
+import BOOLEAN from &apos;./Boolean.js&apos;
+import DATE from &apos;./Date.js&apos;
+import DECIMAL from &apos;./Decimal.js&apos;
+import STRING from &apos;./String.js&apos;
+import ARRAY from &apos;./Array.js&apos;
+
+class OBJECT extends PropEvents {
+  constructor (sourceSchema = {}, { values, parent, name } = {}) {
+    super(parent)
+    const [schema, schemaValues] = schemaBuilder(sourceSchema)
+    // console.log(schemaValues)
+    this.schema = schema
+    // if (parent &amp;&amp; name) {
+    //   parent[name] = this
+    //   this.parent = parent
+    //   this.name = name
+    // }
+    this.buildFromSchema(schema)
+    this.assign(values || schemaValues)
+
+    if (parent &amp;&amp; name) {
+      this.name = name
+      Object.defineProperty(parent, name, {
+        get: () =&gt; {
+          return this
+        },
+        set: (v) =&gt; {
+          this.assign(v)
+        }
+      })
+    }
+    this._pKey = this.schema._id
+      ? &apos;_id&apos;
+      : (
+          this.schema.id ? &apos;id&apos; : Object.keys(this.schema).shift()
+        )
+  }
+
+  assign (values, { preventEvent = false } = {}) {
+    // console.log(values)
+    if (values) {
+      Object.keys(values).forEach(prop =&gt; {
+        // if (prop === &apos;friend&apos;) console.log({ friend: values[prop] })
+        this[prop]._set(values[prop], { preventEvent })
+      })
+    }
+  }
+
+  _set (value, { preventEvent = false } = {}) {
+    this.assign(value, { preventEvent })
+  }
+
+  buildFromSchema (schema) {
+    this._values = {}
+    Object.entries(schema).forEach(([key, Prop]) =&gt; {
+      // console.log(value)
+      // const [Prop, Value] = getProp(value)
+      // console.log(Prop, Value)
+      if (Prop) {
+        if (typesFoundInSchema.includes(Prop) || Prop.isObservable) {
+          this._values[key] = new Prop(null, {
+            parent: this,
+            name: key
+          })
+        } else if (Prop instanceof Array) {
+          this._values[key] = new ARRAY(Prop[0], {
+            parent: this,
+            name: key
+          })
+        } else {
+          this._values[key] = new OBJECT(Prop, {
+            parent: this,
+            name: key
+          })
+        }
+      }
+    })
+  }
+
+  toJSON () {
+    return this._values
+  }
+}
+export default OBJECT
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

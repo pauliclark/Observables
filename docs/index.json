@@ -1,0 +1,3471 @@
+[
+  {
+    "__docId__": 1,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Infinity",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 2,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~NaN",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 3,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~undefined",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 4,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~null",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 5,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 6,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 7,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 8,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 9,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 10,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 11,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Symbol",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 12,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Error",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 13,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~EvalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 14,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~InternalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 15,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~RangeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 16,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~ReferenceError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 17,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~SyntaxError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 18,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~TypeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 19,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~URIError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 20,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 21,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 22,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Date",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 23,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~String",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 24,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~string",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 25,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~RegExp",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 26,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 27,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Int8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 28,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Uint8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 29,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Uint8ClampedArray",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 30,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Int16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 31,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Uint16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 32,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Int32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 33,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Uint32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 34,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Float32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 35,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Float64Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 36,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Map",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 37,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Set",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~WeakMap",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~WeakSet",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~ArrayBuffer",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~DataView",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~JSON",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Promise",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Generator",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~GeneratorFunction",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Reflect",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "props/.external-ecmascript.js",
+    "static": true,
+    "longname": "props/.external-ecmascript.js~Proxy",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "props/Array.js",
+    "content": "\nimport PropEvents from './classes/PropEvents.js'\nimport props, { typesFoundInSchema } from './index.js'\nimport { CHANGE } from './events/events.js'\nimport OBJECT from './Object.js'\nimport schemaBuilder from './classes/schema.js'\nconst makeIterator = (array) => {\n  let nextIndex = 0\n  return {\n    next: function () {\n      return nextIndex < array.length\n        ? {\n            value: array[nextIndex++],\n            done: false\n          }\n        : {\n            done: true\n          }\n    }\n  }\n}\n/**\n * The Observable ARRAY Class\n */\nclass ARRAY extends PropEvents {\n  /**\n * @param {Schema} sourceSchema - The Schema to be used as the shape of the items in the Array\n * @param {Object} options\n * @param {Object[]} options.values - The Array of initial values that will be consumed as Observables according to the Schema\n * @param {Object} options.parent - The Parent Object to which this Array is a member of\n * @param {String} options.name -The Name/key in the Parent Object to which this Array is assigned\n */\n  constructor (sourceSchema = null, { values, parent, name } = {}) {\n    super(parent)\n    this._values = []\n    this._schema = null\n    if (sourceSchema) {\n      const [[schema], schemaValues] = schemaBuilder(!(sourceSchema instanceof Array) ? [sourceSchema] : sourceSchema)\n      // console.log({ schema })\n      this._schema = schema\n      // append schemaValues\n      this._assign(values || schemaValues)\n    }\n    if (parent && name) {\n      parent[name] = this\n      this._name = name\n    }\n    // this.buildFromSchema(schema)\n    // this.assign(values || [])\n\n    if (parent) {\n      Object.defineProperty(parent, name, {\n        get: () => {\n          return this\n        },\n        set: (v) => {\n          this._assign(v)\n        }\n      })\n    }\n    Object.defineProperty(this, 'length', {\n      get: () => {\n        return this.getLength()\n      },\n      set: (v) => {}\n    })\n  }\n\n  [Symbol.iterator] () { return makeIterator(this._values) }\n\n  _itemProp () {\n    if (typesFoundInSchema.includes(this._schema) || this._schema.isObservable) {\n      return this._schema\n    } else if (this._schema instanceof Array) {\n      return ARRAY\n    } else {\n      return OBJECT\n    }\n  }\n\n  _assign (values) {\n    const Prop = this._schema ? this._itemProp() : null\n    if (!(values instanceof Array)) values = [values]\n    // console.log({ Prop, values })\n    this._values = values.map(val => {\n      if (Prop) {\n        if (typesFoundInSchema.includes(this._schema) || this._schema.isObservable) {\n          return new Prop(val, { parent: this })\n        } else if (Prop === ARRAY) {\n          return new ARRAY(this._schema[0], { parent: this, values: val })\n        } else if (Prop === OBJECT) {\n          return new OBJECT(this._schema, { parent: this, values: val })\n        }\n      }\n      return null\n    }).filter(v => v)\n    // console.log(this._values)\n  }\n\n  _newItem (props) {\n    if (this._schema) {\n      const Prop = this._itemProp()\n      if (typesFoundInSchema.includes(this._schema)) {\n        return new Prop(props, { parent: this })\n      } else if (Prop === ARRAY) {\n        return new ARRAY(this._schema[0], { parent: this, values: props })\n      } else if (Prop === OBJECT) {\n        return new OBJECT(this._schema, { parent: this, values: props })\n      }\n    }\n  }\n\n  _changed () {\n    this._event[CHANGE]()\n  }\n\n  /**\n   * Pushes an item onto the Array\n * @param {Object} props - The Object of values that obeys the item Schema\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n */\n  push (props, preventDefault = false) {\n    this._values.push(this._newItem(props))\n    if (!preventDefault) this._changed()\n  }\n\n  /**\n   * Removes the first item of the Array and returns that item\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object} item - The Observalbe Object of the item removed from the array\n */\n  shift (preventDefault = false) {\n    const r = this._values.shift()\n    if (!preventDefault) this._changed()\n    return r\n  }\n\n  /**\n   * Removes the last item of the Array and returns that item\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object} item - The Observalbe Object of the item removed from the array\n */\n  pop (preventDefault = false) {\n    const r = this._values.pop()\n    if (!preventDefault) this._changed()\n    return r\n  }\n\n  /**\n   * Removes a range of items from the Array and returns them\n * @param {Integer} idx - The index of the first item to be removed\n * @param {Integer} toremove - The number of items to be removed\n * @param {Object[]} [props = []] - The array of objects (obeying the Schema) to inserted in the resulting gap\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object[]} items - The Observalbe Objects of the items removed from the array\n */\n  splice (idx, toremove, props = [], preventDefault = false) {\n    if (!(props instanceof Array)) props = [props]\n    const r = this._values.splice(idx, toremove, props.map(prop => this._newItem(prop)))\n    if (!preventDefault) this._changed()\n    return r\n  }\n\n  /**\n   * Returns a range of items from the Array\n * @param {Integer} idxFrom - The index of the first item to be selected\n * @param {Integer} idxTo - The index of the last item to be selected\n * @returns {Object[]} items - The Observalbe Objects of the items selected from the array\n */\n  slice (idxFrom, idxTo) {\n    const r = this._values.slice(idxFrom, idxTo)\n    return r\n  }\n\n  /**\n   * Removes any matching Items from the Array\n * @param {Object[]} items - An Array of Observable Objects/Items to be removed\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Boolean} success - True if any of the Items were found and removed\n */\n  remove (items, preventDefault = false) {\n    if (!(typeof items instanceof Array)) items = [items]\n    let success = false\n    const vals = this._values\n    for (let v = vals.length - 1; v >= 0; v--) {\n      if (items.includes(vals[v])) {\n        this._values.splice(v, 1)\n        vals.splice(v, 1, true)\n        success = true\n      }\n    }\n    if (success && !preventDefault) this._changed()\n    return success\n  }\n\n  /**\n   * Returns an Array of the matching items found in the Array according to the provided method\n * @param {function(item: Object): Boolean} method - The predictate method for filtering the items\n * @returns {Boolean} success - True if any of the Items were found and removed\n */\n  filter (method) {\n    if (!(method instanceof Function)) return this._values\n    return this._values.filter(method)\n  }\n\n  /**\n   * Finds a matching item in the Array according to the provided method\n * @param {function(item: Object): Boolean} method - The predictate method for matching the item\n * @returns {Object} item - The found Observable Item\n */\n  find (method) {\n    if (!(method instanceof Function)) return this._values\n    return this._values.find(method)\n  }\n\n  /**\n   * Moves an item from one index to another\n * @param {Object} indexes\n * @param {Integer} indexes.from - The index of the item to move\n * @param {Integer} indexes.to - The index in the Array to move the item to\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n */\n  moveItem ({ from, to }, preventDefault = false) {\n    if (from < to) {\n      to--\n    }\n    this._values.splice(to, 0, this._values.splice(from, 1)[0])\n    if (!preventDefault) this._changed()\n  }\n\n  /**\n   * Returns the index of the provided Observable Item\n * @param {Object} item - The Observable Item to return the index of\n * @returns {Integer} index - The index of the found Observable Item\n */\n  indexOf (item) {\n    return this._values.indexOf(item)\n  }\n\n  /**\n   * Returns a transposed Array\n * @param {function(item: Object): Object} method - The transposing method applied to each item in the Array\n * @returns {Object[]} items - The Array of transposed Items\n */\n  map (method) {\n    return this._values.map(method)\n  }\n\n  /**\n   * Loop through the Array\n * @param {function(item: Object)} method - The method to be run on each Item\n */\n  forEach (method) {\n    return this._values.forEach(method)\n  }\n\n  /**\n   * Reverses the Array order\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object[]} items - The new reversed Array of Items\n */\n  reverse (preventDefault = false) {\n    this._values = this._values.reverse()\n    if (!preventDefault) this._changed()\n    return this._values\n  }\n\n  /**\n   * Determines if the provided item is in the Array\n * @param {Object|String|Number|Boolean} value - The value of an item (according to the Schema) to check for\n * @returns {Boolean} found - True if the item/value has been found\n */\n  includes (value) {\n    const toCheck = (value && value.get ? value.get() : (value.valueOf ? value.valueOf() : value))\n    return !!this._values.find(val => {\n      return (val && val.get ? val.get() : (val && val.valueOf ? val.valueOf() : val)) === toCheck\n    })\n  }\n\n  /**\n   * Returns the Observable Item by the Index\n * @param {Integer} [idx=null] - The Index of the item to return (if null, all items are returned)\n * @returns {Object} item - The item found at the requested index\n */\n  get (idx = null) {\n    return idx === null\n      ? this._values\n      : (\n          idx >= this._values.length ? null : this._values[idx]\n        )\n  }\n\n  /**\n   * Sets the internal array of items\n * @param {Object[]} [props=[]] - The array of objects to construct the Observable Items (according to the Schema)\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object[]} items - The new array of Observable Items\n */\n  set (props = [], preventDefault = false) {\n    // console.log(props, this.getKey())\n    if (!(props instanceof Array)) {\n      // console.log({props})\n      throw new Error('Expected Array in props')\n    }\n    // const Schema = this._schema\n    // console.log({props})\n    this._values = props.map(p => {\n      // if (typeof Schema === 'function' && p instanceof Schema ) return p\n      return this._newItem(p)\n    })\n    // if (!this._schema) console.log(this._values)\n    // console.log(this)\n    if (!preventDefault) this._changed()\n    return this._values\n  }\n\n  _arrayState () {\n    return JSON.stringify(this._values.sort((a, b) => {\n      if (a._id) {\n        return a._id - b._id\n      } else {\n        return a - b\n      }\n    }))\n  }\n\n  /**\n   * Update the items within the Array. If an item has the same prop *_id*, then the item reference is preserved and the props are updated\n * @param {Object[]} [props=[]] - The array of objects to construct the Observable Items (according to the Schema)\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object[]} items - The new array of Observable Items\n */\n  update (props, preventDefault = false) {\n    if (!(props instanceof Array)) throw new Error('Expected Array in props')\n    const currentLength = this._values.length\n    // const currentState = this.arrayState()\n    const foundItems = []\n    let idx = 0\n    // const list = []\n    let isReordered = false\n\n    while (props.length > 0) {\n      const data = props.shift()\n      let foundItem = this._values.find(v => {\n        return v.equals(data)\n      })\n      if (data._id && !foundItem) {\n        foundItem = this._values.find(v => {\n          // console.log(v._id.valueOf())\n          return (!v._id || !v._id.valueOf()) && (!foundItems.includes(v))\n        })\n      }\n      if (foundItem) {\n        foundItems.push(foundItem)\n        foundItem.update(data, preventDefault)\n        if (this._values.indexOf(foundItem) !== idx) isReordered = true\n      } else {\n        const _newItem = this._newItem(data)\n        foundItems.push(_newItem)\n        // this._values.push(_newItem)\n      }\n      // } else {\n\n      // }\n      idx++\n    }\n    // console.log(this.getKey())\n    // console.log(JSON.parse(JSON.stringify(foundItems)))\n    this._values = foundItems\n    // for (let l = this._values.length - 1; l >= 0; l--) {\n    //   if (!foundItems.includes(this._values[l])) this._values.splice(l, 1)\n    // }\n\n    // const newState = this.arrayState()\n    // if (this.getKey() === 'pending_invite') {\n    // console.log(props)\n    // }\n    const newLength = this._values.length\n    // console.log(currentLength , newLength)\n    if (!preventDefault && (isReordered || currentLength !== newLength)) this._changed(true)\n    // if (!preventDefault && currentState !== newState) this._changed(true)\n    return this._values\n  }\n\n  /**\n   * Returns the length of the Array. Used by the virtual property *length*\n * @returns {Integer} length - The number of items in the Array\n */\n  getLength () {\n    return this._values.length\n  }\n\n  /**\n   * Returns an Array of the parsed values of each item\n * @returns {Object[]} values - Array of primitive item values\n */\n  valueOf () {\n    return this._values.map(r => r.valueOf ? r.valueOf() : r)\n  }\n\n  /**\n   * Returns the Array of Observable Items\n * @returns {Object[]} items - Array of Observable Items\n */\n  toJSON () {\n    return this._values\n  }\n\n  /**\n   * Returns the Array of Objects\n * @returns {Object[]} objects - Array of Objects\n */\n  toObject () {\n    return this._values.map(r => r.toObject ? r.toObject() : r)\n  }\n\n  /**\n   * Reorders the Array\n * @param {function(a: Object, b: Object): Integer} sortMethod - The sort method that determines whether items a and b swap places\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object[]} items - The new array of Observable Items\n */\n  sort (sortMethod = (a, b) => {\n    return b - a\n  }, preventDefault = false) {\n    const was = this._arrayState()\n    this._values = this._values.sort(sortMethod)\n    const isNow = this._arrayState()\n    if (was !== isNow && !preventDefault) this._changed()\n    return this._values\n  }\n}\n\nexport default ARRAY\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/Array.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "function",
+    "name": "makeIterator",
+    "memberof": "props/Array.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "props/Array.js~makeIterator",
+    "access": "public",
+    "export": false,
+    "importPath": "Observables/props/Array.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "params": [
+      {
+        "name": "array",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "{\"next\": *}"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 50,
+    "kind": "class",
+    "name": "ARRAY",
+    "memberof": "props/Array.js",
+    "static": true,
+    "longname": "props/Array.js~ARRAY",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/Array.js",
+    "importStyle": "ARRAY",
+    "description": "The Observable ARRAY Class",
+    "lineNumber": 25,
+    "interface": false,
+    "extends": [
+      "props/classes/PropEvents.js~PropEvents"
+    ]
+  },
+  {
+    "__docId__": 51,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 33,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Schema"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "sourceSchema",
+        "description": "The Schema to be used as the shape of the items in the Array"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object[]"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.values",
+        "description": "The Array of initial values that will be consumed as Observables according to the Schema"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.parent",
+        "description": "The Parent Object to which this Array is a member of"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.name",
+        "description": "The Name/key in the Parent Object to which this Array is assigned"
+      }
+    ]
+  },
+  {
+    "__docId__": 52,
+    "kind": "member",
+    "name": "_values",
+    "memberof": "props/Array.js~ARRAY",
+    "static": false,
+    "longname": "props/Array.js~ARRAY#_values",
+    "access": "private",
+    "description": null,
+    "lineNumber": 35,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*[]"
+      ]
+    }
+  },
+  {
+    "__docId__": 53,
+    "kind": "member",
+    "name": "_schema",
+    "memberof": "props/Array.js~ARRAY",
+    "static": false,
+    "longname": "props/Array.js~ARRAY#_schema",
+    "access": "private",
+    "description": null,
+    "lineNumber": 36,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 55,
+    "kind": "member",
+    "name": "_name",
+    "memberof": "props/Array.js~ARRAY",
+    "static": false,
+    "longname": "props/Array.js~ARRAY#_name",
+    "access": "private",
+    "description": null,
+    "lineNumber": 46,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 56,
+    "kind": "method",
+    "name": "[Symbol.iterator]",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#[Symbol.iterator]",
+    "access": "public",
+    "description": null,
+    "lineNumber": 69,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 57,
+    "kind": "method",
+    "name": "_itemProp",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#_itemProp",
+    "access": "private",
+    "description": null,
+    "lineNumber": 71,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 58,
+    "kind": "method",
+    "name": "_assign",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#_assign",
+    "access": "private",
+    "description": null,
+    "lineNumber": 81,
+    "undocument": true,
+    "params": [
+      {
+        "name": "values",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 60,
+    "kind": "method",
+    "name": "_newItem",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#_newItem",
+    "access": "private",
+    "description": null,
+    "lineNumber": 100,
+    "undocument": true,
+    "params": [
+      {
+        "name": "props",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 61,
+    "kind": "method",
+    "name": "_changed",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#_changed",
+    "access": "private",
+    "description": null,
+    "lineNumber": 113,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 62,
+    "kind": "method",
+    "name": "push",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#push",
+    "access": "public",
+    "description": "Pushes an item onto the Array",
+    "lineNumber": 122,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "props",
+        "description": "The Object of values that obeys the item Schema"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "preventDefault",
+        "description": "If true then the Change event is not fired"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 63,
+    "kind": "method",
+    "name": "shift",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#shift",
+    "access": "public",
+    "description": "Removes the first item of the Array and returns that item",
+    "lineNumber": 132,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Object} item - The Observalbe Object of the item removed from the array"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "preventDefault",
+        "description": "If true then the Change event is not fired"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": "item - The Observalbe Object of the item removed from the array"
+    }
+  },
+  {
+    "__docId__": 64,
+    "kind": "method",
+    "name": "pop",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#pop",
+    "access": "public",
+    "description": "Removes the last item of the Array and returns that item",
+    "lineNumber": 143,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Object} item - The Observalbe Object of the item removed from the array"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "preventDefault",
+        "description": "If true then the Change event is not fired"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": "item - The Observalbe Object of the item removed from the array"
+    }
+  },
+  {
+    "__docId__": 65,
+    "kind": "method",
+    "name": "splice",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#splice",
+    "access": "public",
+    "description": "Removes a range of items from the Array and returns them",
+    "lineNumber": 157,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Object[]} items - The Observalbe Objects of the items removed from the array"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Integer"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "idx",
+        "description": "The index of the first item to be removed"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Integer"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "toremove",
+        "description": "The number of items to be removed"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object[]"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " []",
+        "defaultRaw": [],
+        "name": "props",
+        "description": "The array of objects (obeying the Schema) to inserted in the resulting gap"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "preventDefault",
+        "description": "If true then the Change event is not fired"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object[]"
+      ],
+      "spread": false,
+      "description": "items - The Observalbe Objects of the items removed from the array"
+    }
+  },
+  {
+    "__docId__": 66,
+    "kind": "method",
+    "name": "slice",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#slice",
+    "access": "public",
+    "description": "Returns a range of items from the Array",
+    "lineNumber": 170,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Object[]} items - The Observalbe Objects of the items selected from the array"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Integer"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "idxFrom",
+        "description": "The index of the first item to be selected"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Integer"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "idxTo",
+        "description": "The index of the last item to be selected"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object[]"
+      ],
+      "spread": false,
+      "description": "items - The Observalbe Objects of the items selected from the array"
+    }
+  },
+  {
+    "__docId__": 67,
+    "kind": "method",
+    "name": "remove",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#remove",
+    "access": "public",
+    "description": "Removes any matching Items from the Array",
+    "lineNumber": 181,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Boolean} success - True if any of the Items were found and removed"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object[]"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "items",
+        "description": "An Array of Observable Objects/Items to be removed"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "preventDefault",
+        "description": "If true then the Change event is not fired"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": "success - True if any of the Items were found and removed"
+    }
+  },
+  {
+    "__docId__": 68,
+    "kind": "method",
+    "name": "filter",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#filter",
+    "access": "public",
+    "description": "Returns an Array of the matching items found in the Array according to the provided method",
+    "lineNumber": 201,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Boolean} success - True if any of the Items were found and removed"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "function(item: Object): Boolean"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "method",
+        "description": "The predictate method for filtering the items"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": "success - True if any of the Items were found and removed"
+    }
+  },
+  {
+    "__docId__": 69,
+    "kind": "method",
+    "name": "find",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#find",
+    "access": "public",
+    "description": "Finds a matching item in the Array according to the provided method",
+    "lineNumber": 211,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Object} item - The found Observable Item"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "function(item: Object): Boolean"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "method",
+        "description": "The predictate method for matching the item"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": "item - The found Observable Item"
+    }
+  },
+  {
+    "__docId__": 70,
+    "kind": "method",
+    "name": "moveItem",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#moveItem",
+    "access": "public",
+    "description": "Moves an item from one index to another",
+    "lineNumber": 223,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "indexes",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Integer"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "indexes.from",
+        "description": "The index of the item to move"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Integer"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "indexes.to",
+        "description": "The index in the Array to move the item to"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "preventDefault",
+        "description": "If true then the Change event is not fired"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 71,
+    "kind": "method",
+    "name": "indexOf",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#indexOf",
+    "access": "public",
+    "description": "Returns the index of the provided Observable Item",
+    "lineNumber": 236,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Integer} index - The index of the found Observable Item"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "item",
+        "description": "The Observable Item to return the index of"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Integer"
+      ],
+      "spread": false,
+      "description": "index - The index of the found Observable Item"
+    }
+  },
+  {
+    "__docId__": 72,
+    "kind": "method",
+    "name": "map",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#map",
+    "access": "public",
+    "description": "Returns a transposed Array",
+    "lineNumber": 245,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Object[]} items - The Array of transposed Items"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "function(item: Object): Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "method",
+        "description": "The transposing method applied to each item in the Array"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object[]"
+      ],
+      "spread": false,
+      "description": "items - The Array of transposed Items"
+    }
+  },
+  {
+    "__docId__": 73,
+    "kind": "method",
+    "name": "forEach",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#forEach",
+    "access": "public",
+    "description": "Loop through the Array",
+    "lineNumber": 253,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "function(item: Object)"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "method",
+        "description": "The method to be run on each Item"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 74,
+    "kind": "method",
+    "name": "reverse",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#reverse",
+    "access": "public",
+    "description": "Reverses the Array order",
+    "lineNumber": 262,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Object[]} items - The new reversed Array of Items"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "preventDefault",
+        "description": "If true then the Change event is not fired"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object[]"
+      ],
+      "spread": false,
+      "description": "items - The new reversed Array of Items"
+    }
+  },
+  {
+    "__docId__": 76,
+    "kind": "method",
+    "name": "includes",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#includes",
+    "access": "public",
+    "description": "Determines if the provided item is in the Array",
+    "lineNumber": 273,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Boolean} found - True if the item/value has been found"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object",
+          "String",
+          "Number",
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "value",
+        "description": "The value of an item (according to the Schema) to check for"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": "found - True if the item/value has been found"
+    }
+  },
+  {
+    "__docId__": 77,
+    "kind": "method",
+    "name": "get",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#get",
+    "access": "public",
+    "description": "Returns the Observable Item by the Index",
+    "lineNumber": 285,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Object} item - The item found at the requested index"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Integer"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "null",
+        "defaultRaw": null,
+        "name": "idx",
+        "description": "The Index of the item to return (if null, all items are returned)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": "item - The item found at the requested index"
+    }
+  },
+  {
+    "__docId__": 78,
+    "kind": "method",
+    "name": "set",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#set",
+    "access": "public",
+    "description": "Sets the internal array of items",
+    "lineNumber": 299,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Object[]} items - The new array of Observable Items"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object[]"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "[]",
+        "defaultRaw": [],
+        "name": "props",
+        "description": "The array of objects to construct the Observable Items (according to the Schema)"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "preventDefault",
+        "description": "If true then the Change event is not fired"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object[]"
+      ],
+      "spread": false,
+      "description": "items - The new array of Observable Items"
+    }
+  },
+  {
+    "__docId__": 80,
+    "kind": "method",
+    "name": "_arrayState",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#_arrayState",
+    "access": "private",
+    "description": null,
+    "lineNumber": 317,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 81,
+    "kind": "method",
+    "name": "update",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#update",
+    "access": "public",
+    "description": "Update the items within the Array. If an item has the same prop *_id*, then the item reference is preserved and the props are updated",
+    "lineNumber": 333,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Object[]} items - The new array of Observable Items"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object[]"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "[]",
+        "defaultRaw": [],
+        "name": "props",
+        "description": "The array of objects to construct the Observable Items (according to the Schema)"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "preventDefault",
+        "description": "If true then the Change event is not fired"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object[]"
+      ],
+      "spread": false,
+      "description": "items - The new array of Observable Items"
+    }
+  },
+  {
+    "__docId__": 83,
+    "kind": "method",
+    "name": "getLength",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#getLength",
+    "access": "public",
+    "description": "Returns the length of the Array. Used by the virtual property *length*",
+    "lineNumber": 389,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Integer} length - The number of items in the Array"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Integer"
+      ],
+      "spread": false,
+      "description": "length - The number of items in the Array"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 84,
+    "kind": "method",
+    "name": "valueOf",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#valueOf",
+    "access": "public",
+    "description": "Returns an Array of the parsed values of each item",
+    "lineNumber": 397,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Object[]} values - Array of primitive item values"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object[]"
+      ],
+      "spread": false,
+      "description": "values - Array of primitive item values"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 85,
+    "kind": "method",
+    "name": "toJSON",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#toJSON",
+    "access": "public",
+    "description": "Returns the Array of Observable Items",
+    "lineNumber": 405,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Object[]} items - Array of Observable Items"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object[]"
+      ],
+      "spread": false,
+      "description": "items - Array of Observable Items"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 86,
+    "kind": "method",
+    "name": "toObject",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#toObject",
+    "access": "public",
+    "description": "Returns the Array of Objects",
+    "lineNumber": 413,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Object[]} objects - Array of Objects"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object[]"
+      ],
+      "spread": false,
+      "description": "objects - Array of Objects"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 87,
+    "kind": "method",
+    "name": "sort",
+    "memberof": "props/Array.js~ARRAY",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Array.js~ARRAY#sort",
+    "access": "public",
+    "description": "Reorders the Array",
+    "lineNumber": 423,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Object[]} items - The new array of Observable Items"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "function(a: Object, b: Object): Integer"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "sortMethod",
+        "description": "The sort method that determines whether items a and b swap places"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "preventDefault",
+        "description": "If true then the Change event is not fired"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object[]"
+      ],
+      "spread": false,
+      "description": "items - The new array of Observable Items"
+    }
+  },
+  {
+    "__docId__": 89,
+    "kind": "file",
+    "name": "props/Boolean.js",
+    "content": "\nimport Prop from './classes/Prop.js'\nclass BOOLEAN extends Prop {\n  parse (value) {\n    return value != null ? !!value : null\n  }\n\n  format () {\n    return this.get() ? 'true' : 'false'\n  }\n\n  toggle () {\n    this.set(!this.get())\n  }\n}\n\nexport default BOOLEAN\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/Boolean.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 90,
+    "kind": "class",
+    "name": "BOOLEAN",
+    "memberof": "props/Boolean.js",
+    "static": true,
+    "longname": "props/Boolean.js~BOOLEAN",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/Boolean.js",
+    "importStyle": "BOOLEAN",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "interface": false,
+    "extends": [
+      "props/classes/Prop.js~Prop"
+    ]
+  },
+  {
+    "__docId__": 91,
+    "kind": "method",
+    "name": "parse",
+    "memberof": "props/Boolean.js~BOOLEAN",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Boolean.js~BOOLEAN#parse",
+    "access": "public",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "params": [
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 92,
+    "kind": "method",
+    "name": "format",
+    "memberof": "props/Boolean.js~BOOLEAN",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Boolean.js~BOOLEAN#format",
+    "access": "public",
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 93,
+    "kind": "method",
+    "name": "toggle",
+    "memberof": "props/Boolean.js~BOOLEAN",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Boolean.js~BOOLEAN#toggle",
+    "access": "public",
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 94,
+    "kind": "file",
+    "name": "props/Decimal.js",
+    "content": "\nimport Prop from './classes/Prop.js'\nclass DECIMAL extends Prop {\n  parse (value) {\n    return value != null ? parseFloat(value) : null\n  }\n}\n\nexport default DECIMAL\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/Decimal.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 95,
+    "kind": "class",
+    "name": "DECIMAL",
+    "memberof": "props/Decimal.js",
+    "static": true,
+    "longname": "props/Decimal.js~DECIMAL",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/Decimal.js",
+    "importStyle": "DECIMAL",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "interface": false,
+    "extends": [
+      "props/classes/Prop.js~Prop"
+    ]
+  },
+  {
+    "__docId__": 96,
+    "kind": "method",
+    "name": "parse",
+    "memberof": "props/Decimal.js~DECIMAL",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Decimal.js~DECIMAL#parse",
+    "access": "public",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "params": [
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 97,
+    "kind": "file",
+    "name": "props/Integer.js",
+    "content": "import Prop from './classes/Prop.js'\nimport { CHANGE } from './events/events.js'\nclass INTEGER extends Prop {\n  parse (value) {\n    return value != null ? parseInt(value) : null\n  }\n\n  increment () {\n    this.value++\n    this[CHANGE]()\n  }\n\n  decrement () {\n    this.value--\n    this[CHANGE]()\n  }\n}\n\nexport default INTEGER\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/Integer.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 98,
+    "kind": "class",
+    "name": "INTEGER",
+    "memberof": "props/Integer.js",
+    "static": true,
+    "longname": "props/Integer.js~INTEGER",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/Integer.js",
+    "importStyle": "INTEGER",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "interface": false,
+    "extends": [
+      "props/classes/Prop.js~Prop"
+    ]
+  },
+  {
+    "__docId__": 99,
+    "kind": "method",
+    "name": "parse",
+    "memberof": "props/Integer.js~INTEGER",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Integer.js~INTEGER#parse",
+    "access": "public",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "params": [
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 100,
+    "kind": "method",
+    "name": "increment",
+    "memberof": "props/Integer.js~INTEGER",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Integer.js~INTEGER#increment",
+    "access": "public",
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 101,
+    "kind": "method",
+    "name": "decrement",
+    "memberof": "props/Integer.js~INTEGER",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Integer.js~INTEGER#decrement",
+    "access": "public",
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 102,
+    "kind": "file",
+    "name": "props/Object.js",
+    "content": "import props, { typesFoundInSchema } from './index.js'\nimport { CHANGE } from './events/events.js'\nimport PropEvents from './classes/PropEvents.js'\nimport schemaBuilder from './classes/schema.js'\nimport INTEGER from './Integer.js'\nimport BOOLEAN from './Boolean.js'\nimport DATE from './Date.js'\nimport DECIMAL from './Decimal.js'\nimport STRING from './String.js'\nimport ARRAY from './Array.js'\n\nclass OBJECT extends PropEvents {\n  constructor (sourceSchema = {}, { values, parent, name } = {}) {\n    super(parent)\n    const [schema, schemaValues] = schemaBuilder(sourceSchema)\n    // console.log(schemaValues)\n    this.schema = schema\n    // if (parent && name) {\n    //   parent[name] = this\n    //   this.parent = parent\n    //   this.name = name\n    // }\n    this.buildFromSchema(schema)\n    this.assign(values || schemaValues)\n\n    if (parent && name) {\n      this.name = name\n      Object.defineProperty(parent, name, {\n        get: () => {\n          return this\n        },\n        set: (v) => {\n          this.assign(v)\n        }\n      })\n    }\n    this._pKey = this.schema._id\n      ? '_id'\n      : (\n          this.schema.id ? 'id' : Object.keys(this.schema).shift()\n        )\n  }\n\n  assign (values, { preventEvent = false } = {}) {\n    // console.log(values)\n    if (values) {\n      Object.keys(values).forEach(prop => {\n        // if (prop === 'friend') console.log({ friend: values[prop] })\n        this[prop]._set(values[prop], { preventEvent })\n      })\n    }\n  }\n\n  _set (value, { preventEvent = false } = {}) {\n    this.assign(value, { preventEvent })\n  }\n\n  buildFromSchema (schema) {\n    this._values = {}\n    Object.entries(schema).forEach(([key, Prop]) => {\n      // console.log(value)\n      // const [Prop, Value] = getProp(value)\n      // console.log(Prop, Value)\n      if (Prop) {\n        if (typesFoundInSchema.includes(Prop) || Prop.isObservable) {\n          this._values[key] = new Prop(null, {\n            parent: this,\n            name: key\n          })\n        } else if (Prop instanceof Array) {\n          this._values[key] = new ARRAY(Prop[0], {\n            parent: this,\n            name: key\n          })\n        } else {\n          this._values[key] = new OBJECT(Prop, {\n            parent: this,\n            name: key\n          })\n        }\n      }\n    })\n  }\n\n  toJSON () {\n    return this._values\n  }\n}\nexport default OBJECT\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/Object.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 103,
+    "kind": "class",
+    "name": "OBJECT",
+    "memberof": "props/Object.js",
+    "static": true,
+    "longname": "props/Object.js~OBJECT",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/Object.js",
+    "importStyle": "OBJECT",
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "interface": false,
+    "extends": [
+      "props/classes/PropEvents.js~PropEvents"
+    ]
+  },
+  {
+    "__docId__": 104,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "props/Object.js~OBJECT",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Object.js~OBJECT#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true
+  },
+  {
+    "__docId__": 105,
+    "kind": "member",
+    "name": "schema",
+    "memberof": "props/Object.js~OBJECT",
+    "static": false,
+    "longname": "props/Object.js~OBJECT#schema",
+    "access": "public",
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 106,
+    "kind": "member",
+    "name": "name",
+    "memberof": "props/Object.js~OBJECT",
+    "static": false,
+    "longname": "props/Object.js~OBJECT#name",
+    "access": "public",
+    "description": null,
+    "lineNumber": 27,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 107,
+    "kind": "member",
+    "name": "_pKey",
+    "memberof": "props/Object.js~OBJECT",
+    "static": false,
+    "longname": "props/Object.js~OBJECT#_pKey",
+    "access": "private",
+    "description": null,
+    "lineNumber": 37,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 108,
+    "kind": "method",
+    "name": "assign",
+    "memberof": "props/Object.js~OBJECT",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Object.js~OBJECT#assign",
+    "access": "public",
+    "description": null,
+    "lineNumber": 44,
+    "undocument": true,
+    "params": [
+      {
+        "name": "values",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "objectPattern1",
+        "optional": true,
+        "types": [
+          "{\"preventEvent\": *}"
+        ],
+        "defaultRaw": {},
+        "defaultValue": "{}"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 109,
+    "kind": "method",
+    "name": "_set",
+    "memberof": "props/Object.js~OBJECT",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Object.js~OBJECT#_set",
+    "access": "private",
+    "description": null,
+    "lineNumber": 54,
+    "undocument": true,
+    "params": [
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "objectPattern1",
+        "optional": true,
+        "types": [
+          "{\"preventEvent\": *}"
+        ],
+        "defaultRaw": {},
+        "defaultValue": "{}"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 110,
+    "kind": "method",
+    "name": "buildFromSchema",
+    "memberof": "props/Object.js~OBJECT",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Object.js~OBJECT#buildFromSchema",
+    "access": "public",
+    "description": null,
+    "lineNumber": 58,
+    "undocument": true,
+    "params": [
+      {
+        "name": "schema",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 111,
+    "kind": "member",
+    "name": "_values",
+    "memberof": "props/Object.js~OBJECT",
+    "static": false,
+    "longname": "props/Object.js~OBJECT#_values",
+    "access": "private",
+    "description": null,
+    "lineNumber": 59,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{}"
+      ]
+    }
+  },
+  {
+    "__docId__": 112,
+    "kind": "method",
+    "name": "toJSON",
+    "memberof": "props/Object.js~OBJECT",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Object.js~OBJECT#toJSON",
+    "access": "public",
+    "description": null,
+    "lineNumber": 85,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 113,
+    "kind": "file",
+    "name": "props/Reference.js",
+    "content": "import Prop from './classes/Prop.js'\nimport { LOAD } from './events/events.js'\nimport { referenceModel } from './containers/models.js'\nclass REFERENCE extends Prop {\n  constructor (model, { id, parent, name } = {}) {\n    super(id, { parent, name })\n    if (Object.keys(model).length !== 1) throw new Error('Reference model in constructor must have one key e.g. {User}')\n    this.modelName = Object.keys(model).pop()\n    this.model = model[this.modelName]\n    this._ref = null\n    if (id) {\n      referenceModel(this.modelName, id).then(ref => {\n        this._attachRef(ref)\n      })\n    }\n\n    if (parent && name) {\n      Object.defineProperty(parent, `_${name}`, {\n        get: () => {\n          return this._ref\n        }\n      })\n    }\n  }\n\n  _preChange () {\n    this._ref = null\n    // console.log({id:this.value})\n    if (this.value) {\n      referenceModel(this.modelName, this.value).then(ref => {\n        this._attachRef(ref)\n        // this.processEvent(LOAD, this, { bubble: true })\n      })\n    }\n  }\n\n  getRef () {\n    if (this._ref) {\n      return Promise.resolve(this._ref)\n    } else {\n      return new Promise((resolve) => {\n        this.on(LOAD, () => {\n          resolve(this._ref)\n        })\n      })\n    }\n  }\n\n  _attachRef (ref) {\n    this._ref = ref\n    this.processEvent(LOAD, this, { bubble: true })\n  }\n\n  get () {\n    return this._ref\n  }\n\n  valueOf () {\n    return this.value\n  }\n}\n\nexport default REFERENCE\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/Reference.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 114,
+    "kind": "class",
+    "name": "REFERENCE",
+    "memberof": "props/Reference.js",
+    "static": true,
+    "longname": "props/Reference.js~REFERENCE",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/Reference.js",
+    "importStyle": "REFERENCE",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "interface": false,
+    "extends": [
+      "props/classes/Prop.js~Prop"
+    ]
+  },
+  {
+    "__docId__": 115,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "props/Reference.js~REFERENCE",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Reference.js~REFERENCE#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true
+  },
+  {
+    "__docId__": 116,
+    "kind": "member",
+    "name": "modelName",
+    "memberof": "props/Reference.js~REFERENCE",
+    "static": false,
+    "longname": "props/Reference.js~REFERENCE#modelName",
+    "access": "public",
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 117,
+    "kind": "member",
+    "name": "model",
+    "memberof": "props/Reference.js~REFERENCE",
+    "static": false,
+    "longname": "props/Reference.js~REFERENCE#model",
+    "access": "public",
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 118,
+    "kind": "member",
+    "name": "_ref",
+    "memberof": "props/Reference.js~REFERENCE",
+    "static": false,
+    "longname": "props/Reference.js~REFERENCE#_ref",
+    "access": "private",
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 119,
+    "kind": "method",
+    "name": "_preChange",
+    "memberof": "props/Reference.js~REFERENCE",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Reference.js~REFERENCE#_preChange",
+    "access": "private",
+    "description": null,
+    "lineNumber": 26,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 121,
+    "kind": "method",
+    "name": "getRef",
+    "memberof": "props/Reference.js~REFERENCE",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Reference.js~REFERENCE#getRef",
+    "access": "public",
+    "description": null,
+    "lineNumber": 37,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 122,
+    "kind": "method",
+    "name": "_attachRef",
+    "memberof": "props/Reference.js~REFERENCE",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Reference.js~REFERENCE#_attachRef",
+    "access": "private",
+    "description": null,
+    "lineNumber": 49,
+    "undocument": true,
+    "params": [
+      {
+        "name": "ref",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 124,
+    "kind": "method",
+    "name": "get",
+    "memberof": "props/Reference.js~REFERENCE",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Reference.js~REFERENCE#get",
+    "access": "public",
+    "description": null,
+    "lineNumber": 54,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 125,
+    "kind": "method",
+    "name": "valueOf",
+    "memberof": "props/Reference.js~REFERENCE",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Reference.js~REFERENCE#valueOf",
+    "access": "public",
+    "description": null,
+    "lineNumber": 58,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 126,
+    "kind": "file",
+    "name": "props/String.js",
+    "content": "\nimport Prop from './classes/Prop.js'\nclass STRING extends Prop {\n  parse (value) {\n    return value != null ? value.toString() : null\n  }\n}\n\nexport default STRING\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/String.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 127,
+    "kind": "class",
+    "name": "STRING",
+    "memberof": "props/String.js",
+    "static": true,
+    "longname": "props/String.js~STRING",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/String.js",
+    "importStyle": "STRING",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "interface": false,
+    "extends": [
+      "props/classes/Prop.js~Prop"
+    ]
+  },
+  {
+    "__docId__": 128,
+    "kind": "method",
+    "name": "parse",
+    "memberof": "props/String.js~STRING",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/String.js~STRING#parse",
+    "access": "public",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "params": [
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 129,
+    "kind": "file",
+    "name": "props/Text.js",
+    "content": "import Prop from './classes/Prop.js'\nclass TEXT extends Prop {\n  parse (value) {\n    return value != null ? value.toString() : null\n  }\n}\n\nexport default TEXT\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/Text.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 130,
+    "kind": "class",
+    "name": "TEXT",
+    "memberof": "props/Text.js",
+    "static": true,
+    "longname": "props/Text.js~TEXT",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/Text.js",
+    "importStyle": "TEXT",
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true,
+    "interface": false,
+    "extends": [
+      "props/classes/Prop.js~Prop"
+    ]
+  },
+  {
+    "__docId__": 131,
+    "kind": "method",
+    "name": "parse",
+    "memberof": "props/Text.js~TEXT",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Text.js~TEXT#parse",
+    "access": "public",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "params": [
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 132,
+    "kind": "file",
+    "name": "props/classes/SchemaError.js",
+    "content": "class SchemaError extends Error {\n  constructor (...args) {\n    super(...args)\n    this.name = 'SchemaError'\n  }\n}\nexport default SchemaError\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/classes/SchemaError.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 133,
+    "kind": "class",
+    "name": "SchemaError",
+    "memberof": "props/classes/SchemaError.js",
+    "static": true,
+    "longname": "props/classes/SchemaError.js~SchemaError",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/classes/SchemaError.js",
+    "importStyle": "SchemaError",
+    "description": null,
+    "lineNumber": 1,
+    "undocument": true,
+    "interface": false,
+    "extends": [
+      "Error"
+    ]
+  },
+  {
+    "__docId__": 134,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "props/classes/SchemaError.js~SchemaError",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/classes/SchemaError.js~SchemaError#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true
+  },
+  {
+    "__docId__": 135,
+    "kind": "member",
+    "name": "name",
+    "memberof": "props/classes/SchemaError.js~SchemaError",
+    "static": false,
+    "longname": "props/classes/SchemaError.js~SchemaError#name",
+    "access": "public",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 136,
+    "kind": "file",
+    "name": "props/classes/schema.js",
+    "content": "import SchemaError from './SchemaError.js'\nimport props, { typesFoundInSchema } from '../index.js'\nimport INTEGER from '../Integer.js'\nimport BOOLEAN from '../Boolean.js'\nimport DATE from '../Date.js'\nimport DECIMAL from '../Decimal.js'\nimport STRING from '../String.js'\nimport ARRAY from '../Array.js'\nimport OBJECT from '../Object.js'\n// import TEXT from './Text.js'\nconst getProp = obj => {\n  if (typesFoundInSchema.includes(obj)) return { Prop: obj }\n  if (obj.isObservable) {\n    return { Prop: obj }\n  }\n  if (typeof obj === 'string' && props[obj]) return { Prop: props[obj] }\n  if (typeof obj === 'string') return { Prop: STRING, Value: obj }\n  if (obj instanceof Date) return { Prop: DATE, Value: obj }\n  if (typeof obj === 'number') {\n    if (obj === parseInt(obj)) return { Prop: INTEGER, Value: obj }\n    return { Prop: DECIMAL, Value: obj }\n  }\n  if (typeof obj === 'boolean') return { Prop: BOOLEAN, Value: obj }\n  if (typeof obj === 'object') {\n    if (Object.keys(obj).length === 1 && obj.type && props[obj.type]) {\n      return { Prop: props[obj.type] }\n    } else if (Object.keys(obj).length === 2 && obj.type && props[obj.type] && obj.value !== undefined) {\n      return { Prop: props[obj.type], Value: obj.value }\n    } else {\n      return { Prop: OBJECT, Value: obj }\n    }\n  }\n  if (obj === null) throw new SchemaError('A NULL value cannot be parsed in a Schema')\n  throw new SchemaError(`Schema could not parse the entry ${obj}`)\n}\n\nconst schema = s => {\n  if (s instanceof Array) {\n    if (!s.length) throw new SchemaError('An Array in a schema must contain a sub-schema for the containing objects')\n    return s.map(i => schema(i))\n  }\n  if (s.isObservable) return s\n  const structure = Object.keys(s).reduce((acc, key) => {\n    const { Prop, Value } = getProp(s[key])\n    acc[key] = { Prop, Value }\n    if (acc[key].Prop === OBJECT) {\n      acc[key] = schema(s[key])\n    }\n    return acc\n  }, {})\n  return structure\n}\nconst TypeSchema = s => {\n  if (s instanceof Array) {\n    return s.map(TypeSchema)\n  }\n  if (s.isObservable) return s\n  return Object.keys(s).reduce((acc, key) => {\n    if (s[key] instanceof Array) {\n      acc[key] = s[key].map(TypeSchema)\n    } else {\n      const { Prop } = s[key]\n      if (!Prop) {\n        acc[key] = TypeSchema(s[key])\n      } else {\n        acc[key] = Prop\n      }\n    }\n    return acc\n  }, {})\n}\nconst ValueSchema = s => {\n  if (s instanceof Array) {\n    return s.map(ValueSchema)\n  }\n  return Object.keys(s).reduce((acc, key) => {\n    if (s[key]) {\n      if (s[key] instanceof Array) {\n        acc[key] = s[key].map(ValueSchema)\n      } else {\n        const { Prop, Value } = s[key]\n        if (!Prop) {\n          acc[key] = ValueSchema(s[key])\n        } else {\n          acc[key] = Value\n        }\n      }\n    }\n    return acc\n  }, {})\n}\nconst TypesAndValues = s => {\n  // console.log(s)\n  const TAV = schema(s)\n  // console.log(TAV)\n  return [TypeSchema(TAV), ValueSchema(TAV)]\n}\nexport default TypesAndValues\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/classes/schema.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 137,
+    "kind": "function",
+    "name": "getProp",
+    "memberof": "props/classes/schema.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "props/classes/schema.js~getProp",
+    "access": "public",
+    "export": false,
+    "importPath": "Observables/props/classes/schema.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "params": [
+      {
+        "name": "obj",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "{\"Prop\": *, \"Value\": *}"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 138,
+    "kind": "function",
+    "name": "schema",
+    "memberof": "props/classes/schema.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "props/classes/schema.js~schema",
+    "access": "public",
+    "export": false,
+    "importPath": "Observables/props/classes/schema.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 37,
+    "undocument": true,
+    "params": [
+      {
+        "name": "s",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 139,
+    "kind": "function",
+    "name": "TypeSchema",
+    "memberof": "props/classes/schema.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "props/classes/schema.js~TypeSchema",
+    "access": "public",
+    "export": false,
+    "importPath": "Observables/props/classes/schema.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 53,
+    "undocument": true,
+    "params": [
+      {
+        "name": "s",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 140,
+    "kind": "function",
+    "name": "ValueSchema",
+    "memberof": "props/classes/schema.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "props/classes/schema.js~ValueSchema",
+    "access": "public",
+    "export": false,
+    "importPath": "Observables/props/classes/schema.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 72,
+    "undocument": true,
+    "params": [
+      {
+        "name": "s",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 141,
+    "kind": "function",
+    "name": "TypesAndValues",
+    "memberof": "props/classes/schema.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "props/classes/schema.js~TypesAndValues",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/classes/schema.js",
+    "importStyle": "TypesAndValues",
+    "description": null,
+    "lineNumber": 92,
+    "undocument": true,
+    "params": [
+      {
+        "name": "s",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "undefined[]"
+      ]
+    }
+  },
+  {
+    "__docId__": 142,
+    "kind": "file",
+    "name": "props/containers/models.js",
+    "content": "const store = {}\nconst listeners = {}\nclass Store {\n  constructor (name, model) {\n    this.name = name\n    this.Model = model\n    this.models = {}\n    this._referenceListeners = (listeners[this.name] && listeners[this.name].referenceModel instanceof Array) ? listeners[this.name].referenceModel : []\n    delete listeners[this.name]\n  }\n\n  add (items = []) {\n    while (items.length) {\n      const item = items.shift()\n      if (item instanceof this.Model && item._pKey) {\n        this.models[item[item._pKey].toString()] = item\n        const listeners = this._referenceListeners.filter(listener => listener.id === item._pKey)\n        while (listeners.length) {\n          const listener = listeners.shift()\n          listener.resolve(item)\n        }\n        this._referenceListeners = this._referenceListeners.filter(listener => listener.id !== item._pKey)\n      }\n    }\n  }\n\n  filter (predictate) {\n    return Object.values(this.models).filter(predictate)\n  }\n\n  findByPKey (id) {\n    if (this.models[id.toString()]) return this.models[id.toString()]\n    return null\n  }\n\n  referenceModel (id, resolve = () => {}) {\n    if (!id) return resolve(null)\n    if (resolve) {\n      if (this.models[id.toString()]) {\n        resolve(this.models[id.toString()])\n      } else {\n        this._referenceListeners.push({ id: id.toString(), resolve })\n      }\n    } else {\n      if (this.models[id.toString()]) {\n        return this.models[id.toString()]\n      } else {\n        return new Promise((resolve) => {\n          this._referenceListeners.push({ id: id.toString(), resolve })\n        })\n      }\n    }\n  }\n}\nexport const register = (models) => {\n  try {\n    Object.keys(models).forEach(name => {\n      if (!store[name]) store[name] = new Store(name, models[name])\n    })\n  } catch (_e) {}\n  return store\n}\nexport const referenceModel = (model, id) => {\n  // console.log(model, id)\n  if (store[model]) {\n    return new Promise((resolve, reject) => {\n      store[model].referenceModel(id, resolve)\n    })\n  } else {\n    return new Promise((resolve, reject) => {\n      if (!listeners[model]) listeners[model] = {}\n      if (!listeners[model].referenceModel) listeners[model].referenceModel = []\n      listeners[model].referenceModel.push({ id: id.toString(), resolve })\n    })\n  }\n}\nexport default store\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/containers/models.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 143,
+    "kind": "variable",
+    "name": "listeners",
+    "memberof": "props/containers/models.js",
+    "static": true,
+    "longname": "props/containers/models.js~listeners",
+    "access": "public",
+    "export": false,
+    "importPath": "Observables/props/containers/models.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{}"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 144,
+    "kind": "class",
+    "name": "Store",
+    "memberof": "props/containers/models.js",
+    "static": true,
+    "longname": "props/containers/models.js~Store",
+    "access": "public",
+    "export": false,
+    "importPath": "Observables/props/containers/models.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "interface": false,
+    "ignore": true
+  },
+  {
+    "__docId__": 145,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "props/containers/models.js~Store",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/containers/models.js~Store#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true
+  },
+  {
+    "__docId__": 146,
+    "kind": "member",
+    "name": "name",
+    "memberof": "props/containers/models.js~Store",
+    "static": false,
+    "longname": "props/containers/models.js~Store#name",
+    "access": "public",
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 147,
+    "kind": "member",
+    "name": "Model",
+    "memberof": "props/containers/models.js~Store",
+    "static": false,
+    "longname": "props/containers/models.js~Store#Model",
+    "access": "public",
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 148,
+    "kind": "member",
+    "name": "models",
+    "memberof": "props/containers/models.js~Store",
+    "static": false,
+    "longname": "props/containers/models.js~Store#models",
+    "access": "public",
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{}"
+      ]
+    }
+  },
+  {
+    "__docId__": 149,
+    "kind": "member",
+    "name": "_referenceListeners",
+    "memberof": "props/containers/models.js~Store",
+    "static": false,
+    "longname": "props/containers/models.js~Store#_referenceListeners",
+    "access": "private",
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 150,
+    "kind": "method",
+    "name": "add",
+    "memberof": "props/containers/models.js~Store",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/containers/models.js~Store#add",
+    "access": "public",
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "params": [
+      {
+        "name": "items",
+        "optional": true,
+        "types": [
+          "*[]"
+        ],
+        "defaultRaw": [],
+        "defaultValue": "[]"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 152,
+    "kind": "method",
+    "name": "filter",
+    "memberof": "props/containers/models.js~Store",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/containers/models.js~Store#filter",
+    "access": "public",
+    "description": null,
+    "lineNumber": 27,
+    "undocument": true,
+    "params": [
+      {
+        "name": "predictate",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 153,
+    "kind": "method",
+    "name": "findByPKey",
+    "memberof": "props/containers/models.js~Store",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/containers/models.js~Store#findByPKey",
+    "access": "public",
+    "description": null,
+    "lineNumber": 31,
+    "undocument": true,
+    "params": [
+      {
+        "name": "id",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 154,
+    "kind": "method",
+    "name": "referenceModel",
+    "memberof": "props/containers/models.js~Store",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/containers/models.js~Store#referenceModel",
+    "access": "public",
+    "description": null,
+    "lineNumber": 36,
+    "undocument": true,
+    "params": [
+      {
+        "name": "id",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "resolve",
+        "optional": true,
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 155,
+    "kind": "function",
+    "name": "register",
+    "memberof": "props/containers/models.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "props/containers/models.js~register",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/containers/models.js",
+    "importStyle": "{register}",
+    "description": null,
+    "lineNumber": 55,
+    "undocument": true,
+    "params": [
+      {
+        "name": "models",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 156,
+    "kind": "function",
+    "name": "referenceModel",
+    "memberof": "props/containers/models.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "props/containers/models.js~referenceModel",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/containers/models.js",
+    "importStyle": "{referenceModel}",
+    "description": null,
+    "lineNumber": 63,
+    "undocument": true,
+    "params": [
+      {
+        "name": "model",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "id",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 157,
+    "kind": "variable",
+    "name": "store",
+    "memberof": "props/containers/models.js",
+    "static": true,
+    "longname": "props/containers/models.js~store",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/containers/models.js",
+    "importStyle": "store",
+    "description": null,
+    "lineNumber": 1,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{}"
+      ]
+    }
+  },
+  {
+    "__docId__": 158,
+    "kind": "file",
+    "name": "props/events/events.js",
+    "content": "export const CHANGE = 'change'\nexport const LOAD = 'load'\n\nexport default {\n  CHANGE,\n  LOAD\n}\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/events/events.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 159,
+    "kind": "variable",
+    "name": "CHANGE",
+    "memberof": "props/events/events.js",
+    "static": true,
+    "longname": "props/events/events.js~CHANGE",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/events/events.js",
+    "importStyle": "{CHANGE}",
+    "description": null,
+    "lineNumber": 1,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 160,
+    "kind": "variable",
+    "name": "LOAD",
+    "memberof": "props/events/events.js",
+    "static": true,
+    "longname": "props/events/events.js~LOAD",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/events/events.js",
+    "importStyle": "{LOAD}",
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 161,
+    "kind": "file",
+    "name": "props/index.js",
+    "content": "\nimport BOOLEAN from './Boolean.js'\nimport DATE from './Date.js'\nimport DECIMAL from './Decimal.js'\nimport INTEGER from './Integer.js'\nimport STRING from './String.js'\nimport TEXT from './Text.js'\nimport REFERENCE from './Reference.js'\n/**\n * @ignore\n */\nconst props = {\n  Boolean: BOOLEAN,\n  Date: DATE,\n  Decimal: DECIMAL,\n  Integer: INTEGER,\n  String: STRING,\n  Text: TEXT\n}\n/**\n * @ignore\n */\nexport const typesFoundInSchema = [\n  INTEGER,\n  BOOLEAN,\n  DATE,\n  DECIMAL,\n  STRING,\n  TEXT,\n  REFERENCE\n]\n/**\n * @ignore\n */\nexport default props\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/index.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 162,
+    "kind": "variable",
+    "name": "typesFoundInSchema",
+    "memberof": "props/index.js",
+    "static": true,
+    "longname": "props/index.js~typesFoundInSchema",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/index.js",
+    "importStyle": "{typesFoundInSchema}",
+    "description": null,
+    "lineNumber": 23,
+    "undocument": true,
+    "type": {
+      "types": [
+        "undefined[]"
+      ]
+    }
+  },
+  {
+    "__docId__": 163,
+    "kind": "variable",
+    "name": "props",
+    "memberof": "props/index.js",
+    "static": true,
+    "longname": "props/index.js~props",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/index.js",
+    "importStyle": "props",
+    "description": "",
+    "lineNumber": 12,
+    "ignore": true,
+    "type": {
+      "types": [
+        "{\"Boolean\": *, \"Date\": *, \"Decimal\": *, \"Integer\": *, \"String\": *, \"Text\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 164,
+    "kind": "file",
+    "name": "props/react/mountedState.js",
+    "content": "import { CHANGE } from '../classes/events.js'\nconst mountedState = (observable, componentClass) => {\n  if (!observable.isObservable) throw new Error('Provided Object is not observable')\n  const initialState = {}\n  componentClass.state = initialState\n  const watcher = () => {\n    componentClass.setState(observable._value)\n  }\n  const mount = () => {\n    observable.on(CHANGE, watcher)\n  }\n  const unmount = () => {\n    observable.off(CHANGE, watcher)\n  }\n  return { mount, unmount }\n}\n\nexport default mountedState\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/react/mountedState.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 165,
+    "kind": "function",
+    "name": "mountedState",
+    "memberof": "props/react/mountedState.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "props/react/mountedState.js~mountedState",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/react/mountedState.js",
+    "importStyle": "mountedState",
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true,
+    "params": [
+      {
+        "name": "observable",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "componentClass",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "{\"mount\": *, \"unmount\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 166,
+    "kind": "file",
+    "name": "props/react/stateOnEffect.js",
+    "content": "import { CHANGE } from '../events/events.js'\n\nconst stateOnEffect = (observable = {}, { useState, useEffect }) => {\n  if (!observable.isObservable) throw new Error('Provided Object is not observable')\n  const [value, setValue] = useState(observable.toJSON())\n  // console.log(value)\n  useEffect(() => {\n    // console.log({ watcher: observable.toJSON() })\n    const watcher = () => {\n      setValue(observable.toJSON())\n    }\n\n    observable.on(CHANGE, watcher)\n    return () => {\n      observable.off(CHANGE, watcher)\n    }\n  })\n  return value\n}\n\nexport default stateOnEffect\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/react/stateOnEffect.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 167,
+    "kind": "function",
+    "name": "stateOnEffect",
+    "memberof": "props/react/stateOnEffect.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "props/react/stateOnEffect.js~stateOnEffect",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/react/stateOnEffect.js",
+    "importStyle": "stateOnEffect",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "params": [
+      {
+        "name": "observable",
+        "optional": true,
+        "types": [
+          "{}"
+        ],
+        "defaultRaw": {},
+        "defaultValue": "{}"
+      },
+      {
+        "name": "objectPattern1",
+        "types": [
+          "{\"useState\": *, \"useEffect\": *}"
+        ],
+        "defaultRaw": {
+          "useState": null,
+          "useEffect": null
+        },
+        "defaultValue": "{\"useState\":null,\"useEffect\":null}"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 168,
+    "kind": "file",
+    "name": "props/sample/User.js",
+    "content": "import OBJECT from '../Object.js'\nimport INTEGER from '../Integer.js'\nimport STRING from '../String.js'\nimport { register } from '../containers/models.js'\nimport UserRef from './UserReference.js'\nconst schema = {\n  id: INTEGER,\n  name: STRING,\n  address: STRING,\n  friend: UserRef\n}\nclass User extends OBJECT {\n  constructor (values) {\n    super(schema, { values })\n    store.User.add([this])\n  }\n}\nconst store = register({ User })\nexport default User\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/sample/User.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 169,
+    "kind": "variable",
+    "name": "schema",
+    "memberof": "props/sample/User.js",
+    "static": true,
+    "longname": "props/sample/User.js~schema",
+    "access": "public",
+    "export": false,
+    "importPath": "Observables/props/sample/User.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{\"id\": *, \"name\": *, \"address\": *, \"friend\": *}"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 170,
+    "kind": "variable",
+    "name": "store",
+    "memberof": "props/sample/User.js",
+    "static": true,
+    "longname": "props/sample/User.js~store",
+    "access": "public",
+    "export": false,
+    "importPath": "Observables/props/sample/User.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 171,
+    "kind": "class",
+    "name": "User",
+    "memberof": "props/sample/User.js",
+    "static": true,
+    "longname": "props/sample/User.js~User",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/sample/User.js",
+    "importStyle": "User",
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "interface": false,
+    "extends": [
+      "props/Object.js~OBJECT"
+    ]
+  },
+  {
+    "__docId__": 172,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "props/sample/User.js~User",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/sample/User.js~User#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true
+  },
+  {
+    "__docId__": 173,
+    "kind": "file",
+    "name": "props/sample/UserReference.js",
+    "content": "import REFERENCE from '../Reference.js'\nimport User from './User.js'\nclass UserRef extends REFERENCE {\n  constructor (id, { parent, name } = {}) {\n    super({ User }, { id, parent, name })\n  }\n}\n\nexport default UserRef\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/sample/UserReference.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 174,
+    "kind": "class",
+    "name": "UserRef",
+    "memberof": "props/sample/UserReference.js",
+    "static": true,
+    "longname": "props/sample/UserReference.js~UserRef",
+    "access": "public",
+    "export": true,
+    "importPath": "Observables/props/sample/UserReference.js",
+    "importStyle": "UserRef",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "interface": false,
+    "extends": [
+      "props/Reference.js~REFERENCE"
+    ]
+  },
+  {
+    "__docId__": 175,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "props/sample/UserReference.js~UserRef",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/sample/UserReference.js~UserRef#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true
+  },
+  {
+    "kind": "index",
+    "content": "# Observables\nA package of observables properties, objects and arrays\n\n##\n\n\n",
+    "longname": "/home/paul/Observables/README.md",
+    "name": "./README.md",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "kind": "packageJSON",
+    "content": "{\n  \"name\": \"Observables\",\n  \"version\": \"1.0.0\",\n  \"description\": \"Package of Observable parameters\",\n  \"main\": \"index.js\",\n  \"type\": \"module\",\n  \"repository\": \"https://github.com/pauliclark/Observables.git\",\n  \"author\": \"pauliclark <paul@venuescanner.com>\",\n  \"license\": \"MIT\",\n  \"private\": false,\n  \"scripts\": {\n    \"test\": \"NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest\",\n    \"test:file\": \"NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest \\\"model\\\\.test\\\\.js\\\"  --watchAll\",\n    \"docs:build\": \"node --trace-warnings ./node_modules/.bin/esdoc\",\n    \"docs\": \"node --trace-warnings ./docs.js\"\n  },\n  \"dependencies\": {\n    \"luxon\": \"^2.0.2\"\n  },\n  \"devDependencies\": {\n    \"@babel/preset-env\": \"^7.15.0\",\n    \"@babel/preset-react\": \"^7.14.5\",\n    \"babel-jest\": \"^27.0.6\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^7.32.0\",\n    \"eslint-config-standard\": \"^16.0.2\",\n    \"eslint-plugin-import\": \"^2.22.1\",\n    \"eslint-plugin-node\": \"^11.1.0\",\n    \"eslint-plugin-promise\": \"^4.2.1\",\n    \"express\": \"^4.17.1\",\n    \"jest\": \"^27.0.6\",\n    \"jsdom\": \"^17.0.0\",\n    \"react\": \"^17.0.2\",\n    \"react-dom\": \"^17.0.2\",\n    \"react-test-renderer\": \"^17.0.2\",\n    \"regenerator-runtime\": \"^0.13.9\"\n  },\n  \"jest\": {\n    \"testEnvironment\": \"jsdom\",\n    \"setupFilesAfterEnv\": [\n      \"./tests/setupTests.js\"\n    ]\n  }\n}",
+    "longname": "/home/paul/Observables/package.json",
+    "name": "package.json",
+    "static": true,
+    "access": "public"
+  }
+]

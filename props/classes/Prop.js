@@ -1,4 +1,4 @@
-import { CHANGE } from './events.js'
+import { CHANGE } from '../events/events.js'
 import PropEvents from './PropEvents.js'
 
 class Prop extends PropEvents {
@@ -6,7 +6,7 @@ class Prop extends PropEvents {
     super(parent)
     this.name = name
     // console.log(value)
-    if (parent) {
+    if (parent && name) {
       Object.defineProperty(parent, name, {
         get: () => {
           return this
@@ -22,10 +22,14 @@ class Prop extends PropEvents {
     this._set(value, { preventEvent: true })
   }
 
+  static isProp = true
   _set (value, { preventEvent = false } = {}) {
     const oldValue = this.value
     const newValue = this.parse(value)
     this.value = newValue
+    if (newValue !== oldValue) {
+      if (this._preChange) this._preChange()
+    }
     if (!preventEvent && newValue !== oldValue) {
       // console.log({ CHANGE })
       this._event[CHANGE]()

@@ -10,7 +10,9 @@
   "private": false,
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest",
-    "test:file": "NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest \"date\\.test\\.js\""
+    "test:file": "NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest \"model\\.test\\.js\"  --watchAll",
+    "docs:build": "node --trace-warnings ./node_modules/.bin/esdoc",
+    "docs": "node --trace-warnings ./docs.js"
   },
   "dependencies": {
     "luxon": "^2.0.2"
@@ -19,11 +21,14 @@
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
     "babel-jest": "^27.0.6",
+    "esdoc": "^1.1.0",
+    "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^7.32.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
+    "express": "^4.17.1",
     "jest": "^27.0.6",
     "jsdom": "^17.0.0",
     "react": "^17.0.2",

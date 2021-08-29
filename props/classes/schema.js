@@ -10,7 +10,9 @@ import OBJECT from '../Object.js'
 // import TEXT from './Text.js'
 const getProp = obj => {
   if (typesFoundInSchema.includes(obj)) return { Prop: obj }
-  if (obj.isObservable) return { Prop: obj }
+  if (obj.isObservable) {
+    return { Prop: obj }
+  }
   if (typeof obj === 'string' && props[obj]) return { Prop: props[obj] }
   if (typeof obj === 'string') return { Prop: STRING, Value: obj }
   if (obj instanceof Date) return { Prop: DATE, Value: obj }
@@ -37,6 +39,7 @@ const schema = s => {
     if (!s.length) throw new SchemaError('An Array in a schema must contain a sub-schema for the containing objects')
     return s.map(i => schema(i))
   }
+  if (s.isObservable) return s
   const structure = Object.keys(s).reduce((acc, key) => {
     const { Prop, Value } = getProp(s[key])
     acc[key] = { Prop, Value }
@@ -51,6 +54,7 @@ const TypeSchema = s => {
   if (s instanceof Array) {
     return s.map(TypeSchema)
   }
+  if (s.isObservable) return s
   return Object.keys(s).reduce((acc, key) => {
     if (s[key] instanceof Array) {
       acc[key] = s[key].map(TypeSchema)
@@ -86,7 +90,9 @@ const ValueSchema = s => {
   }, {})
 }
 const TypesAndValues = s => {
+  // console.log(s)
   const TAV = schema(s)
+  // console.log(TAV)
   return [TypeSchema(TAV), ValueSchema(TAV)]
 }
 export default TypesAndValues

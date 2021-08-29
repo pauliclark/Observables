@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">props/containers/models.js | Observables</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Package of Observable parameters"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Observables"><meta property="twitter:description" content="Package of Observable parameters"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/pauliclark/Observables.git"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Array.js~ARRAY.html">ARRAY</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Boolean.js~BOOLEAN.html">BOOLEAN</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Decimal.js~DECIMAL.html">DECIMAL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Integer.js~INTEGER.html">INTEGER</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Object.js~OBJECT.html">OBJECT</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Reference.js~REFERENCE.html">REFERENCE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/String.js~STRING.html">STRING</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Text.js~TEXT.html">TEXT</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-typesFoundInSchema">typesFoundInSchema</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#classes">classes</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/classes/SchemaError.js~SchemaError.html">SchemaError</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-TypesAndValues">TypesAndValues</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#containers">containers</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-referenceModel">referenceModel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-register">register</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-store">store</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#events">events</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CHANGE">CHANGE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LOAD">LOAD</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#react">react</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-mountedState">mountedState</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-stateOnEffect">stateOnEffect</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#sample">sample</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/sample/User.js~User.html">User</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/sample/UserReference.js~UserRef.html">UserRef</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">props/containers/models.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const store = {}
+const listeners = {}
+class Store {
+  constructor (name, model) {
+    this.name = name
+    this.Model = model
+    this.models = {}
+    this._referenceListeners = (listeners[this.name] &amp;&amp; listeners[this.name].referenceModel instanceof Array) ? listeners[this.name].referenceModel : []
+    delete listeners[this.name]
+  }
+
+  add (items = []) {
+    while (items.length) {
+      const item = items.shift()
+      if (item instanceof this.Model &amp;&amp; item._pKey) {
+        this.models[item[item._pKey].toString()] = item
+        const listeners = this._referenceListeners.filter(listener =&gt; listener.id === item._pKey)
+        while (listeners.length) {
+          const listener = listeners.shift()
+          listener.resolve(item)
+        }
+        this._referenceListeners = this._referenceListeners.filter(listener =&gt; listener.id !== item._pKey)
+      }
+    }
+  }
+
+  filter (predictate) {
+    return Object.values(this.models).filter(predictate)
+  }
+
+  findByPKey (id) {
+    if (this.models[id.toString()]) return this.models[id.toString()]
+    return null
+  }
+
+  referenceModel (id, resolve = () =&gt; {}) {
+    if (!id) return resolve(null)
+    if (resolve) {
+      if (this.models[id.toString()]) {
+        resolve(this.models[id.toString()])
+      } else {
+        this._referenceListeners.push({ id: id.toString(), resolve })
+      }
+    } else {
+      if (this.models[id.toString()]) {
+        return this.models[id.toString()]
+      } else {
+        return new Promise((resolve) =&gt; {
+          this._referenceListeners.push({ id: id.toString(), resolve })
+        })
+      }
+    }
+  }
+}
+export const register = (models) =&gt; {
+  try {
+    Object.keys(models).forEach(name =&gt; {
+      if (!store[name]) store[name] = new Store(name, models[name])
+    })
+  } catch (_e) {}
+  return store
+}
+export const referenceModel = (model, id) =&gt; {
+  // console.log(model, id)
+  if (store[model]) {
+    return new Promise((resolve, reject) =&gt; {
+      store[model].referenceModel(id, resolve)
+    })
+  } else {
+    return new Promise((resolve, reject) =&gt; {
+      if (!listeners[model]) listeners[model] = {}
+      if (!listeners[model].referenceModel) listeners[model].referenceModel = []
+      listeners[model].referenceModel.push({ id: id.toString(), resolve })
+    })
+  }
+}
+export default store
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

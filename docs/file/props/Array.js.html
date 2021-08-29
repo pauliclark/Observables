@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">props/Array.js | Observables</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Package of Observable parameters"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Observables"><meta property="twitter:description" content="Package of Observable parameters"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/pauliclark/Observables.git"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Array.js~ARRAY.html">ARRAY</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Boolean.js~BOOLEAN.html">BOOLEAN</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Decimal.js~DECIMAL.html">DECIMAL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Integer.js~INTEGER.html">INTEGER</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Object.js~OBJECT.html">OBJECT</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Reference.js~REFERENCE.html">REFERENCE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/String.js~STRING.html">STRING</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Text.js~TEXT.html">TEXT</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-typesFoundInSchema">typesFoundInSchema</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#classes">classes</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/classes/SchemaError.js~SchemaError.html">SchemaError</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-TypesAndValues">TypesAndValues</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#containers">containers</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-referenceModel">referenceModel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-register">register</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-store">store</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#events">events</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CHANGE">CHANGE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LOAD">LOAD</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#react">react</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-mountedState">mountedState</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-stateOnEffect">stateOnEffect</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#sample">sample</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/sample/User.js~User.html">User</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/sample/UserReference.js~UserRef.html">UserRef</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">props/Array.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">
+import PropEvents from &apos;./classes/PropEvents.js&apos;
+import props, { typesFoundInSchema } from &apos;./index.js&apos;
+import { CHANGE } from &apos;./events/events.js&apos;
+import OBJECT from &apos;./Object.js&apos;
+import schemaBuilder from &apos;./classes/schema.js&apos;
+const makeIterator = (array) =&gt; {
+  let nextIndex = 0
+  return {
+    next: function () {
+      return nextIndex &lt; array.length
+        ? {
+            value: array[nextIndex++],
+            done: false
+          }
+        : {
+            done: true
+          }
+    }
+  }
+}
+/**
+ * The Observable ARRAY Class
+ */
+class ARRAY extends PropEvents {
+  /**
+ * @param {Schema} sourceSchema - The Schema to be used as the shape of the items in the Array
+ * @param {Object} options
+ * @param {Object[]} options.values - The Array of initial values that will be consumed as Observables according to the Schema
+ * @param {Object} options.parent - The Parent Object to which this Array is a member of
+ * @param {String} options.name -The Name/key in the Parent Object to which this Array is assigned
+ */
+  constructor (sourceSchema = null, { values, parent, name } = {}) {
+    super(parent)
+    this._values = []
+    this._schema = null
+    if (sourceSchema) {
+      const [[schema], schemaValues] = schemaBuilder(!(sourceSchema instanceof Array) ? [sourceSchema] : sourceSchema)
+      // console.log({ schema })
+      this._schema = schema
+      // append schemaValues
+      this._assign(values || schemaValues)
+    }
+    if (parent &amp;&amp; name) {
+      parent[name] = this
+      this._name = name
+    }
+    // this.buildFromSchema(schema)
+    // this.assign(values || [])
+
+    if (parent) {
+      Object.defineProperty(parent, name, {
+        get: () =&gt; {
+          return this
+        },
+        set: (v) =&gt; {
+          this._assign(v)
+        }
+      })
+    }
+    Object.defineProperty(this, &apos;length&apos;, {
+      get: () =&gt; {
+        return this.getLength()
+      },
+      set: (v) =&gt; {}
+    })
+  }
+
+  [Symbol.iterator] () { return makeIterator(this._values) }
+
+  _itemProp () {
+    if (typesFoundInSchema.includes(this._schema) || this._schema.isObservable) {
+      return this._schema
+    } else if (this._schema instanceof Array) {
+      return ARRAY
+    } else {
+      return OBJECT
+    }
+  }
+
+  _assign (values) {
+    const Prop = this._schema ? this._itemProp() : null
+    if (!(values instanceof Array)) values = [values]
+    // console.log({ Prop, values })
+    this._values = values.map(val =&gt; {
+      if (Prop) {
+        if (typesFoundInSchema.includes(this._schema) || this._schema.isObservable) {
+          return new Prop(val, { parent: this })
+        } else if (Prop === ARRAY) {
+          return new ARRAY(this._schema[0], { parent: this, values: val })
+        } else if (Prop === OBJECT) {
+          return new OBJECT(this._schema, { parent: this, values: val })
+        }
+      }
+      return null
+    }).filter(v =&gt; v)
+    // console.log(this._values)
+  }
+
+  _newItem (props) {
+    if (this._schema) {
+      const Prop = this._itemProp()
+      if (typesFoundInSchema.includes(this._schema)) {
+        return new Prop(props, { parent: this })
+      } else if (Prop === ARRAY) {
+        return new ARRAY(this._schema[0], { parent: this, values: props })
+      } else if (Prop === OBJECT) {
+        return new OBJECT(this._schema, { parent: this, values: props })
+      }
+    }
+  }
+
+  _changed () {
+    this._event[CHANGE]()
+  }
+
+  /**
+   * Pushes an item onto the Array
+ * @param {Object} props - The Object of values that obeys the item Schema
+ * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired
+ */
+  push (props, preventDefault = false) {
+    this._values.push(this._newItem(props))
+    if (!preventDefault) this._changed()
+  }
+
+  /**
+   * Removes the first item of the Array and returns that item
+ * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired
+ * @returns {Object} item - The Observalbe Object of the item removed from the array
+ */
+  shift (preventDefault = false) {
+    const r = this._values.shift()
+    if (!preventDefault) this._changed()
+    return r
+  }
+
+  /**
+   * Removes the last item of the Array and returns that item
+ * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired
+ * @returns {Object} item - The Observalbe Object of the item removed from the array
+ */
+  pop (preventDefault = false) {
+    const r = this._values.pop()
+    if (!preventDefault) this._changed()
+    return r
+  }
+
+  /**
+   * Removes a range of items from the Array and returns them
+ * @param {Integer} idx - The index of the first item to be removed
+ * @param {Integer} toremove - The number of items to be removed
+ * @param {Object[]} [props = []] - The array of objects (obeying the Schema) to inserted in the resulting gap
+ * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired
+ * @returns {Object[]} items - The Observalbe Objects of the items removed from the array
+ */
+  splice (idx, toremove, props = [], preventDefault = false) {
+    if (!(props instanceof Array)) props = [props]
+    const r = this._values.splice(idx, toremove, props.map(prop =&gt; this._newItem(prop)))
+    if (!preventDefault) this._changed()
+    return r
+  }
+
+  /**
+   * Returns a range of items from the Array
+ * @param {Integer} idxFrom - The index of the first item to be selected
+ * @param {Integer} idxTo - The index of the last item to be selected
+ * @returns {Object[]} items - The Observalbe Objects of the items selected from the array
+ */
+  slice (idxFrom, idxTo) {
+    const r = this._values.slice(idxFrom, idxTo)
+    return r
+  }
+
+  /**
+   * Removes any matching Items from the Array
+ * @param {Object[]} items - An Array of Observable Objects/Items to be removed
+ * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired
+ * @returns {Boolean} success - True if any of the Items were found and removed
+ */
+  remove (items, preventDefault = false) {
+    if (!(typeof items instanceof Array)) items = [items]
+    let success = false
+    const vals = this._values
+    for (let v = vals.length - 1; v &gt;= 0; v--) {
+      if (items.includes(vals[v])) {
+        this._values.splice(v, 1)
+        vals.splice(v, 1, true)
+        success = true
+      }
+    }
+    if (success &amp;&amp; !preventDefault) this._changed()
+    return success
+  }
+
+  /**
+   * Returns an Array of the matching items found in the Array according to the provided method
+ * @param {function(item: Object): Boolean} method - The predictate method for filtering the items
+ * @returns {Boolean} success - True if any of the Items were found and removed
+ */
+  filter (method) {
+    if (!(method instanceof Function)) return this._values
+    return this._values.filter(method)
+  }
+
+  /**
+   * Finds a matching item in the Array according to the provided method
+ * @param {function(item: Object): Boolean} method - The predictate method for matching the item
+ * @returns {Object} item - The found Observable Item
+ */
+  find (method) {
+    if (!(method instanceof Function)) return this._values
+    return this._values.find(method)
+  }
+
+  /**
+   * Moves an item from one index to another
+ * @param {Object} indexes
+ * @param {Integer} indexes.from - The index of the item to move
+ * @param {Integer} indexes.to - The index in the Array to move the item to
+ * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired
+ */
+  moveItem ({ from, to }, preventDefault = false) {
+    if (from &lt; to) {
+      to--
+    }
+    this._values.splice(to, 0, this._values.splice(from, 1)[0])
+    if (!preventDefault) this._changed()
+  }
+
+  /**
+   * Returns the index of the provided Observable Item
+ * @param {Object} item - The Observable Item to return the index of
+ * @returns {Integer} index - The index of the found Observable Item
+ */
+  indexOf (item) {
+    return this._values.indexOf(item)
+  }
+
+  /**
+   * Returns a transposed Array
+ * @param {function(item: Object): Object} method - The transposing method applied to each item in the Array
+ * @returns {Object[]} items - The Array of transposed Items
+ */
+  map (method) {
+    return this._values.map(method)
+  }
+
+  /**
+   * Loop through the Array
+ * @param {function(item: Object)} method - The method to be run on each Item
+ */
+  forEach (method) {
+    return this._values.forEach(method)
+  }
+
+  /**
+   * Reverses the Array order
+ * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired
+ * @returns {Object[]} items - The new reversed Array of Items
+ */
+  reverse (preventDefault = false) {
+    this._values = this._values.reverse()
+    if (!preventDefault) this._changed()
+    return this._values
+  }
+
+  /**
+   * Determines if the provided item is in the Array
+ * @param {Object|String|Number|Boolean} value - The value of an item (according to the Schema) to check for
+ * @returns {Boolean} found - True if the item/value has been found
+ */
+  includes (value) {
+    const toCheck = (value &amp;&amp; value.get ? value.get() : (value.valueOf ? value.valueOf() : value))
+    return !!this._values.find(val =&gt; {
+      return (val &amp;&amp; val.get ? val.get() : (val &amp;&amp; val.valueOf ? val.valueOf() : val)) === toCheck
+    })
+  }
+
+  /**
+   * Returns the Observable Item by the Index
+ * @param {Integer} [idx=null] - The Index of the item to return (if null, all items are returned)
+ * @returns {Object} item - The item found at the requested index
+ */
+  get (idx = null) {
+    return idx === null
+      ? this._values
+      : (
+          idx &gt;= this._values.length ? null : this._values[idx]
+        )
+  }
+
+  /**
+   * Sets the internal array of items
+ * @param {Object[]} [props=[]] - The array of objects to construct the Observable Items (according to the Schema)
+ * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired
+ * @returns {Object[]} items - The new array of Observable Items
+ */
+  set (props = [], preventDefault = false) {
+    // console.log(props, this.getKey())
+    if (!(props instanceof Array)) {
+      // console.log({props})
+      throw new Error(&apos;Expected Array in props&apos;)
+    }
+    // const Schema = this._schema
+    // console.log({props})
+    this._values = props.map(p =&gt; {
+      // if (typeof Schema === &apos;function&apos; &amp;&amp; p instanceof Schema ) return p
+      return this._newItem(p)
+    })
+    // if (!this._schema) console.log(this._values)
+    // console.log(this)
+    if (!preventDefault) this._changed()
+    return this._values
+  }
+
+  _arrayState () {
+    return JSON.stringify(this._values.sort((a, b) =&gt; {
+      if (a._id) {
+        return a._id - b._id
+      } else {
+        return a - b
+      }
+    }))
+  }
+
+  /**
+   * Update the items within the Array. If an item has the same prop *_id*, then the item reference is preserved and the props are updated
+ * @param {Object[]} [props=[]] - The array of objects to construct the Observable Items (according to the Schema)
+ * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired
+ * @returns {Object[]} items - The new array of Observable Items
+ */
+  update (props, preventDefault = false) {
+    if (!(props instanceof Array)) throw new Error(&apos;Expected Array in props&apos;)
+    const currentLength = this._values.length
+    // const currentState = this.arrayState()
+    const foundItems = []
+    let idx = 0
+    // const list = []
+    let isReordered = false
+
+    while (props.length &gt; 0) {
+      const data = props.shift()
+      let foundItem = this._values.find(v =&gt; {
+        return v.equals(data)
+      })
+      if (data._id &amp;&amp; !foundItem) {
+        foundItem = this._values.find(v =&gt; {
+          // console.log(v._id.valueOf())
+          return (!v._id || !v._id.valueOf()) &amp;&amp; (!foundItems.includes(v))
+        })
+      }
+      if (foundItem) {
+        foundItems.push(foundItem)
+        foundItem.update(data, preventDefault)
+        if (this._values.indexOf(foundItem) !== idx) isReordered = true
+      } else {
+        const _newItem = this._newItem(data)
+        foundItems.push(_newItem)
+        // this._values.push(_newItem)
+      }
+      // } else {
+
+      // }
+      idx++
+    }
+    // console.log(this.getKey())
+    // console.log(JSON.parse(JSON.stringify(foundItems)))
+    this._values = foundItems
+    // for (let l = this._values.length - 1; l &gt;= 0; l--) {
+    //   if (!foundItems.includes(this._values[l])) this._values.splice(l, 1)
+    // }
+
+    // const newState = this.arrayState()
+    // if (this.getKey() === &apos;pending_invite&apos;) {
+    // console.log(props)
+    // }
+    const newLength = this._values.length
+    // console.log(currentLength , newLength)
+    if (!preventDefault &amp;&amp; (isReordered || currentLength !== newLength)) this._changed(true)
+    // if (!preventDefault &amp;&amp; currentState !== newState) this._changed(true)
+    return this._values
+  }
+
+  /**
+   * Returns the length of the Array. Used by the virtual property *length*
+ * @returns {Integer} length - The number of items in the Array
+ */
+  getLength () {
+    return this._values.length
+  }
+
+  /**
+   * Returns an Array of the parsed values of each item
+ * @returns {Object[]} values - Array of primitive item values
+ */
+  valueOf () {
+    return this._values.map(r =&gt; r.valueOf ? r.valueOf() : r)
+  }
+
+  /**
+   * Returns the Array of Observable Items
+ * @returns {Object[]} items - Array of Observable Items
+ */
+  toJSON () {
+    return this._values
+  }
+
+  /**
+   * Returns the Array of Objects
+ * @returns {Object[]} objects - Array of Objects
+ */
+  toObject () {
+    return this._values.map(r =&gt; r.toObject ? r.toObject() : r)
+  }
+
+  /**
+   * Reorders the Array
+ * @param {function(a: Object, b: Object): Integer} sortMethod - The sort method that determines whether items a and b swap places
+ * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired
+ * @returns {Object[]} items - The new array of Observable Items
+ */
+  sort (sortMethod = (a, b) =&gt; {
+    return b - a
+  }, preventDefault = false) {
+    const was = this._arrayState()
+    this._values = this._values.sort(sortMethod)
+    const isNow = this._arrayState()
+    if (was !== isNow &amp;&amp; !preventDefault) this._changed()
+    return this._values
+  }
+}
+
+export default ARRAY
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

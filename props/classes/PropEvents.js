@@ -1,4 +1,4 @@
-import events from './events.js'
+import events from '../events/events.js'
 class PropEvents {
   constructor (parent) {
     this.parent = parent
@@ -13,6 +13,7 @@ class PropEvents {
       }
     })
   }
+  static isObservable = true
   isObservable = true
   on (eventName, callback) {
     if (!(Object.values(events).includes(eventName))) throw new Error(`${eventName} is not a valid event`)

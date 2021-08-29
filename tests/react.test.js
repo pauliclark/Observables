@@ -32,27 +32,29 @@ beforeEach(() => {
   container = document.createElement('div')
   document.body.appendChild(container)
 })
-it('React render value', async () => {
-  const model = new OBJECT({
-    name: 'Paul',
-    details: {
-      age: 21
-    }
-  })
+describe('React', () => {
+  it('React render value', async () => {
+    const model = new OBJECT({
+      name: 'Paul',
+      details: {
+        age: 21
+      }
+    })
 
-  render(
+    render(
     <ObjectAge model={model}/>,
     container
-  )
-  expect(container.textContent).toBe('Paul21')
-  const childrenContent = [].slice.call(container.children).map(e => e.textContent)
-  expect(childrenContent[0]).toBe('Paul')
-  expect(childrenContent[1]).toBe('21')
-  await waitFor(1000)
-  act(() => {
-    model.details.age = 22
+    )
+    expect(container.textContent).toBe('Paul21')
+    const childrenContent = [].slice.call(container.children).map(e => e.textContent)
+    expect(childrenContent[0]).toBe('Paul')
+    expect(childrenContent[1]).toBe('21')
+    await waitFor(1000)
+    act(() => {
+      model.details.age = 22
+    })
+    await waitFor(100)
+    const newChildrenContent = [].slice.call(container.children).map(e => e.textContent)
+    expect(newChildrenContent[1]).toBe('22')
   })
-  await waitFor(100)
-  const newChildrenContent = [].slice.call(container.children).map(e => e.textContent)
-  expect(newChildrenContent[1]).toBe('22')
 })

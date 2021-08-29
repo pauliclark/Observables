@@ -1,5 +1,5 @@
 import Prop from './classes/Prop.js'
-import { CHANGE } from './classes/events.js'
+import { CHANGE } from './events/events.js'
 class INTEGER extends Prop {
   parse (value) {
     return value != null ? parseInt(value) : null

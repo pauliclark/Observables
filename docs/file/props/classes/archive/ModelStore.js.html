@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">props/classes/archive/ModelStore.js | Observables</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Package of Observable parameters"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Observables"><meta property="twitter:description" content="Package of Observable parameters"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/pauliclark/Observables.git"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Array.js~ARRAY.html">ARRAY</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Boolean.js~BOOLEAN.html">BOOLEAN</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Decimal.js~DECIMAL.html">DECIMAL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Integer.js~INTEGER.html">INTEGER</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Object.js~OBJECT.html">OBJECT</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/String.js~STRING.html">STRING</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Text.js~TEXT.html">TEXT</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-props">props</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-typesFoundInSchema">typesFoundInSchema</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#classes">classes</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/classes/Prop.js~Prop.html">Prop</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/classes/SchemaError.js~SchemaError.html">SchemaError</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-TypesAndValues">TypesAndValues</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CHANGE">CHANGE</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#classes-archive">classes/archive</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/classes/archive/Observable.js~Observable.html">Observable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-assignProperties">assignProperties</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-buildProperties">buildProperties</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-updateProperties">updateProperties</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ObservableValidation">ObservableValidation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ModelStore">ModelStore</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ObservableProps">ObservableProps</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#react">react</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-mountedState">mountedState</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-stateOnEffect">stateOnEffect</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#validators">validators</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-emails">emails</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-messages">messages</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-numbers">numbers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-strings">strings</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">props/classes/archive/ModelStore.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">
+import * as ObservablePropTypes from &apos;./ObservablePropTypesCustom&apos;
+const ModelStore = {
+  /* Registered models */
+  models: {},
+  /* Listeners by Model for pushed from client models */
+  receivingTranspose: {},
+  listeners: {},
+  /* waiters - listening for models when they appear */
+  waiters: {},
+  /* Storage of model instances by model type */
+  store: {},
+  /* prop types - can be extended as per usage */
+  propTypes: ObservablePropTypes,
+  /* Defined the socket client and the registered models */
+  init ({ client, models = {} } = { models: {} }) {
+    Object.keys(models).forEach(model =&gt; {
+      if (!this.models[model]) {
+        this.models[model] = models[model]
+        this.store[model] = {}
+        this.receivingTranspose[model.replace(/[a-z][A-Z]/g, m =&gt; `${m[0]}_${m[1]}`).toLowerCase()] = model
+      }
+    })
+    if (client &amp;&amp; !this.client) {
+      this.client = client
+      if (this.client.registerModels) {
+        this.client.registerModels(Object.keys(this.models).map(k =&gt; k.replace(/[a-z][A-Z]/g, m =&gt; `${m[0]}_${m[1]}`).toLowerCase()), (received) =&gt; this.receiver(received))
+      }
+      this.client.addListener(&apos;trigger&apos;, (data) =&gt; {
+        this.triggers(data)
+      })
+    }
+  },
+  triggers (data) {
+    Object.keys(data).forEach(key =&gt; {
+      const ids = Object.keys(data[key])
+      ids.forEach(id =&gt; {
+        const method = data[key][id]
+        // console.log(this.store[key][id], method)
+        if (this.store[key] &amp;&amp; this.store[key][id] &amp;&amp; this.store[key][id][method]) this.store[key][id][method]()
+      })
+    })
+  },
+  async delete (instance) {
+    return this.client.send(&apos;room&apos;, {
+      deleteModel: {
+        [instance.modelType]: {
+          [instance._id]: instance
+        }
+      }
+    })
+  },
+  filter (model, compare) {
+    if (!this.store[model]) return null
+    return Object.values(this.store[model]).filter(compare)
+  },
+  findById (model, id) {
+    if (!this.store[model]) return undefined
+    return this.store[model][id.toString()]
+  },
+  find (model, compare) {
+    if (!this.store[model]) return null
+    return Object.values(this.store[model]).find(compare)
+  },
+  fetch (models, callback) {
+    // console.log(models)
+    const types = Object.keys(models)
+    const found = {}
+    const waitFor = {}
+    types.forEach(type =&gt; {
+      if (this.store[type] &amp;&amp; this.store[type][models[type]]) {
+        found[type] = this.store[type][models[type]]
+      } else {
+        waitFor[type] = models[type]
+      }
+    })
+    const wait = Object.keys(waitFor)
+    wait.forEach(type =&gt; {
+      if (!this.waiters[type]) this.waiters[type] = {}
+      if (!this.waiters[type][waitFor[type]]) this.waiters[type][waitFor[type]] = []
+      this.waiters[type][waitFor[type]].push(callback)
+    })
+    if (Object.keys(found).length) {
+      callback(found)
+    }
+  },
+  checkWaiter () {
+
+  },
+  buildListeners: {},
+  listenForBuilds (model, method = () =&gt; { }, filter = (i) =&gt; { return true }) {
+    if (!this.models[model]) throw new Error(`Model ${model} is not initiated in ModelStore`)
+    if (!this.buildListeners[model]) this.buildListeners[model] = []
+    this.buildListeners[model].push({ method, filter })
+  },
+  runBuildListeners (model, models = []) {
+    // console.log({butuilListeners:{model, models}})
+    if (this.buildListeners[model] &amp;&amp; this.buildListeners[model].length) {
+      // console.log({listeners:this.buildListeners[model]})
+      for (let l = this.buildListeners[model].length - 1; l &gt;= 0; l--) {
+        let allFail = true
+        models.forEach(item =&gt; {
+          try {
+            if (this.buildListeners[model][l].filter &amp;&amp; this.buildListeners[model][l].filter(item)) {
+              this.buildListeners[model][l].method(item)
+            }
+            allFail = false
+          } catch (e) {
+            console.error(e)
+          }
+        })
+        if (allFail) this.buildListeners[model].splice(l, 1)
+      }
+    }
+  },
+  build (models) {
+    // console.log({ models })
+    const response = {}
+    const modelsTypes = Object.keys(models)
+    modelsTypes.forEach(model =&gt; {
+      // console.log(model)
+      if (!this.store[model]) this.store[model] = {}
+      if (models[model]) {
+        const newItems = models[model].filter(m =&gt; !this.store[model][m._id]).map(m =&gt; new this.models[model](m))
+        const existingItems = models[model].filter(m =&gt; this.store[model][m._id]).map(m =&gt; this.store[model][m._id])
+        response[model] = [...newItems, ...existingItems]
+        // console.log([...response[model]])
+        this.add([...newItems])
+      } else {
+        console.warn(`Model ${model} has not been initiated`)
+      }
+    })
+    // console.log({ response })
+    return response
+  },
+  add (items) {
+    // console.log(this)
+    if (!(items instanceof Array)) items = [items]
+    items.forEach(item =&gt; {
+      // console.log(item)
+      if (item.modelType) {
+        const model = item.modelType
+        if (!this.store[model]) this.store[model] = {}
+        if (!this.store[model][item._id.valueOf()]) {
+          this.store[model][item._id.valueOf()] = item
+          this.runBuildListeners(model, [item])
+          if (this.waiters[model] &amp;&amp; this.waiters[model][item._id.get()] &amp;&amp; this.waiters[model][item._id.get()].length) {
+            while (this.waiters[model][item._id.get()].length) {
+              let fetchCallback = this.waiters[model][item._id.get()].shift()
+              fetchCallback({ [model]: item })
+            }
+          }
+          item.watch((v, fromUpdate) =&gt; {
+            if (fromUpdate !== true) {
+              this.sendChange(item)
+            }
+          })
+        }
+      }
+    })
+    this.recordLoaded()
+  },
+  // sentChanges: {},
+  timeouts: {},
+  sendChange (item) {
+    // console.log(JSON.stringify(item))
+    // console.log(item.constructor &amp;&amp; item.constructor.name)
+    if (item.modelType) {
+      if (this.timeouts[item._id]) clearTimeout(this.timeouts[item._id])
+      this.timeouts[item._id] = setTimeout(() =&gt; {
+        delete this.timeouts[item._id]
+        const changes = {}
+        changes[item.modelType] = {}
+        changes[item.modelType][item._id] = item
+        // this.sentChanges[item.modelType][item._id] = true
+        console.log(item, &apos;is saving&apos;)
+        this.client.send(&apos;room&apos;, { updateModel: changes })
+      }, 50)
+    }
+  },
+  recordLoaded () {
+    const loaded = {}
+    Object.keys(this.store).forEach(model =&gt; {
+      loaded[model] = Object.keys(this.store[model])
+    })
+    if (this.client) this.client.loaded(loaded)
+  },
+  receiver (received) {
+    // console.log(received)
+    const models = Object.keys(received)
+    const newModels = {}
+    models.forEach(model =&gt; {
+      const modelName = this.receivingTranspose[model]
+      // console.log({ modelName, modelNames: Object.keys(this.models) })
+      if (this.models[modelName]) {
+        // eslint-disable-next-line compat/compat
+        const items = Object.values(received[model])
+        items.forEach(item =&gt; {
+          if (this.store[modelName][item._id]) {
+            if (this.store[modelName][item._id].update) {
+              // const fromChange = false// = this.sentChanges[modelName] &amp;&amp; this.sentChanges[modelName][item._id]
+              // if (fromChange) delete this.sentChanges[modelName][item._id]
+              if (item.__deleted) {
+                const deleting = this.store[modelName][item._id]
+                delete this.store[modelName][item._id]
+                deleting.deleted()
+              } else {
+                this.store[modelName][item._id].update(item)
+              }
+            } else {
+              console.error(item, &apos;cannot find an update method&apos;)
+            }
+          } else if (!item.__deleted) {
+            const newModel = new this.models[modelName](item)
+
+            this.add(newModel)
+            // this.store[modelName][item._id] = newModel
+            if (!newModels[modelName]) newModels[modelName] = []
+            newModels[modelName].push(newModel)
+          }
+        })
+      }
+    })
+    Object.keys(newModels).forEach(model =&gt; {
+      // this.runBuildListeners(model,newModels[model])
+      this.triggerNewModel(model, newModels[model])
+    })
+  },
+  addListenerForNew (model, callback) {
+    if (!this.listeners[model]) this.listeners[model] = []
+    this.listeners[model].push(callback)
+  },
+  triggerNewModel (model, items) {
+    if (this.listeners[model]) {
+      this.listeners[model].forEach(callback =&gt; {
+        try {
+          callback(items)
+        } catch (e) {
+          callback = null
+        }
+      })
+      this.listeners[model] = this.listeners[model].filter(listener =&gt; listener)
+    }
+  }
+}
+window.ModelStore = ModelStore
+export { ModelStore }
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

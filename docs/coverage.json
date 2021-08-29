@@ -1,0 +1,186 @@
+{
+  "coverage": "24.5%",
+  "expectCount": 102,
+  "actualCount": 25,
+  "files": {
+    "props/Array.js": {
+      "expectCount": 34,
+      "actualCount": 24,
+      "undocumentLines": [
+        7,
+        35,
+        36,
+        46,
+        69,
+        71,
+        81,
+        100,
+        113,
+        317
+      ]
+    },
+    "props/Boolean.js": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        4,
+        8,
+        12
+      ]
+    },
+    "props/Decimal.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        4
+      ]
+    },
+    "props/Integer.js": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        4,
+        8,
+        13
+      ]
+    },
+    "props/Object.js": {
+      "expectCount": 10,
+      "actualCount": 0,
+      "undocumentLines": [
+        12,
+        13,
+        17,
+        27,
+        37,
+        44,
+        54,
+        58,
+        59,
+        85
+      ]
+    },
+    "props/Reference.js": {
+      "expectCount": 10,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        5,
+        8,
+        9,
+        10,
+        26,
+        37,
+        49,
+        54,
+        58
+      ]
+    },
+    "props/String.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        4
+      ]
+    },
+    "props/Text.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        2,
+        3
+      ]
+    },
+    "props/classes/SchemaError.js": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        1,
+        2,
+        4
+      ]
+    },
+    "props/classes/schema.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        11,
+        37,
+        53,
+        72,
+        92
+      ]
+    },
+    "props/containers/models.js": {
+      "expectCount": 14,
+      "actualCount": 0,
+      "undocumentLines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        12,
+        27,
+        31,
+        36,
+        55,
+        63,
+        1
+      ]
+    },
+    "props/events/events.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        1,
+        2
+      ]
+    },
+    "props/index.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        23
+      ]
+    },
+    "props/react/mountedState.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    },
+    "props/react/stateOnEffect.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        3
+      ]
+    },
+    "props/sample/User.js": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        6,
+        18,
+        12,
+        13
+      ]
+    },
+    "props/sample/UserReference.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        4
+      ]
+    }
+  }
+}

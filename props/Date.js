@@ -1,7 +1,7 @@
 
 import Prop from './classes/Prop.js'
 import { DateTime } from 'luxon'
-import { CHANGE } from './classes/events.js'
+import { CHANGE } from './events/events.js'
 const defaultParser = 'fromJSDate'
 const parseMatcher = [
   {
@@ -93,28 +93,35 @@ class DATE extends Prop {
   setOptions (options) {
     this.options = { ...defaultOptions, ...options }
     luxonMethods.forEach(method => {
-      if (method instanceof Array) {
-        const [localMethod, dateMethod] = method
-        this[localMethod] = (...args) => {
-          return this.value[dateMethod](...args)
-        }
-      } else {
-        this[method] = (...args) => {
-          const oldValue = this.value
-          const newValue = this.value[method](...args)
-          if (newValue instanceof DateTime) {
-            this.value = newValue
-            // console.log(oldValue.toJSDate(), newValue.toJSDate(), newValue.equals(oldValue))
-            if (!newValue.equals(oldValue)) {
-              // console.log(CHANGE)
-              this._event[CHANGE]()
-            }
+      const [localMethod, dateMethod] = (method instanceof Array) ? method : [method, method]
+      this[localMethod] = (...args) => {
+        if (!this || !this.value) return
+        const oldValue = this.value
+        const newValue = this.value[dateMethod](...args)
+        if (newValue instanceof DateTime) {
+          this.value = newValue
+          // console.log(oldValue.toJSDate(), newValue.toJSDate(), newValue.equals(oldValue))
+          if (!newValue.equals(oldValue)) {
+            // console.log(CHANGE)
+            this._event[CHANGE]()
           }
-          // console.log(newValue)
-          return newValue
         }
+        // console.log(newValue)
+        return newValue
       }
     })
+  }
+
+  [Symbol.toPrimitive] (hint) {
+    switch (hint) {
+      case 'number':
+        return this.value.toJSDate ? this.value.toJSDate().getTime() : this.value
+      case 'string':
+        return this.toString()
+      case 'default':
+        return this.value.toJSDate ? this.value.toJSDate().getTime() : this.value
+    }
+    return this.get()
   }
 
   _set (value, { preventEvent = false } = {}) {

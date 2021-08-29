@@ -1,4 +1,4 @@
-import { CHANGE } from '../classes/events.js'
+import { CHANGE } from '../events/events.js'
 
 const stateOnEffect = (observable = {}, { useState, useEffect }) => {
   if (!observable.isObservable) throw new Error('Provided Object is not observable')
