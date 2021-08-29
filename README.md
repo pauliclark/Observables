@@ -207,7 +207,7 @@ console.log(`${data[0].name} should be Paul`)
 ```
 import {EVENTS, ARRAY, STRING, INTEGER, DATE } from 'observabubble'
 const {CHANGE} = EVENTS
-const model = new ARRAY(
+const people = new ARRAY(
   {
     name: STRING,
     age: INTEGER,
@@ -222,7 +222,12 @@ const model = new ARRAY(
     ]
   }
 )
-model.on(CHANGE,target => {
-  console.log(JSON.stringify(model,null,2))
+people.on(CHANGE,target => {
+  console.log(JSON.stringify(target,null,2))
+})
+people.push({
+  name: 'Bobby',
+  age: 30,
+  today: new Date()
 })
 ```
