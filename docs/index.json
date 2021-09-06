@@ -567,7 +567,7 @@
     "__docId__": 48,
     "kind": "file",
     "name": "props/Array.js",
-    "content": "\nimport PropEvents from './classes/PropEvents.js'\nimport props, { typesFoundInSchema } from './index.js'\nimport { CHANGE } from './events/events.js'\nimport OBJECT from './Object.js'\nimport schemaBuilder from './classes/schema.js'\nconst makeIterator = (array) => {\n  let nextIndex = 0\n  return {\n    next: function () {\n      return nextIndex < array.length\n        ? {\n            value: array[nextIndex++],\n            done: false\n          }\n        : {\n            done: true\n          }\n    }\n  }\n}\n/**\n * The Observable ARRAY Class\n */\nclass ARRAY extends PropEvents {\n  /**\n * @param {Schema} sourceSchema - The Schema to be used as the shape of the items in the Array\n * @param {Object} options\n * @param {Object[]} options.values - The Array of initial values that will be consumed as Observables according to the Schema\n * @param {Object} options.parent - The Parent Object to which this Array is a member of\n * @param {String} options.name -The Name/key in the Parent Object to which this Array is assigned\n */\n  constructor (sourceSchema = null, { values, parent, name } = {}) {\n    super(parent)\n    this._values = []\n    this._schema = null\n    if (sourceSchema) {\n      const [[schema], schemaValues] = schemaBuilder(!(sourceSchema instanceof Array) ? [sourceSchema] : sourceSchema)\n      // console.log({ schema })\n      this._schema = schema\n      // append schemaValues\n      this._assign(values || schemaValues)\n    }\n    if (parent && name) {\n      parent[name] = this\n      this._name = name\n    }\n    // this.buildFromSchema(schema)\n    // this.assign(values || [])\n\n    if (parent) {\n      Object.defineProperty(parent, name, {\n        get: () => {\n          return this\n        },\n        set: (v) => {\n          this._assign(v)\n        }\n      })\n    }\n    Object.defineProperty(this, 'length', {\n      get: () => {\n        return this.getLength()\n      },\n      set: (v) => {}\n    })\n  }\n\n  [Symbol.iterator] () { return makeIterator(this._values) }\n\n  _itemProp () {\n    if (typesFoundInSchema.includes(this._schema) || this._schema.isObservable) {\n      return this._schema\n    } else if (this._schema instanceof Array) {\n      return ARRAY\n    } else {\n      return OBJECT\n    }\n  }\n\n  _assign (values) {\n    const Prop = this._schema ? this._itemProp() : null\n    if (!(values instanceof Array)) values = [values]\n    // console.log({ Prop, values })\n    this._values = values.map(val => {\n      if (Prop) {\n        if (typesFoundInSchema.includes(this._schema) || this._schema.isObservable) {\n          return new Prop(val, { parent: this })\n        } else if (Prop === ARRAY) {\n          return new ARRAY(this._schema[0], { parent: this, values: val })\n        } else if (Prop === OBJECT) {\n          return new OBJECT(this._schema, { parent: this, values: val })\n        }\n      }\n      return null\n    }).filter(v => v)\n    // console.log(this._values)\n  }\n\n  _newItem (props) {\n    if (this._schema) {\n      const Prop = this._itemProp()\n      if (typesFoundInSchema.includes(this._schema)) {\n        return new Prop(props, { parent: this })\n      } else if (Prop === ARRAY) {\n        return new ARRAY(this._schema[0], { parent: this, values: props })\n      } else if (Prop === OBJECT) {\n        return new OBJECT(this._schema, { parent: this, values: props })\n      }\n    }\n  }\n\n  _changed () {\n    this._event[CHANGE]()\n  }\n\n  /**\n   * Pushes an item onto the Array\n * @param {Object} props - The Object of values that obeys the item Schema\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n */\n  push (props, preventDefault = false) {\n    this._values.push(this._newItem(props))\n    if (!preventDefault) this._changed()\n  }\n\n  /**\n   * Removes the first item of the Array and returns that item\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object} item - The Observalbe Object of the item removed from the array\n */\n  shift (preventDefault = false) {\n    const r = this._values.shift()\n    if (!preventDefault) this._changed()\n    return r\n  }\n\n  /**\n   * Removes the last item of the Array and returns that item\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object} item - The Observalbe Object of the item removed from the array\n */\n  pop (preventDefault = false) {\n    const r = this._values.pop()\n    if (!preventDefault) this._changed()\n    return r\n  }\n\n  /**\n   * Removes a range of items from the Array and returns them\n * @param {Integer} idx - The index of the first item to be removed\n * @param {Integer} toremove - The number of items to be removed\n * @param {Object[]} [props = []] - The array of objects (obeying the Schema) to inserted in the resulting gap\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object[]} items - The Observalbe Objects of the items removed from the array\n */\n  splice (idx, toremove, props = [], preventDefault = false) {\n    if (!(props instanceof Array)) props = [props]\n    const r = this._values.splice(idx, toremove, props.map(prop => this._newItem(prop)))\n    if (!preventDefault) this._changed()\n    return r\n  }\n\n  /**\n   * Returns a range of items from the Array\n * @param {Integer} idxFrom - The index of the first item to be selected\n * @param {Integer} idxTo - The index of the last item to be selected\n * @returns {Object[]} items - The Observalbe Objects of the items selected from the array\n */\n  slice (idxFrom, idxTo) {\n    const r = this._values.slice(idxFrom, idxTo)\n    return r\n  }\n\n  /**\n   * Removes any matching Items from the Array\n * @param {Object[]} items - An Array of Observable Objects/Items to be removed\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Boolean} success - True if any of the Items were found and removed\n */\n  remove (items, preventDefault = false) {\n    if (!(typeof items instanceof Array)) items = [items]\n    let success = false\n    const vals = this._values\n    for (let v = vals.length - 1; v >= 0; v--) {\n      if (items.includes(vals[v])) {\n        this._values.splice(v, 1)\n        vals.splice(v, 1, true)\n        success = true\n      }\n    }\n    if (success && !preventDefault) this._changed()\n    return success\n  }\n\n  /**\n   * Returns an Array of the matching items found in the Array according to the provided method\n * @param {function(item: Object): Boolean} method - The predictate method for filtering the items\n * @returns {Boolean} success - True if any of the Items were found and removed\n */\n  filter (method) {\n    if (!(method instanceof Function)) return this._values\n    return this._values.filter(method)\n  }\n\n  /**\n   * Finds a matching item in the Array according to the provided method\n * @param {function(item: Object): Boolean} method - The predictate method for matching the item\n * @returns {Object} item - The found Observable Item\n */\n  find (method) {\n    if (!(method instanceof Function)) return this._values\n    return this._values.find(method)\n  }\n\n  /**\n   * Moves an item from one index to another\n * @param {Object} indexes\n * @param {Integer} indexes.from - The index of the item to move\n * @param {Integer} indexes.to - The index in the Array to move the item to\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n */\n  moveItem ({ from, to }, preventDefault = false) {\n    if (from < to) {\n      to--\n    }\n    this._values.splice(to, 0, this._values.splice(from, 1)[0])\n    if (!preventDefault) this._changed()\n  }\n\n  /**\n   * Returns the index of the provided Observable Item\n * @param {Object} item - The Observable Item to return the index of\n * @returns {Integer} index - The index of the found Observable Item\n */\n  indexOf (item) {\n    return this._values.indexOf(item)\n  }\n\n  /**\n   * Returns a transposed Array\n * @param {function(item: Object): Object} method - The transposing method applied to each item in the Array\n * @returns {Object[]} items - The Array of transposed Items\n */\n  map (method) {\n    return this._values.map(method)\n  }\n\n  /**\n   * Loop through the Array\n * @param {function(item: Object)} method - The method to be run on each Item\n */\n  forEach (method) {\n    return this._values.forEach(method)\n  }\n\n  /**\n   * Reverses the Array order\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object[]} items - The new reversed Array of Items\n */\n  reverse (preventDefault = false) {\n    this._values = this._values.reverse()\n    if (!preventDefault) this._changed()\n    return this._values\n  }\n\n  /**\n   * Determines if the provided item is in the Array\n * @param {Object|String|Number|Boolean} value - The value of an item (according to the Schema) to check for\n * @returns {Boolean} found - True if the item/value has been found\n */\n  includes (value) {\n    const toCheck = (value && value.get ? value.get() : (value.valueOf ? value.valueOf() : value))\n    return !!this._values.find(val => {\n      return (val && val.get ? val.get() : (val && val.valueOf ? val.valueOf() : val)) === toCheck\n    })\n  }\n\n  /**\n   * Returns the Observable Item by the Index\n * @param {Integer} [idx=null] - The Index of the item to return (if null, all items are returned)\n * @returns {Object} item - The item found at the requested index\n */\n  get (idx = null) {\n    return idx === null\n      ? this._values\n      : (\n          idx >= this._values.length ? null : this._values[idx]\n        )\n  }\n\n  /**\n   * Sets the internal array of items\n * @param {Object[]} [props=[]] - The array of objects to construct the Observable Items (according to the Schema)\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object[]} items - The new array of Observable Items\n */\n  set (props = [], preventDefault = false) {\n    // console.log(props, this.getKey())\n    if (!(props instanceof Array)) {\n      // console.log({props})\n      throw new Error('Expected Array in props')\n    }\n    // const Schema = this._schema\n    // console.log({props})\n    this._values = props.map(p => {\n      // if (typeof Schema === 'function' && p instanceof Schema ) return p\n      return this._newItem(p)\n    })\n    // if (!this._schema) console.log(this._values)\n    // console.log(this)\n    if (!preventDefault) this._changed()\n    return this._values\n  }\n\n  _arrayState () {\n    return JSON.stringify(this._values.sort((a, b) => {\n      if (a._id) {\n        return a._id - b._id\n      } else {\n        return a - b\n      }\n    }))\n  }\n\n  /**\n   * Update the items within the Array. If an item has the same prop *_id*, then the item reference is preserved and the props are updated\n * @param {Object[]} [props=[]] - The array of objects to construct the Observable Items (according to the Schema)\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object[]} items - The new array of Observable Items\n */\n  update (props, preventDefault = false) {\n    if (!(props instanceof Array)) throw new Error('Expected Array in props')\n    const currentLength = this._values.length\n    // const currentState = this.arrayState()\n    const foundItems = []\n    let idx = 0\n    // const list = []\n    let isReordered = false\n\n    while (props.length > 0) {\n      const data = props.shift()\n      let foundItem = this._values.find(v => {\n        return v.equals(data)\n      })\n      if (data._id && !foundItem) {\n        foundItem = this._values.find(v => {\n          // console.log(v._id.valueOf())\n          return (!v._id || !v._id.valueOf()) && (!foundItems.includes(v))\n        })\n      }\n      if (foundItem) {\n        foundItems.push(foundItem)\n        foundItem.update(data, preventDefault)\n        if (this._values.indexOf(foundItem) !== idx) isReordered = true\n      } else {\n        const _newItem = this._newItem(data)\n        foundItems.push(_newItem)\n        // this._values.push(_newItem)\n      }\n      // } else {\n\n      // }\n      idx++\n    }\n    // console.log(this.getKey())\n    // console.log(JSON.parse(JSON.stringify(foundItems)))\n    this._values = foundItems\n    // for (let l = this._values.length - 1; l >= 0; l--) {\n    //   if (!foundItems.includes(this._values[l])) this._values.splice(l, 1)\n    // }\n\n    // const newState = this.arrayState()\n    // if (this.getKey() === 'pending_invite') {\n    // console.log(props)\n    // }\n    const newLength = this._values.length\n    // console.log(currentLength , newLength)\n    if (!preventDefault && (isReordered || currentLength !== newLength)) this._changed(true)\n    // if (!preventDefault && currentState !== newState) this._changed(true)\n    return this._values\n  }\n\n  /**\n   * Returns the length of the Array. Used by the virtual property *length*\n * @returns {Integer} length - The number of items in the Array\n */\n  getLength () {\n    return this._values.length\n  }\n\n  /**\n   * Returns an Array of the parsed values of each item\n * @returns {Object[]} values - Array of primitive item values\n */\n  valueOf () {\n    return this._values.map(r => r.valueOf ? r.valueOf() : r)\n  }\n\n  /**\n   * Returns the Array of Observable Items\n * @returns {Object[]} items - Array of Observable Items\n */\n  toJSON () {\n    return this._values\n  }\n\n  /**\n   * Returns the Array of Objects\n * @returns {Object[]} objects - Array of Objects\n */\n  toObject () {\n    return this._values.map(r => r.toObject ? r.toObject() : r)\n  }\n\n  /**\n   * Reorders the Array\n * @param {function(a: Object, b: Object): Integer} sortMethod - The sort method that determines whether items a and b swap places\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object[]} items - The new array of Observable Items\n */\n  sort (sortMethod = (a, b) => {\n    return b - a\n  }, preventDefault = false) {\n    const was = this._arrayState()\n    this._values = this._values.sort(sortMethod)\n    const isNow = this._arrayState()\n    if (was !== isNow && !preventDefault) this._changed()\n    return this._values\n  }\n}\n\nexport default ARRAY\n",
+    "content": "\nimport PropEvents from './classes/PropEvents.js'\n// import props from './index.js'\nimport { CHANGE } from './events/events.js'\nimport OBJECT from './Object.js'\nimport schemaBuilder from './classes/schema.js'\nconst makeIterator = (array) => {\n  let nextIndex = 0\n  return {\n    next: function () {\n      return nextIndex < array.length\n        ? {\n            value: array[nextIndex++],\n            done: false\n          }\n        : {\n            done: true\n          }\n    }\n  }\n}\n/**\n * The Observable ARRAY Class\n */\nclass ARRAY extends PropEvents {\n  /**\n * @param {Schema} sourceSchema - The Schema to be used as the shape of the items in the Array\n * @param {Object} options\n * @param {Object[]} options.values - The Array of initial values that will be consumed as Observables according to the Schema\n * @param {Object} options.parent - The Parent Object to which this Array is a member of\n * @param {String} options.name -The Name/key in the Parent Object to which this Array is assigned\n */\n  constructor (sourceSchema = null, { values, parent, name } = {}) {\n    super(parent)\n    this._values = []\n    this._schema = null\n    if (sourceSchema) {\n      const [[schema], schemaValues] = schemaBuilder(!(sourceSchema instanceof Array) ? [sourceSchema] : sourceSchema)\n      // console.log({ schema })\n      this._schema = schema\n      // append schemaValues\n      this._assign(values || schemaValues)\n    }\n    if (parent && name) {\n      parent[name] = this\n      this._name = name\n    }\n    // this.buildFromSchema(schema)\n    // this.assign(values || [])\n\n    if (parent) {\n      Object.defineProperty(parent, name, {\n        get: () => {\n          return this\n        },\n        set: (v) => {\n          this._assign(v)\n        }\n      })\n    }\n    Object.defineProperty(this, 'length', {\n      get: () => {\n        return this.getLength()\n      },\n      set: (v) => {}\n    })\n  }\n\n  [Symbol.iterator] () { return makeIterator(this._values) }\n\n  _itemProp () {\n    if (this._schema.isObservable) {\n      return this._schema\n    } else if (this._schema instanceof Array) {\n      return ARRAY\n    } else {\n      return OBJECT\n    }\n  }\n\n  _assign (values) {\n    const Prop = this._schema ? this._itemProp() : null\n    if (!(values instanceof Array)) values = [values]\n    // console.log({ Prop, values })\n    this._values = values.map(val => {\n      if (Prop) {\n        if (this._schema.isObservable) {\n          return new Prop(val, { parent: this })\n        } else if (Prop === ARRAY) {\n          return new ARRAY(this._schema[0], { parent: this, values: val })\n        } else if (Prop === OBJECT) {\n          return new OBJECT(this._schema, { parent: this, values: val })\n        }\n      }\n      return null\n    }).filter(v => v)\n    // console.log(this._values)\n  }\n\n  _newItem (props) {\n    if (this._schema) {\n      const Prop = this._itemProp()\n      if (this._schema.isObservable) {\n        return new Prop(props, { parent: this })\n      } else if (Prop === ARRAY) {\n        return new ARRAY(this._schema[0], { parent: this, values: props })\n      } else if (Prop === OBJECT) {\n        return new OBJECT(this._schema, { parent: this, values: props })\n      }\n    }\n  }\n\n  _changed () {\n    this._event[CHANGE]()\n  }\n\n  /**\n   * Pushes an item onto the Array\n * @param {Object} props - The Object of values that obeys the item Schema\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n */\n  push (props, preventDefault = false) {\n    this._values.push(this._newItem(props))\n    if (!preventDefault) this._changed()\n  }\n\n  /**\n   * Removes the first item of the Array and returns that item\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object} item - The Observalbe Object of the item removed from the array\n */\n  shift (preventDefault = false) {\n    const r = this._values.shift()\n    if (!preventDefault) this._changed()\n    return r\n  }\n\n  /**\n   * Removes the last item of the Array and returns that item\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object} item - The Observalbe Object of the item removed from the array\n */\n  pop (preventDefault = false) {\n    const r = this._values.pop()\n    if (!preventDefault) this._changed()\n    return r\n  }\n\n  /**\n   * Removes a range of items from the Array and returns them\n * @param {Integer} idx - The index of the first item to be removed\n * @param {Integer} toremove - The number of items to be removed\n * @param {Object[]} [props = []] - The array of objects (obeying the Schema) to inserted in the resulting gap\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object[]} items - The Observalbe Objects of the items removed from the array\n */\n  splice (idx, toremove, props = [], preventDefault = false) {\n    if (!(props instanceof Array)) props = [props]\n    const r = this._values.splice(idx, toremove, props.map(prop => this._newItem(prop)))\n    if (!preventDefault) this._changed()\n    return r\n  }\n\n  /**\n   * Returns a range of items from the Array\n * @param {Integer} idxFrom - The index of the first item to be selected\n * @param {Integer} idxTo - The index of the last item to be selected\n * @returns {Object[]} items - The Observalbe Objects of the items selected from the array\n */\n  slice (idxFrom, idxTo) {\n    const r = this._values.slice(idxFrom, idxTo)\n    return r\n  }\n\n  /**\n   * Removes any matching Items from the Array\n * @param {Object[]} items - An Array of Observable Objects/Items to be removed\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Boolean} success - True if any of the Items were found and removed\n */\n  remove (items, preventDefault = false) {\n    if (!(typeof items instanceof Array)) items = [items]\n    let success = false\n    const vals = this._values\n    for (let v = vals.length - 1; v >= 0; v--) {\n      if (items.includes(vals[v])) {\n        this._values.splice(v, 1)\n        vals.splice(v, 1, true)\n        success = true\n      }\n    }\n    if (success && !preventDefault) this._changed()\n    return success\n  }\n\n  /**\n   * Returns an Array of the matching items found in the Array according to the provided method\n * @param {function(item: Object): Boolean} method - The predictate method for filtering the items\n * @returns {Boolean} success - True if any of the Items were found and removed\n */\n  filter (method) {\n    if (!(method instanceof Function)) return this._values\n    return this._values.filter(method)\n  }\n\n  /**\n   * Finds a matching item in the Array according to the provided method\n * @param {function(item: Object): Boolean} method - The predictate method for matching the item\n * @returns {Object} item - The found Observable Item\n */\n  find (method) {\n    if (!(method instanceof Function)) return this._values\n    return this._values.find(method)\n  }\n\n  /**\n   * Moves an item from one index to another\n * @param {Object} indexes\n * @param {Integer} indexes.from - The index of the item to move\n * @param {Integer} indexes.to - The index in the Array to move the item to\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n */\n  moveItem ({ from, to }, preventDefault = false) {\n    if (from < to) {\n      to--\n    }\n    this._values.splice(to, 0, this._values.splice(from, 1)[0])\n    if (!preventDefault) this._changed()\n  }\n\n  /**\n   * Returns the index of the provided Observable Item\n * @param {Object} item - The Observable Item to return the index of\n * @returns {Integer} index - The index of the found Observable Item\n */\n  indexOf (item) {\n    return this._values.indexOf(item)\n  }\n\n  /**\n   * Returns a transposed Array\n * @param {function(item: Object): Object} method - The transposing method applied to each item in the Array\n * @returns {Object[]} items - The Array of transposed Items\n */\n  map (method) {\n    return this._values.map(method)\n  }\n\n  /**\n   * Loop through the Array\n * @param {function(item: Object)} method - The method to be run on each Item\n */\n  forEach (method) {\n    return this._values.forEach(method)\n  }\n\n  /**\n   * Reverses the Array order\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object[]} items - The new reversed Array of Items\n */\n  reverse (preventDefault = false) {\n    this._values = this._values.reverse()\n    if (!preventDefault) this._changed()\n    return this._values\n  }\n\n  /**\n   * Determines if the provided item is in the Array\n * @param {Object|String|Number|Boolean} value - The value of an item (according to the Schema) to check for\n * @returns {Boolean} found - True if the item/value has been found\n */\n  includes (value) {\n    const toCheck = (value && value.get ? value.get() : (value.valueOf ? value.valueOf() : value))\n    return !!this._values.find(val => {\n      return (val && val.get ? val.get() : (val && val.valueOf ? val.valueOf() : val)) === toCheck\n    })\n  }\n\n  /**\n   * Returns the Observable Item by the Index\n * @param {Integer} [idx=null] - The Index of the item to return (if null, all items are returned)\n * @returns {Object} item - The item found at the requested index\n */\n  get (idx = null) {\n    return idx === null\n      ? this._values\n      : (\n          idx >= this._values.length ? null : this._values[idx]\n        )\n  }\n\n  /**\n   * Sets the internal array of items\n * @param {Object[]} [props=[]] - The array of objects to construct the Observable Items (according to the Schema)\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object[]} items - The new array of Observable Items\n */\n  set (props = [], preventDefault = false) {\n    // console.log(props, this.getKey())\n    if (!(props instanceof Array)) {\n      // console.log({props})\n      throw new Error('Expected Array in props')\n    }\n    // const Schema = this._schema\n    // console.log({props})\n    this._values = props.map(p => {\n      // if (typeof Schema === 'function' && p instanceof Schema ) return p\n      return this._newItem(p)\n    })\n    // if (!this._schema) console.log(this._values)\n    // console.log(this)\n    if (!preventDefault) this._changed()\n    return this._values\n  }\n\n  _arrayState () {\n    return JSON.stringify(this._values.sort((a, b) => {\n      if (a._id) {\n        return a._id - b._id\n      } else {\n        return a - b\n      }\n    }))\n  }\n\n  /**\n   * Update the items within the Array. If an item has the same prop *_id*, then the item reference is preserved and the props are updated\n * @param {Object[]} [props=[]] - The array of objects to construct the Observable Items (according to the Schema)\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object[]} items - The new array of Observable Items\n */\n  update (props, preventDefault = false) {\n    if (!(props instanceof Array)) throw new Error('Expected Array in props')\n    const currentLength = this._values.length\n    // const currentState = this.arrayState()\n    const foundItems = []\n    let idx = 0\n    // const list = []\n    let isReordered = false\n\n    while (props.length > 0) {\n      const data = props.shift()\n      let foundItem = this._values.find(v => {\n        return v.equals(data)\n      })\n      if (data._id && !foundItem) {\n        foundItem = this._values.find(v => {\n          // console.log(v._id.valueOf())\n          return (!v._id || !v._id.valueOf()) && (!foundItems.includes(v))\n        })\n      }\n      if (foundItem) {\n        foundItems.push(foundItem)\n        foundItem.update(data, preventDefault)\n        if (this._values.indexOf(foundItem) !== idx) isReordered = true\n      } else {\n        const _newItem = this._newItem(data)\n        foundItems.push(_newItem)\n        // this._values.push(_newItem)\n      }\n      // } else {\n\n      // }\n      idx++\n    }\n    // console.log(this.getKey())\n    // console.log(JSON.parse(JSON.stringify(foundItems)))\n    this._values = foundItems\n    // for (let l = this._values.length - 1; l >= 0; l--) {\n    //   if (!foundItems.includes(this._values[l])) this._values.splice(l, 1)\n    // }\n\n    // const newState = this.arrayState()\n    // if (this.getKey() === 'pending_invite') {\n    // console.log(props)\n    // }\n    const newLength = this._values.length\n    // console.log(currentLength , newLength)\n    if (!preventDefault && (isReordered || currentLength !== newLength)) this._changed(true)\n    // if (!preventDefault && currentState !== newState) this._changed(true)\n    return this._values\n  }\n\n  /**\n   * Returns the length of the Array. Used by the virtual property *length*\n * @returns {Integer} length - The number of items in the Array\n */\n  getLength () {\n    return this._values.length\n  }\n\n  /**\n   * Returns an Array of the parsed values of each item\n * @returns {Object[]} values - Array of primitive item values\n */\n  valueOf () {\n    return this._values.map(r => r.valueOf ? r.valueOf() : r)\n  }\n\n  /**\n   * Returns the Array of Observable Items\n * @returns {Object[]} items - Array of Observable Items\n */\n  toJSON () {\n    return this._values\n  }\n\n  /**\n   * Returns the Array of Objects\n * @returns {Object[]} objects - Array of Objects\n */\n  toObject () {\n    return this._values.map(r => r.toObject ? r.toObject() : r)\n  }\n\n  /**\n   * Reorders the Array\n * @param {function(a: Object, b: Object): Integer} sortMethod - The sort method that determines whether items a and b swap places\n * @param {Boolean} [preventDefault=false] - If true then the Change event is not fired\n * @returns {Object[]} items - The new array of Observable Items\n */\n  sort (sortMethod = (a, b) => {\n    return b - a\n  }, preventDefault = false) {\n    const was = this._arrayState()\n    this._values = this._values.sort(sortMethod)\n    const isNow = this._arrayState()\n    if (was !== isNow && !preventDefault) this._changed()\n    return this._values\n  }\n}\n\nexport default ARRAY\n",
     "static": true,
     "longname": "/home/paul/Observables/props/Array.js",
     "access": "public",
@@ -585,7 +585,7 @@
     "longname": "props/Array.js~makeIterator",
     "access": "public",
     "export": false,
-    "importPath": "Observables/props/Array.js",
+    "importPath": "observabubble/props/Array.js",
     "importStyle": null,
     "description": null,
     "lineNumber": 7,
@@ -614,7 +614,7 @@
     "longname": "props/Array.js~ARRAY",
     "access": "public",
     "export": true,
-    "importPath": "Observables/props/Array.js",
+    "importPath": "observabubble/props/Array.js",
     "importStyle": "ARRAY",
     "description": "The Observable ARRAY Class",
     "lineNumber": 25,
@@ -1799,7 +1799,7 @@
     "__docId__": 89,
     "kind": "file",
     "name": "props/Boolean.js",
-    "content": "\nimport Prop from './classes/Prop.js'\nclass BOOLEAN extends Prop {\n  parse (value) {\n    return value != null ? !!value : null\n  }\n\n  format () {\n    return this.get() ? 'true' : 'false'\n  }\n\n  toggle () {\n    this.set(!this.get())\n  }\n}\n\nexport default BOOLEAN\n",
+    "content": "\n/**\n * The Observable BOOLEAN Class\n */\nimport Prop from './classes/Prop.js'\nimport OBJECT from './Object.js'\nclass BOOLEAN extends Prop {\n  /**\n * @param {Boolean} value - The initial value of the Boolean\n * @param {Object} options\n * @param {OBJECT} options.parent - The Parent Object to which this Array is a member of\n * @param {String} options.name -The Name/key in the Parent Object to which this Array is assigned\n */\n  constructor (value, { parent, name } = {}) {\n    super(value, { parent, name })\n  }\n\n  /**\n   * Removes the first item of the Array and returns that item\n * @param {Boolean} value - If true then the Change event is not fired\n * @returns {Boolean} value - The Observalbe Object of the item removed from the array\n */\n  parse (value) {\n    return value != null ? !!value : null\n  }\n\n  format () {\n    return this.get() ? 'true' : 'false'\n  }\n\n  toggle () {\n    this.set(!this.get())\n  }\n}\n\nexport default BOOLEAN\n",
     "static": true,
     "longname": "/home/paul/Observables/props/Boolean.js",
     "access": "public",
@@ -1815,10 +1815,10 @@
     "longname": "props/Boolean.js~BOOLEAN",
     "access": "public",
     "export": true,
-    "importPath": "Observables/props/Boolean.js",
+    "importPath": "observabubble/props/Boolean.js",
     "importStyle": "BOOLEAN",
     "description": null,
-    "lineNumber": 3,
+    "lineNumber": 7,
     "undocument": true,
     "interface": false,
     "extends": [
@@ -1827,6 +1827,61 @@
   },
   {
     "__docId__": 91,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "props/Boolean.js~BOOLEAN",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Boolean.js~BOOLEAN#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 14,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "value",
+        "description": "The initial value of the Boolean"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "OBJECT"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.parent",
+        "description": "The Parent Object to which this Array is a member of"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.name",
+        "description": "The Name/key in the Parent Object to which this Array is assigned"
+      }
+    ]
+  },
+  {
+    "__docId__": 92,
     "kind": "method",
     "name": "parse",
     "memberof": "props/Boolean.js~BOOLEAN",
@@ -1835,25 +1890,37 @@
     "static": false,
     "longname": "props/Boolean.js~BOOLEAN#parse",
     "access": "public",
-    "description": null,
-    "lineNumber": 4,
-    "undocument": true,
+    "description": "Removes the first item of the Array and returns that item",
+    "lineNumber": 23,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Boolean} value - The Observalbe Object of the item removed from the array"
+      }
+    ],
     "params": [
       {
-        "name": "value",
+        "nullable": null,
         "types": [
-          "*"
-        ]
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "value",
+        "description": "If true then the Change event is not fired"
       }
     ],
     "return": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
+        "Boolean"
+      ],
+      "spread": false,
+      "description": "value - The Observalbe Object of the item removed from the array"
     }
   },
   {
-    "__docId__": 92,
+    "__docId__": 93,
     "kind": "method",
     "name": "format",
     "memberof": "props/Boolean.js~BOOLEAN",
@@ -1863,7 +1930,7 @@
     "longname": "props/Boolean.js~BOOLEAN#format",
     "access": "public",
     "description": null,
-    "lineNumber": 8,
+    "lineNumber": 27,
     "undocument": true,
     "params": [],
     "return": {
@@ -1873,7 +1940,7 @@
     }
   },
   {
-    "__docId__": 93,
+    "__docId__": 94,
     "kind": "method",
     "name": "toggle",
     "memberof": "props/Boolean.js~BOOLEAN",
@@ -1883,211 +1950,249 @@
     "longname": "props/Boolean.js~BOOLEAN#toggle",
     "access": "public",
     "description": null,
-    "lineNumber": 12,
+    "lineNumber": 31,
     "undocument": true,
     "params": [],
     "return": null
-  },
-  {
-    "__docId__": 94,
-    "kind": "file",
-    "name": "props/Decimal.js",
-    "content": "\nimport Prop from './classes/Prop.js'\nclass DECIMAL extends Prop {\n  parse (value) {\n    return value != null ? parseFloat(value) : null\n  }\n}\n\nexport default DECIMAL\n",
-    "static": true,
-    "longname": "/home/paul/Observables/props/Decimal.js",
-    "access": "public",
-    "description": null,
-    "lineNumber": 1
   },
   {
     "__docId__": 95,
-    "kind": "class",
-    "name": "DECIMAL",
-    "memberof": "props/Decimal.js",
+    "kind": "file",
+    "name": "props/Date.js",
+    "content": "\nimport Prop from './classes/Prop.js'\nimport { DateTime } from 'luxon'\nimport { CHANGE } from './events/events.js'\nconst defaultParser = 'fromJSDate'\nconst parseMatcher = [\n  {\n    match: val => val instanceof Date,\n    parse: 'fromJSDate'\n  },\n  {\n    match: val => val && val.match(/\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+/),\n    parse: 'fromISO'\n  }\n]\nconst defaultOptions = {\n}\nconst luxonMethods = [\n  ['getUnit', 'get'],\n  'isValid',\n  'invalidReason',\n  'invalidExplanation',\n  'locale',\n  'numberingSystem',\n  'outputCalendar',\n  'zone',\n  'zoneName',\n  'year',\n  'quarter',\n  'month',\n  'day',\n  'hour',\n  'minute',\n  'second',\n  'millisecond',\n  'weekYear',\n  'weekNumber',\n  'weekday',\n  'ordinal',\n  'monthShort',\n  'monthLong',\n  'weekdayShort',\n  'weekdayLong',\n  'offset',\n  'offsetNameShort',\n  'offsetNameLong',\n  'isOffsetFixed',\n  'isInDST',\n  'isInLeapYear',\n  'daysInMonth',\n  'daysInYear',\n  'weeksInWeekYear',\n  'resolvedLocaleOptions',\n  'toUTC',\n  'toLocal',\n  'setZone',\n  'reconfigure',\n  'setLocale',\n  'set',\n  'plus',\n  'minus',\n  'startOf',\n  'endOf',\n  'toFormat',\n  'toLocaleString',\n  'toLocaleParts',\n  'toISO',\n  'toISODate',\n  'toISOWeekDate',\n  'toISOTime',\n  'toRFC2822',\n  'toHTTP',\n  'toSQLDate',\n  'toSQLTime',\n  'toSQL',\n  'toString',\n  'valueOf',\n  'toMillis',\n  'toSeconds',\n  'toJSON',\n  'toBSON',\n  'toObject',\n  'toJSDate',\n  'diff',\n  'diffNow',\n  'until',\n  'hasSame',\n  'equals',\n  'toRelative',\n  'toRelativeCalendar'\n]\n\n/**\n * The Observable DATE Class\n */\nclass DATE extends Prop {\n  /**\n * @param {Date} value - The initial value of the Date\n * @param {Object} options\n * @param {OBJECT} options.parent - The Parent Object to which this Date is a member of\n * @param {String} options.name -The Name/key in the Parent Object to which this Date is assigned\n */\n  constructor (value, { parent, name } = {}) {\n    super(value, { parent, name })\n  }\n\n  /**\n   * @ignore\n */\n  _setOptions (options = {}) {\n    this._options = { ...defaultOptions, ...options }\n    luxonMethods.forEach(method => {\n      const [localMethod, dateMethod] = (method instanceof Array) ? method : [method, method]\n      this[localMethod] = (...args) => {\n        if (!this || !this.value) return\n        const oldValue = this.value\n        const newValue = this.value[dateMethod](...args)\n        if (newValue instanceof DateTime) {\n          this.value = newValue\n          // console.log(oldValue.toJSDate(), newValue.toJSDate(), newValue.equals(oldValue))\n          if (!newValue.equals(oldValue)) {\n            // console.log(CHANGE)\n            this._event[CHANGE]()\n          }\n        }\n        // console.log(newValue)\n        return newValue\n      }\n    })\n  }\n\n  /**\n   * @ignore\n */\n  [Symbol.toPrimitive] (hint) {\n    switch (hint) {\n      case 'number':\n        return this.value.toJSDate ? this.value.toJSDate().getTime() : this.value\n      case 'string':\n        return this.toString()\n      case 'default':\n        return this.value.toJSDate ? this.value.toJSDate().getTime() : this.value\n    }\n    return this.get()\n  }\n\n  /**\n   * @ignore\n */\n  _set (value, { preventEvent = false } = {}) {\n    const oldValue = this.value\n    const newValue = this.parse(value)\n    this.value = newValue\n    if (!preventEvent && !newValue.equals(oldValue)) {\n      this._event[CHANGE]()\n    }\n  }\n\n  /**\n   * Parses the Date\n * @param {any} value - The value to be parsed\n * @returns {Date} - The parsed Date\n */\n  parse (value) {\n    const parser = parseMatcher.find(p => p.match(value))\n    const method = parser ? parser.parse : defaultParser\n    // console.log(method)\n    const val = DateTime[method](value)\n    // console.log(val)\n    return val\n  }\n\n  /**\n   * @ignore\n */\n  toJSON () {\n    return (this.value && this.value.toJSDate) ? this.value.toJSDate() : this.value\n  }\n\n  /**\n   * @ignore\n */\n  valueOf () {\n    return (this.value && this.value.toJSDate) ? this.value.toJSDate() : this.value\n  }\n\n  /**\n   * @ignore\n */\n  toString () {\n    return this.value ? (this.value.toJSDate ? this.value.toJSDate().toString() : this.value.toString()) : this.value\n  }\n}\n\nexport default DATE\n",
     "static": true,
-    "longname": "props/Decimal.js~DECIMAL",
+    "longname": "/home/paul/Observables/props/Date.js",
     "access": "public",
-    "export": true,
-    "importPath": "Observables/props/Decimal.js",
-    "importStyle": "DECIMAL",
     "description": null,
-    "lineNumber": 3,
-    "undocument": true,
-    "interface": false,
-    "extends": [
-      "props/classes/Prop.js~Prop"
-    ]
+    "lineNumber": 1
   },
   {
     "__docId__": 96,
-    "kind": "method",
-    "name": "parse",
-    "memberof": "props/Decimal.js~DECIMAL",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "props/Decimal.js~DECIMAL#parse",
+    "kind": "variable",
+    "name": "defaultParser",
+    "memberof": "props/Date.js",
+    "static": true,
+    "longname": "props/Date.js~defaultParser",
     "access": "public",
+    "export": false,
+    "importPath": "observabubble/props/Date.js",
+    "importStyle": null,
     "description": null,
-    "lineNumber": 4,
+    "lineNumber": 5,
     "undocument": true,
-    "params": [
-      {
-        "name": "value",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": {
+    "type": {
       "types": [
-        "*"
+        "string"
       ]
-    }
+    },
+    "ignore": true
   },
   {
     "__docId__": 97,
-    "kind": "file",
-    "name": "props/Integer.js",
-    "content": "import Prop from './classes/Prop.js'\nimport { CHANGE } from './events/events.js'\nclass INTEGER extends Prop {\n  parse (value) {\n    return value != null ? parseInt(value) : null\n  }\n\n  increment () {\n    this.value++\n    this[CHANGE]()\n  }\n\n  decrement () {\n    this.value--\n    this[CHANGE]()\n  }\n}\n\nexport default INTEGER\n",
+    "kind": "variable",
+    "name": "parseMatcher",
+    "memberof": "props/Date.js",
     "static": true,
-    "longname": "/home/paul/Observables/props/Integer.js",
+    "longname": "props/Date.js~parseMatcher",
     "access": "public",
+    "export": false,
+    "importPath": "observabubble/props/Date.js",
+    "importStyle": null,
     "description": null,
-    "lineNumber": 1
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "undefined[]"
+      ]
+    },
+    "ignore": true
   },
   {
     "__docId__": 98,
-    "kind": "class",
-    "name": "INTEGER",
-    "memberof": "props/Integer.js",
+    "kind": "variable",
+    "name": "defaultOptions",
+    "memberof": "props/Date.js",
     "static": true,
-    "longname": "props/Integer.js~INTEGER",
+    "longname": "props/Date.js~defaultOptions",
+    "access": "public",
+    "export": false,
+    "importPath": "observabubble/props/Date.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 16,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{}"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 99,
+    "kind": "variable",
+    "name": "luxonMethods",
+    "memberof": "props/Date.js",
+    "static": true,
+    "longname": "props/Date.js~luxonMethods",
+    "access": "public",
+    "export": false,
+    "importPath": "observabubble/props/Date.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "type": {
+      "types": [
+        "undefined[]"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 100,
+    "kind": "class",
+    "name": "DATE",
+    "memberof": "props/Date.js",
+    "static": true,
+    "longname": "props/Date.js~DATE",
     "access": "public",
     "export": true,
-    "importPath": "Observables/props/Integer.js",
-    "importStyle": "INTEGER",
-    "description": null,
-    "lineNumber": 3,
-    "undocument": true,
+    "importPath": "observabubble/props/Date.js",
+    "importStyle": "DATE",
+    "description": "The Observable DATE Class",
+    "lineNumber": 96,
     "interface": false,
     "extends": [
       "props/classes/Prop.js~Prop"
     ]
   },
   {
-    "__docId__": 99,
-    "kind": "method",
-    "name": "parse",
-    "memberof": "props/Integer.js~INTEGER",
+    "__docId__": 101,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "props/Date.js~DATE",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "props/Integer.js~INTEGER#parse",
+    "longname": "props/Date.js~DATE#constructor",
     "access": "public",
-    "description": null,
-    "lineNumber": 4,
-    "undocument": true,
+    "description": "",
+    "lineNumber": 103,
     "params": [
       {
-        "name": "value",
+        "nullable": null,
         "types": [
-          "*"
-        ]
+          "Date"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "value",
+        "description": "The initial value of the Date"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "OBJECT"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.parent",
+        "description": "The Parent Object to which this Date is a member of"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.name",
+        "description": "The Name/key in the Parent Object to which this Date is assigned"
+      }
+    ]
+  },
+  {
+    "__docId__": 102,
+    "kind": "method",
+    "name": "_setOptions",
+    "memberof": "props/Date.js~DATE",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Date.js~DATE#_setOptions",
+    "access": "private",
+    "description": "",
+    "lineNumber": 110,
+    "ignore": true,
+    "params": [
+      {
+        "name": "options",
+        "optional": true,
+        "types": [
+          "{}"
+        ],
+        "defaultRaw": {},
+        "defaultValue": "{}"
       }
     ],
-    "return": {
+    "return": null
+  },
+  {
+    "__docId__": 103,
+    "kind": "member",
+    "name": "_options",
+    "memberof": "props/Date.js~DATE",
+    "static": false,
+    "longname": "props/Date.js~DATE#_options",
+    "access": "private",
+    "description": null,
+    "lineNumber": 111,
+    "undocument": true,
+    "type": {
       "types": [
-        "*"
+        "{...defaultOptions: Object, ...options: Object}"
       ]
     }
   },
   {
-    "__docId__": 100,
-    "kind": "method",
-    "name": "increment",
-    "memberof": "props/Integer.js~INTEGER",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "props/Integer.js~INTEGER#increment",
-    "access": "public",
-    "description": null,
-    "lineNumber": 8,
-    "undocument": true,
-    "params": [],
-    "return": null
-  },
-  {
-    "__docId__": 101,
-    "kind": "method",
-    "name": "decrement",
-    "memberof": "props/Integer.js~INTEGER",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "props/Integer.js~INTEGER#decrement",
-    "access": "public",
-    "description": null,
-    "lineNumber": 13,
-    "undocument": true,
-    "params": [],
-    "return": null
-  },
-  {
-    "__docId__": 102,
-    "kind": "file",
-    "name": "props/Object.js",
-    "content": "import props, { typesFoundInSchema } from './index.js'\nimport { CHANGE } from './events/events.js'\nimport PropEvents from './classes/PropEvents.js'\nimport schemaBuilder from './classes/schema.js'\nimport INTEGER from './Integer.js'\nimport BOOLEAN from './Boolean.js'\nimport DATE from './Date.js'\nimport DECIMAL from './Decimal.js'\nimport STRING from './String.js'\nimport ARRAY from './Array.js'\n\nclass OBJECT extends PropEvents {\n  constructor (sourceSchema = {}, { values, parent, name } = {}) {\n    super(parent)\n    const [schema, schemaValues] = schemaBuilder(sourceSchema)\n    // console.log(schemaValues)\n    this.schema = schema\n    // if (parent && name) {\n    //   parent[name] = this\n    //   this.parent = parent\n    //   this.name = name\n    // }\n    this.buildFromSchema(schema)\n    this.assign(values || schemaValues)\n\n    if (parent && name) {\n      this.name = name\n      Object.defineProperty(parent, name, {\n        get: () => {\n          return this\n        },\n        set: (v) => {\n          this.assign(v)\n        }\n      })\n    }\n    this._pKey = this.schema._id\n      ? '_id'\n      : (\n          this.schema.id ? 'id' : Object.keys(this.schema).shift()\n        )\n  }\n\n  assign (values, { preventEvent = false } = {}) {\n    // console.log(values)\n    if (values) {\n      Object.keys(values).forEach(prop => {\n        // if (prop === 'friend') console.log({ friend: values[prop] })\n        this[prop]._set(values[prop], { preventEvent })\n      })\n    }\n  }\n\n  _set (value, { preventEvent = false } = {}) {\n    this.assign(value, { preventEvent })\n  }\n\n  buildFromSchema (schema) {\n    this._values = {}\n    Object.entries(schema).forEach(([key, Prop]) => {\n      // console.log(value)\n      // const [Prop, Value] = getProp(value)\n      // console.log(Prop, Value)\n      if (Prop) {\n        if (typesFoundInSchema.includes(Prop) || Prop.isObservable) {\n          this._values[key] = new Prop(null, {\n            parent: this,\n            name: key\n          })\n        } else if (Prop instanceof Array) {\n          this._values[key] = new ARRAY(Prop[0], {\n            parent: this,\n            name: key\n          })\n        } else {\n          this._values[key] = new OBJECT(Prop, {\n            parent: this,\n            name: key\n          })\n        }\n      }\n    })\n  }\n\n  toJSON () {\n    return this._values\n  }\n}\nexport default OBJECT\n",
-    "static": true,
-    "longname": "/home/paul/Observables/props/Object.js",
-    "access": "public",
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 103,
-    "kind": "class",
-    "name": "OBJECT",
-    "memberof": "props/Object.js",
-    "static": true,
-    "longname": "props/Object.js~OBJECT",
-    "access": "public",
-    "export": true,
-    "importPath": "Observables/props/Object.js",
-    "importStyle": "OBJECT",
-    "description": null,
-    "lineNumber": 12,
-    "undocument": true,
-    "interface": false,
-    "extends": [
-      "props/classes/PropEvents.js~PropEvents"
-    ]
-  },
-  {
     "__docId__": 104,
-    "kind": "constructor",
-    "name": "constructor",
-    "memberof": "props/Object.js~OBJECT",
-    "generator": false,
-    "async": false,
+    "kind": "member",
+    "name": "[localMethod]",
+    "memberof": "props/Date.js~DATE",
     "static": false,
-    "longname": "props/Object.js~OBJECT#constructor",
+    "longname": "props/Date.js~DATE#[localMethod]",
     "access": "public",
     "description": null,
-    "lineNumber": 13,
-    "undocument": true
+    "lineNumber": 114,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
   },
   {
     "__docId__": 105,
     "kind": "member",
-    "name": "schema",
-    "memberof": "props/Object.js~OBJECT",
+    "name": "value",
+    "memberof": "props/Date.js~DATE",
     "static": false,
-    "longname": "props/Object.js~OBJECT#schema",
+    "longname": "props/Date.js~DATE#value",
     "access": "public",
     "description": null,
-    "lineNumber": 17,
+    "lineNumber": 119,
     "undocument": true,
     "type": {
       "types": [
@@ -2097,16 +2202,26 @@
   },
   {
     "__docId__": 106,
-    "kind": "member",
-    "name": "name",
-    "memberof": "props/Object.js~OBJECT",
+    "kind": "method",
+    "name": "[Symbol.toPrimitive]",
+    "memberof": "props/Date.js~DATE",
+    "generator": false,
+    "async": false,
     "static": false,
-    "longname": "props/Object.js~OBJECT#name",
+    "longname": "props/Date.js~DATE#[Symbol.toPrimitive]",
     "access": "public",
-    "description": null,
-    "lineNumber": 27,
-    "undocument": true,
-    "type": {
+    "description": "",
+    "lineNumber": 135,
+    "ignore": true,
+    "params": [
+      {
+        "name": "hint",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
       "types": [
         "*"
       ]
@@ -2114,14 +2229,483 @@
   },
   {
     "__docId__": 107,
+    "kind": "method",
+    "name": "_set",
+    "memberof": "props/Date.js~DATE",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Date.js~DATE#_set",
+    "access": "private",
+    "description": "",
+    "lineNumber": 150,
+    "ignore": true,
+    "params": [
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "objectPattern1",
+        "optional": true,
+        "types": [
+          "{\"preventEvent\": *}"
+        ],
+        "defaultRaw": {},
+        "defaultValue": "{}"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 109,
+    "kind": "method",
+    "name": "parse",
+    "memberof": "props/Date.js~DATE",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Date.js~DATE#parse",
+    "access": "public",
+    "description": "Parses the Date",
+    "lineNumber": 164,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Date} - The parsed Date"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "any"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "value",
+        "description": "The value to be parsed"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Date"
+      ],
+      "spread": false,
+      "description": "The parsed Date"
+    }
+  },
+  {
+    "__docId__": 110,
+    "kind": "method",
+    "name": "toJSON",
+    "memberof": "props/Date.js~DATE",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Date.js~DATE#toJSON",
+    "access": "public",
+    "description": "",
+    "lineNumber": 176,
+    "ignore": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 111,
+    "kind": "method",
+    "name": "valueOf",
+    "memberof": "props/Date.js~DATE",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Date.js~DATE#valueOf",
+    "access": "public",
+    "description": "",
+    "lineNumber": 183,
+    "ignore": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 112,
+    "kind": "method",
+    "name": "toString",
+    "memberof": "props/Date.js~DATE",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Date.js~DATE#toString",
+    "access": "public",
+    "description": "",
+    "lineNumber": 190,
+    "ignore": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 113,
+    "kind": "file",
+    "name": "props/Decimal.js",
+    "content": "\nimport Prop from './classes/Prop.js'\n/**\n * The Observable DECIMAL Class\n */\nclass DECIMAL extends Prop {\n  /**\n * @param {Boolean} value - The initial value of the Decimal\n * @param {Object} options\n * @param {OBJECT} options.parent - The Parent Object to which this Decimal is a member of\n * @param {String} options.name -The Name/key in the Parent Object to which this Decimal is assigned\n */\n  constructor (value, { parent, name } = {}) {\n    super(value, { parent, name })\n  }\n\n  parse (value) {\n    return value != null ? parseFloat(value) : null\n  }\n}\n\nexport default DECIMAL\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/Decimal.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 114,
+    "kind": "class",
+    "name": "DECIMAL",
+    "memberof": "props/Decimal.js",
+    "static": true,
+    "longname": "props/Decimal.js~DECIMAL",
+    "access": "public",
+    "export": true,
+    "importPath": "observabubble/props/Decimal.js",
+    "importStyle": "DECIMAL",
+    "description": "The Observable DECIMAL Class",
+    "lineNumber": 6,
+    "interface": false,
+    "extends": [
+      "props/classes/Prop.js~Prop"
+    ]
+  },
+  {
+    "__docId__": 115,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "props/Decimal.js~DECIMAL",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Decimal.js~DECIMAL#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 13,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "value",
+        "description": "The initial value of the Decimal"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "OBJECT"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.parent",
+        "description": "The Parent Object to which this Decimal is a member of"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.name",
+        "description": "The Name/key in the Parent Object to which this Decimal is assigned"
+      }
+    ]
+  },
+  {
+    "__docId__": 116,
+    "kind": "method",
+    "name": "parse",
+    "memberof": "props/Decimal.js~DECIMAL",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Decimal.js~DECIMAL#parse",
+    "access": "public",
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "params": [
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 117,
+    "kind": "file",
+    "name": "props/Integer.js",
+    "content": "import Prop from './classes/Prop.js'\nimport { CHANGE } from './events/events.js'\n/**\n * The Observable INTEGER Class\n */\nclass INTEGER extends Prop {\n  /**\n * @param {Boolean} value - The initial value of the Decimal\n * @param {Object} options\n * @param {OBJECT} options.parent - The Parent Object to which this Decimal is a member of\n * @param {String} options.name -The Name/key in the Parent Object to which this Decimal is assigned\n */\n  constructor (value, { parent, name } = {}) {\n    super(value, { parent, name })\n  }\n\n  parse (value) {\n    return value != null ? parseInt(value) : null\n  }\n\n  increment () {\n    this.value++\n    this[CHANGE]()\n  }\n\n  decrement () {\n    this.value--\n    this[CHANGE]()\n  }\n}\n\nexport default INTEGER\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/Integer.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 118,
+    "kind": "class",
+    "name": "INTEGER",
+    "memberof": "props/Integer.js",
+    "static": true,
+    "longname": "props/Integer.js~INTEGER",
+    "access": "public",
+    "export": true,
+    "importPath": "observabubble/props/Integer.js",
+    "importStyle": "INTEGER",
+    "description": "The Observable INTEGER Class",
+    "lineNumber": 6,
+    "interface": false,
+    "extends": [
+      "props/classes/Prop.js~Prop"
+    ]
+  },
+  {
+    "__docId__": 119,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "props/Integer.js~INTEGER",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Integer.js~INTEGER#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 13,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "value",
+        "description": "The initial value of the Decimal"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "OBJECT"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.parent",
+        "description": "The Parent Object to which this Decimal is a member of"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.name",
+        "description": "The Name/key in the Parent Object to which this Decimal is assigned"
+      }
+    ]
+  },
+  {
+    "__docId__": 120,
+    "kind": "method",
+    "name": "parse",
+    "memberof": "props/Integer.js~INTEGER",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Integer.js~INTEGER#parse",
+    "access": "public",
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "params": [
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 121,
+    "kind": "method",
+    "name": "increment",
+    "memberof": "props/Integer.js~INTEGER",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Integer.js~INTEGER#increment",
+    "access": "public",
+    "description": null,
+    "lineNumber": 21,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 122,
+    "kind": "method",
+    "name": "decrement",
+    "memberof": "props/Integer.js~INTEGER",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Integer.js~INTEGER#decrement",
+    "access": "public",
+    "description": null,
+    "lineNumber": 26,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 123,
+    "kind": "file",
+    "name": "props/Object.js",
+    "content": "// import props from './index.js'\n// import { CHANGE } from './events/events.js'\nimport PropEvents from './classes/PropEvents.js'\nimport schemaBuilder from './classes/schema.js'\n// import INTEGER from './Integer.js'\n// import BOOLEAN from './Boolean.js'\n// import DATE from './Date.js'\n// import DECIMAL from './Decimal.js'\n// import STRING from './String.js'\nimport ARRAY from './Array.js'\n\n/**\n * The Observable OBJECT Class\n */\nclass OBJECT extends PropEvents {\n  /**\n * @param {Boolean} value - The initial value of the Decimal\n * @param {Object} options\n * @param {OBJECT} options.parent - The Parent Object to which this Decimal is a member of\n * @param {String} options.name -The Name/key in the Parent Object to which this Decimal is assigned\n */\n  constructor (sourceSchema = {}, { values, parent, name } = {}) {\n    super(parent)\n    const [schema, schemaValues] = schemaBuilder(sourceSchema)\n    // console.log(schemaValues)\n    this.schema = schema\n    // if (parent && name) {\n    //   parent[name] = this\n    //   this.parent = parent\n    //   this.name = name\n    // }\n    this.buildFromSchema(schema)\n    this.assign(values || schemaValues)\n\n    if (parent && name) {\n      this.name = name\n      Object.defineProperty(parent, name, {\n        get: () => {\n          return this\n        },\n        set: (v) => {\n          this.assign(v)\n        }\n      })\n    }\n    this._pKey = this.schema._id\n      ? '_id'\n      : (\n          this.schema.id ? 'id' : Object.keys(this.schema).shift()\n        )\n  }\n\n  assign (values, { preventEvent = false } = {}) {\n    // console.log(values)\n    if (values) {\n      Object.keys(values).forEach(prop => {\n        // if (prop === 'friend') console.log({ friend: values[prop] })\n        this[prop]._set(values[prop], { preventEvent })\n      })\n    }\n  }\n\n  _set (value, { preventEvent = false } = {}) {\n    this.assign(value, { preventEvent })\n  }\n\n  buildFromSchema (schema) {\n    this._values = {}\n    Object.entries(schema).forEach(([key, Prop]) => {\n      // console.log(value)\n      // const [Prop, Value] = getProp(value)\n      // console.log(Prop, Value)\n      if (Prop) {\n        if (Prop.isObservable) {\n          this._values[key] = new Prop(null, {\n            parent: this,\n            name: key\n          })\n        } else if (Prop instanceof Array) {\n          this._values[key] = new ARRAY(Prop[0], {\n            parent: this,\n            name: key\n          })\n        } else {\n          this._values[key] = new OBJECT(Prop, {\n            parent: this,\n            name: key\n          })\n        }\n      }\n    })\n  }\n\n  toJSON () {\n    return this._values\n  }\n}\nexport default OBJECT\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/Object.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 124,
+    "kind": "class",
+    "name": "OBJECT",
+    "memberof": "props/Object.js",
+    "static": true,
+    "longname": "props/Object.js~OBJECT",
+    "access": "public",
+    "export": true,
+    "importPath": "observabubble/props/Object.js",
+    "importStyle": "OBJECT",
+    "description": "The Observable OBJECT Class",
+    "lineNumber": 15,
+    "interface": false,
+    "extends": [
+      "props/classes/PropEvents.js~PropEvents"
+    ]
+  },
+  {
+    "__docId__": 125,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "props/Object.js~OBJECT",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/Object.js~OBJECT#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 22,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "value",
+        "description": "The initial value of the Decimal"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "OBJECT"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.parent",
+        "description": "The Parent Object to which this Decimal is a member of"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.name",
+        "description": "The Name/key in the Parent Object to which this Decimal is assigned"
+      }
+    ]
+  },
+  {
+    "__docId__": 126,
     "kind": "member",
-    "name": "_pKey",
+    "name": "schema",
     "memberof": "props/Object.js~OBJECT",
     "static": false,
-    "longname": "props/Object.js~OBJECT#_pKey",
-    "access": "private",
+    "longname": "props/Object.js~OBJECT#schema",
+    "access": "public",
     "description": null,
-    "lineNumber": 37,
+    "lineNumber": 26,
     "undocument": true,
     "type": {
       "types": [
@@ -2130,7 +2714,41 @@
     }
   },
   {
-    "__docId__": 108,
+    "__docId__": 127,
+    "kind": "member",
+    "name": "name",
+    "memberof": "props/Object.js~OBJECT",
+    "static": false,
+    "longname": "props/Object.js~OBJECT#name",
+    "access": "public",
+    "description": null,
+    "lineNumber": 36,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 128,
+    "kind": "member",
+    "name": "_pKey",
+    "memberof": "props/Object.js~OBJECT",
+    "static": false,
+    "longname": "props/Object.js~OBJECT#_pKey",
+    "access": "private",
+    "description": null,
+    "lineNumber": 46,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 129,
     "kind": "method",
     "name": "assign",
     "memberof": "props/Object.js~OBJECT",
@@ -2140,7 +2758,7 @@
     "longname": "props/Object.js~OBJECT#assign",
     "access": "public",
     "description": null,
-    "lineNumber": 44,
+    "lineNumber": 53,
     "undocument": true,
     "params": [
       {
@@ -2162,7 +2780,7 @@
     "return": null
   },
   {
-    "__docId__": 109,
+    "__docId__": 130,
     "kind": "method",
     "name": "_set",
     "memberof": "props/Object.js~OBJECT",
@@ -2172,7 +2790,7 @@
     "longname": "props/Object.js~OBJECT#_set",
     "access": "private",
     "description": null,
-    "lineNumber": 54,
+    "lineNumber": 63,
     "undocument": true,
     "params": [
       {
@@ -2194,7 +2812,7 @@
     "return": null
   },
   {
-    "__docId__": 110,
+    "__docId__": 131,
     "kind": "method",
     "name": "buildFromSchema",
     "memberof": "props/Object.js~OBJECT",
@@ -2204,7 +2822,7 @@
     "longname": "props/Object.js~OBJECT#buildFromSchema",
     "access": "public",
     "description": null,
-    "lineNumber": 58,
+    "lineNumber": 67,
     "undocument": true,
     "params": [
       {
@@ -2217,7 +2835,7 @@
     "return": null
   },
   {
-    "__docId__": 111,
+    "__docId__": 132,
     "kind": "member",
     "name": "_values",
     "memberof": "props/Object.js~OBJECT",
@@ -2225,7 +2843,7 @@
     "longname": "props/Object.js~OBJECT#_values",
     "access": "private",
     "description": null,
-    "lineNumber": 59,
+    "lineNumber": 68,
     "undocument": true,
     "type": {
       "types": [
@@ -2234,7 +2852,7 @@
     }
   },
   {
-    "__docId__": 112,
+    "__docId__": 133,
     "kind": "method",
     "name": "toJSON",
     "memberof": "props/Object.js~OBJECT",
@@ -2244,7 +2862,7 @@
     "longname": "props/Object.js~OBJECT#toJSON",
     "access": "public",
     "description": null,
-    "lineNumber": 85,
+    "lineNumber": 94,
     "undocument": true,
     "params": [],
     "return": {
@@ -2254,10 +2872,10 @@
     }
   },
   {
-    "__docId__": 113,
+    "__docId__": 134,
     "kind": "file",
     "name": "props/Reference.js",
-    "content": "import Prop from './classes/Prop.js'\nimport { LOAD } from './events/events.js'\nimport { referenceModel } from './containers/models.js'\nclass REFERENCE extends Prop {\n  constructor (model, { id, parent, name } = {}) {\n    super(id, { parent, name })\n    if (Object.keys(model).length !== 1) throw new Error('Reference model in constructor must have one key e.g. {User}')\n    this.modelName = Object.keys(model).pop()\n    this.model = model[this.modelName]\n    this._ref = null\n    if (id) {\n      referenceModel(this.modelName, id).then(ref => {\n        this._attachRef(ref)\n      })\n    }\n\n    if (parent && name) {\n      Object.defineProperty(parent, `_${name}`, {\n        get: () => {\n          return this._ref\n        }\n      })\n    }\n  }\n\n  _preChange () {\n    this._ref = null\n    // console.log({id:this.value})\n    if (this.value) {\n      referenceModel(this.modelName, this.value).then(ref => {\n        this._attachRef(ref)\n        // this.processEvent(LOAD, this, { bubble: true })\n      })\n    }\n  }\n\n  getRef () {\n    if (this._ref) {\n      return Promise.resolve(this._ref)\n    } else {\n      return new Promise((resolve) => {\n        this.on(LOAD, () => {\n          resolve(this._ref)\n        })\n      })\n    }\n  }\n\n  _attachRef (ref) {\n    this._ref = ref\n    this.processEvent(LOAD, this, { bubble: true })\n  }\n\n  get () {\n    return this._ref\n  }\n\n  valueOf () {\n    return this.value\n  }\n}\n\nexport default REFERENCE\n",
+    "content": "import Prop from './classes/Prop.js'\nimport { LOAD } from './events/events.js'\nimport { referenceModel } from './containers/models.js'\nclass REFERENCE extends Prop {\n  constructor (model, { id, parent, name } = {}) {\n    super(id, { parent, name })\n    if (Object.keys(model).length !== 1) throw new Error('Reference model in constructor must have one key e.g. {User}')\n    this.modelName = Object.keys(model).pop()\n    this.model = model[this.modelName]\n    this._ref = null\n    if (id) {\n      referenceModel(this.modelName, id).then(ref => {\n        this._attachRef(ref)\n      })\n    }\n\n    if (parent && name) {\n      Object.defineProperty(parent, `_${name}`, {\n        get: () => {\n          return this._ref\n        }\n      })\n    }\n  }\n\n  _preChange () {\n    this._ref = null\n    // console.log({id:this.value})\n    if (this.value) {\n      referenceModel(this.modelName, this.value).then(ref => {\n        this._attachRef(ref)\n        // this.processEvent(LOAD, this, { bubble: true })\n      })\n    }\n  }\n\n  getRef () {\n    if (this._ref) {\n      return Promise.resolve(this._ref)\n    } else {\n      return new Promise((resolve) => {\n        this.on(LOAD, () => {\n          resolve(this._ref)\n        })\n      })\n    }\n  }\n\n  _attachRef (ref) {\n    this._ref = ref\n    this._processEvent(LOAD, this, { bubble: true })\n  }\n\n  get () {\n    return this._ref\n  }\n\n  valueOf () {\n    return this.value\n  }\n}\n\nexport default REFERENCE\n",
     "static": true,
     "longname": "/home/paul/Observables/props/Reference.js",
     "access": "public",
@@ -2265,7 +2883,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 114,
+    "__docId__": 135,
     "kind": "class",
     "name": "REFERENCE",
     "memberof": "props/Reference.js",
@@ -2273,7 +2891,7 @@
     "longname": "props/Reference.js~REFERENCE",
     "access": "public",
     "export": true,
-    "importPath": "Observables/props/Reference.js",
+    "importPath": "observabubble/props/Reference.js",
     "importStyle": "REFERENCE",
     "description": null,
     "lineNumber": 4,
@@ -2284,7 +2902,7 @@
     ]
   },
   {
-    "__docId__": 115,
+    "__docId__": 136,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "props/Reference.js~REFERENCE",
@@ -2298,7 +2916,7 @@
     "undocument": true
   },
   {
-    "__docId__": 116,
+    "__docId__": 137,
     "kind": "member",
     "name": "modelName",
     "memberof": "props/Reference.js~REFERENCE",
@@ -2315,7 +2933,7 @@
     }
   },
   {
-    "__docId__": 117,
+    "__docId__": 138,
     "kind": "member",
     "name": "model",
     "memberof": "props/Reference.js~REFERENCE",
@@ -2332,7 +2950,7 @@
     }
   },
   {
-    "__docId__": 118,
+    "__docId__": 139,
     "kind": "member",
     "name": "_ref",
     "memberof": "props/Reference.js~REFERENCE",
@@ -2349,7 +2967,7 @@
     }
   },
   {
-    "__docId__": 119,
+    "__docId__": 140,
     "kind": "method",
     "name": "_preChange",
     "memberof": "props/Reference.js~REFERENCE",
@@ -2365,7 +2983,7 @@
     "return": null
   },
   {
-    "__docId__": 121,
+    "__docId__": 142,
     "kind": "method",
     "name": "getRef",
     "memberof": "props/Reference.js~REFERENCE",
@@ -2385,7 +3003,7 @@
     }
   },
   {
-    "__docId__": 122,
+    "__docId__": 143,
     "kind": "method",
     "name": "_attachRef",
     "memberof": "props/Reference.js~REFERENCE",
@@ -2408,7 +3026,7 @@
     "return": null
   },
   {
-    "__docId__": 124,
+    "__docId__": 145,
     "kind": "method",
     "name": "get",
     "memberof": "props/Reference.js~REFERENCE",
@@ -2428,7 +3046,7 @@
     }
   },
   {
-    "__docId__": 125,
+    "__docId__": 146,
     "kind": "method",
     "name": "valueOf",
     "memberof": "props/Reference.js~REFERENCE",
@@ -2448,7 +3066,7 @@
     }
   },
   {
-    "__docId__": 126,
+    "__docId__": 147,
     "kind": "file",
     "name": "props/String.js",
     "content": "\nimport Prop from './classes/Prop.js'\nclass STRING extends Prop {\n  parse (value) {\n    return value != null ? value.toString() : null\n  }\n}\n\nexport default STRING\n",
@@ -2459,7 +3077,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 127,
+    "__docId__": 148,
     "kind": "class",
     "name": "STRING",
     "memberof": "props/String.js",
@@ -2467,7 +3085,7 @@
     "longname": "props/String.js~STRING",
     "access": "public",
     "export": true,
-    "importPath": "Observables/props/String.js",
+    "importPath": "observabubble/props/String.js",
     "importStyle": "STRING",
     "description": null,
     "lineNumber": 3,
@@ -2478,7 +3096,7 @@
     ]
   },
   {
-    "__docId__": 128,
+    "__docId__": 149,
     "kind": "method",
     "name": "parse",
     "memberof": "props/String.js~STRING",
@@ -2505,7 +3123,7 @@
     }
   },
   {
-    "__docId__": 129,
+    "__docId__": 150,
     "kind": "file",
     "name": "props/Text.js",
     "content": "import Prop from './classes/Prop.js'\nclass TEXT extends Prop {\n  parse (value) {\n    return value != null ? value.toString() : null\n  }\n}\n\nexport default TEXT\n",
@@ -2516,7 +3134,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 130,
+    "__docId__": 151,
     "kind": "class",
     "name": "TEXT",
     "memberof": "props/Text.js",
@@ -2524,7 +3142,7 @@
     "longname": "props/Text.js~TEXT",
     "access": "public",
     "export": true,
-    "importPath": "Observables/props/Text.js",
+    "importPath": "observabubble/props/Text.js",
     "importStyle": "TEXT",
     "description": null,
     "lineNumber": 2,
@@ -2535,7 +3153,7 @@
     ]
   },
   {
-    "__docId__": 131,
+    "__docId__": 152,
     "kind": "method",
     "name": "parse",
     "memberof": "props/Text.js~TEXT",
@@ -2562,7 +3180,667 @@
     }
   },
   {
-    "__docId__": 132,
+    "__docId__": 153,
+    "kind": "file",
+    "name": "props/classes/Prop.js",
+    "content": "import { CHANGE } from '../events/events.js'\nimport PropEvents from './PropEvents.js'\n\n/**\n * The Observable Prop Class\n */\nclass Prop extends PropEvents {\n\n  /**\n * @param {any} value - The initial value of the property\n * @param {Object} options\n * @param {OBJECT} options.parent - The Parent Object to which this Property is a member of\n * @param {String} options.name -The Name/key in the Parent Object to which this Property is assigned\n */\n  constructor (value, { parent, name, options = {} } = {}) {\n    super(parent)\n    this.name = name\n    // console.log(value)\n    if (parent && name) {\n      Object.defineProperty(parent, name, {\n        get: () => {\n          return this\n        },\n        set: (v) => {\n          this._set(v)\n        }\n      })\n    }\n    if (this._setOptions) {\n      this._setOptions(options)\n    }\n    this._set(value, { preventEvent: true })\n  }\n\n\n  static isProp = true\n  _set (value, { preventEvent = false } = {}) {\n    const oldValue = this.value\n    const newValue = this.parse(value)\n    this.value = newValue\n    if (newValue !== oldValue) {\n      if (this._preChange) this._preChange()\n    }\n    if (!preventEvent && newValue !== oldValue) {\n      // console.log({ CHANGE })\n      this._event[CHANGE]()\n    }\n  }\n\n  get () {\n    return this.value\n  }\n\n  format () {\n    return this.value === null ? '' : this.value.toString()\n  }\n\n  parse (value) {\n    return value\n  }\n\n  equals (data) {\n    return (JSON.stringify(this.parse(data)) === JSON.stringify(this.value))\n  }\n\n  toString () {\n    return this.format()\n  }\n\n  valueOf () {\n    return this.get()\n  }\n\n  [Symbol.toPrimitive] (hint) {\n    switch (hint) {\n      case 'number':\n        return this.value * 1\n      case 'string':\n        return this.value.toString()\n      case 'default':\n        return this.value\n    }\n    return this.get()\n  }\n\n  toJSON () {\n    // console.log(this.value)\n    return this.valueOf()\n  }\n}\nexport default Prop\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/classes/Prop.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 154,
+    "kind": "class",
+    "name": "Prop",
+    "memberof": "props/classes/Prop.js",
+    "static": true,
+    "longname": "props/classes/Prop.js~Prop",
+    "access": "public",
+    "export": true,
+    "importPath": "observabubble/props/classes/Prop.js",
+    "importStyle": "Prop",
+    "description": "The Observable Prop Class",
+    "lineNumber": 7,
+    "interface": false,
+    "extends": [
+      "props/classes/PropEvents.js~PropEvents"
+    ]
+  },
+  {
+    "__docId__": 155,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "props/classes/Prop.js~Prop",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/classes/Prop.js~Prop#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 15,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "any"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "value",
+        "description": "The initial value of the property"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "OBJECT"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.parent",
+        "description": "The Parent Object to which this Property is a member of"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.name",
+        "description": "The Name/key in the Parent Object to which this Property is assigned"
+      }
+    ]
+  },
+  {
+    "__docId__": 156,
+    "kind": "member",
+    "name": "name",
+    "memberof": "props/classes/Prop.js~Prop",
+    "static": false,
+    "longname": "props/classes/Prop.js~Prop#name",
+    "access": "public",
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 157,
+    "kind": "member",
+    "name": "isProp",
+    "memberof": "props/classes/Prop.js~Prop",
+    "static": true,
+    "longname": "props/classes/Prop.js~Prop.isProp",
+    "access": "public",
+    "description": null,
+    "lineNumber": 36,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 158,
+    "kind": "method",
+    "name": "_set",
+    "memberof": "props/classes/Prop.js~Prop",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/classes/Prop.js~Prop#_set",
+    "access": "private",
+    "description": null,
+    "lineNumber": 37,
+    "undocument": true,
+    "params": [
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "objectPattern1",
+        "optional": true,
+        "types": [
+          "{\"preventEvent\": *}"
+        ],
+        "defaultRaw": {},
+        "defaultValue": "{}"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 159,
+    "kind": "member",
+    "name": "value",
+    "memberof": "props/classes/Prop.js~Prop",
+    "static": false,
+    "longname": "props/classes/Prop.js~Prop#value",
+    "access": "public",
+    "description": null,
+    "lineNumber": 40,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 160,
+    "kind": "method",
+    "name": "get",
+    "memberof": "props/classes/Prop.js~Prop",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/classes/Prop.js~Prop#get",
+    "access": "public",
+    "description": null,
+    "lineNumber": 50,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 161,
+    "kind": "method",
+    "name": "format",
+    "memberof": "props/classes/Prop.js~Prop",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/classes/Prop.js~Prop#format",
+    "access": "public",
+    "description": null,
+    "lineNumber": 54,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 162,
+    "kind": "method",
+    "name": "parse",
+    "memberof": "props/classes/Prop.js~Prop",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/classes/Prop.js~Prop#parse",
+    "access": "public",
+    "description": null,
+    "lineNumber": 58,
+    "undocument": true,
+    "params": [
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 163,
+    "kind": "method",
+    "name": "equals",
+    "memberof": "props/classes/Prop.js~Prop",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/classes/Prop.js~Prop#equals",
+    "access": "public",
+    "description": null,
+    "lineNumber": 62,
+    "undocument": true,
+    "params": [
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 164,
+    "kind": "method",
+    "name": "toString",
+    "memberof": "props/classes/Prop.js~Prop",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/classes/Prop.js~Prop#toString",
+    "access": "public",
+    "description": null,
+    "lineNumber": 66,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 165,
+    "kind": "method",
+    "name": "valueOf",
+    "memberof": "props/classes/Prop.js~Prop",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/classes/Prop.js~Prop#valueOf",
+    "access": "public",
+    "description": null,
+    "lineNumber": 70,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 166,
+    "kind": "method",
+    "name": "[Symbol.toPrimitive]",
+    "memberof": "props/classes/Prop.js~Prop",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/classes/Prop.js~Prop#[Symbol.toPrimitive]",
+    "access": "public",
+    "description": null,
+    "lineNumber": 74,
+    "undocument": true,
+    "params": [
+      {
+        "name": "hint",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 167,
+    "kind": "method",
+    "name": "toJSON",
+    "memberof": "props/classes/Prop.js~Prop",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/classes/Prop.js~Prop#toJSON",
+    "access": "public",
+    "description": null,
+    "lineNumber": 86,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 168,
+    "kind": "file",
+    "name": "props/classes/PropEvents.js",
+    "content": "import events from '../events/events.js'\n/**\n * The Prop Event Class\n */\nclass PropEvents {\n  /**\n * @param {any} value - The initial value of the property\n * @param {OBJECT} parent - The Parent Object to which this Property is a member of ({@link Object})\n */\n  constructor (parent) {\n    this.parent = parent\n    this._event = {}\n    // this.isObservable = true\n    this.eventCallbacks = Object.values(events).reduce((acc, key) => {\n      acc[key] = []\n      return acc\n    }, {})\n    Object.values(events).forEach(eventName => {\n      this._event[eventName] = (target = this) => {\n        this._processEvent(eventName, target)\n      }\n    })\n  }\n  /**\n * @ignore\n */\n  static isObservable = true\n  isObservable = true\n\n  // static isObservable () {\n  //   return true\n  // }\n\n  /**\n   * Bind an event listener\n * @param {Event} eventName - The event being listening to, enumerated in the events file\n * @param {Function} callback - The method called when the event is fired\n */\n  on (eventName, callback) {\n    if (!(Object.values(events).includes(eventName))) throw new Error(`${eventName} is not a valid event`)\n    if (!(callback instanceof Function)) throw new Error('Event listener is not a function')\n    this.eventCallbacks[eventName].push(callback)\n  }\n\n  /**\n   * Unbinds an event listener\n * @param {Event} eventName - The event being listening to, enumerated in the events file\n * @param {Function} callback - The method called when the event is fired\n */\n  off (eventName, callback) {\n    const idx = this.eventCallbacks[eventName].indexOf(callback)\n    if (idx >= 0) this.eventCallbacks[eventName].splice(idx, 1)\n  }\n\n  /**\n   * Calls event bubbling on the parent Observable\n * @param {Event} eventName - The event being listening to, enumerated in the events file\n * @param {Prop} target - The Prop that was the source of the Event\n */\n  _bubble (eventName, target) {\n    this._processEvent(eventName, target, { bubble: true })\n  }\n\n  /**\n   * Calls the listeners for the Event triggered\n * @param {Event} eventName - The event being listening to, enumerated in the events file\n * @param {Prop} target - The Prop that was the source of the Event\n * @param {Object} [additional]\n * @param {Boolean} [additional.bubble = false] - A boolean that indicates that the event firing is bubbled from a child Prop\n */\n  async _processEvent (eventName, target, { bubble = false } = { }) {\n    if (!this.eventCallbacks[eventName]) throw new Error(`Cannot process event ${eventName}`)\n    for (let c = this.eventCallbacks[eventName].length - 1; c >= 0; c--) {\n      try {\n        // console.log(eventName,target.toJSON())\n        const response = await this.eventCallbacks[eventName][c](target, bubble)\n        if (response === false) this.eventCallbacks[eventName].splice(c, 1)\n      } catch (e) {\n        this.eventCallbacks[eventName].splice(c, 1)\n      }\n    }\n    if (this.parent && this.parent._bubble) {\n      this.parent._bubble(eventName, target)\n    }\n  }\n}\nexport default PropEvents\n",
+    "static": true,
+    "longname": "/home/paul/Observables/props/classes/PropEvents.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 169,
+    "kind": "class",
+    "name": "PropEvents",
+    "memberof": "props/classes/PropEvents.js",
+    "static": true,
+    "longname": "props/classes/PropEvents.js~PropEvents",
+    "access": "public",
+    "export": true,
+    "importPath": "observabubble/props/classes/PropEvents.js",
+    "importStyle": "PropEvents",
+    "description": "The Prop Event Class",
+    "lineNumber": 5,
+    "interface": false
+  },
+  {
+    "__docId__": 170,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "props/classes/PropEvents.js~PropEvents",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/classes/PropEvents.js~PropEvents#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 10,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "any"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "value",
+        "description": "The initial value of the property"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "OBJECT"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "parent",
+        "description": "The Parent Object to which this Property is a member of ({@link Object})"
+      }
+    ]
+  },
+  {
+    "__docId__": 171,
+    "kind": "member",
+    "name": "parent",
+    "memberof": "props/classes/PropEvents.js~PropEvents",
+    "static": false,
+    "longname": "props/classes/PropEvents.js~PropEvents#parent",
+    "access": "public",
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 172,
+    "kind": "member",
+    "name": "_event",
+    "memberof": "props/classes/PropEvents.js~PropEvents",
+    "static": false,
+    "longname": "props/classes/PropEvents.js~PropEvents#_event",
+    "access": "private",
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{}"
+      ]
+    }
+  },
+  {
+    "__docId__": 173,
+    "kind": "member",
+    "name": "eventCallbacks",
+    "memberof": "props/classes/PropEvents.js~PropEvents",
+    "static": false,
+    "longname": "props/classes/PropEvents.js~PropEvents#eventCallbacks",
+    "access": "public",
+    "description": null,
+    "lineNumber": 14,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 174,
+    "kind": "member",
+    "name": "isObservable",
+    "memberof": "props/classes/PropEvents.js~PropEvents",
+    "static": true,
+    "longname": "props/classes/PropEvents.js~PropEvents.isObservable",
+    "access": "public",
+    "description": "",
+    "lineNumber": 27,
+    "ignore": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 175,
+    "kind": "member",
+    "name": "isObservable",
+    "memberof": "props/classes/PropEvents.js~PropEvents",
+    "static": false,
+    "longname": "props/classes/PropEvents.js~PropEvents#isObservable",
+    "access": "public",
+    "description": null,
+    "lineNumber": 28,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 176,
+    "kind": "method",
+    "name": "on",
+    "memberof": "props/classes/PropEvents.js~PropEvents",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/classes/PropEvents.js~PropEvents#on",
+    "access": "public",
+    "description": "Bind an event listener",
+    "lineNumber": 39,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Event"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "eventName",
+        "description": "The event being listening to, enumerated in the events file"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "callback",
+        "description": "The method called when the event is fired"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 177,
+    "kind": "method",
+    "name": "off",
+    "memberof": "props/classes/PropEvents.js~PropEvents",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/classes/PropEvents.js~PropEvents#off",
+    "access": "public",
+    "description": "Unbinds an event listener",
+    "lineNumber": 50,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Event"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "eventName",
+        "description": "The event being listening to, enumerated in the events file"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "callback",
+        "description": "The method called when the event is fired"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 178,
+    "kind": "method",
+    "name": "_bubble",
+    "memberof": "props/classes/PropEvents.js~PropEvents",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "props/classes/PropEvents.js~PropEvents#_bubble",
+    "access": "private",
+    "description": "Calls event bubbling on the parent Observable",
+    "lineNumber": 60,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Event"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "eventName",
+        "description": "The event being listening to, enumerated in the events file"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Prop"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "target",
+        "description": "The Prop that was the source of the Event"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 179,
+    "kind": "method",
+    "name": "_processEvent",
+    "memberof": "props/classes/PropEvents.js~PropEvents",
+    "generator": false,
+    "async": true,
+    "static": false,
+    "longname": "props/classes/PropEvents.js~PropEvents#_processEvent",
+    "access": "private",
+    "description": "Calls the listeners for the Event triggered",
+    "lineNumber": 71,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Event"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "eventName",
+        "description": "The event being listening to, enumerated in the events file"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Prop"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "target",
+        "description": "The Prop that was the source of the Event"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "additional",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " false",
+        "defaultRaw": false,
+        "name": "additional.bubble",
+        "description": "A boolean that indicates that the event firing is bubbled from a child Prop"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 180,
     "kind": "file",
     "name": "props/classes/SchemaError.js",
     "content": "class SchemaError extends Error {\n  constructor (...args) {\n    super(...args)\n    this.name = 'SchemaError'\n  }\n}\nexport default SchemaError\n",
@@ -2573,7 +3851,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 133,
+    "__docId__": 181,
     "kind": "class",
     "name": "SchemaError",
     "memberof": "props/classes/SchemaError.js",
@@ -2581,7 +3859,7 @@
     "longname": "props/classes/SchemaError.js~SchemaError",
     "access": "public",
     "export": true,
-    "importPath": "Observables/props/classes/SchemaError.js",
+    "importPath": "observabubble/props/classes/SchemaError.js",
     "importStyle": "SchemaError",
     "description": null,
     "lineNumber": 1,
@@ -2592,7 +3870,7 @@
     ]
   },
   {
-    "__docId__": 134,
+    "__docId__": 182,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "props/classes/SchemaError.js~SchemaError",
@@ -2606,7 +3884,7 @@
     "undocument": true
   },
   {
-    "__docId__": 135,
+    "__docId__": 183,
     "kind": "member",
     "name": "name",
     "memberof": "props/classes/SchemaError.js~SchemaError",
@@ -2623,10 +3901,10 @@
     }
   },
   {
-    "__docId__": 136,
+    "__docId__": 184,
     "kind": "file",
     "name": "props/classes/schema.js",
-    "content": "import SchemaError from './SchemaError.js'\nimport props, { typesFoundInSchema } from '../index.js'\nimport INTEGER from '../Integer.js'\nimport BOOLEAN from '../Boolean.js'\nimport DATE from '../Date.js'\nimport DECIMAL from '../Decimal.js'\nimport STRING from '../String.js'\nimport ARRAY from '../Array.js'\nimport OBJECT from '../Object.js'\n// import TEXT from './Text.js'\nconst getProp = obj => {\n  if (typesFoundInSchema.includes(obj)) return { Prop: obj }\n  if (obj.isObservable) {\n    return { Prop: obj }\n  }\n  if (typeof obj === 'string' && props[obj]) return { Prop: props[obj] }\n  if (typeof obj === 'string') return { Prop: STRING, Value: obj }\n  if (obj instanceof Date) return { Prop: DATE, Value: obj }\n  if (typeof obj === 'number') {\n    if (obj === parseInt(obj)) return { Prop: INTEGER, Value: obj }\n    return { Prop: DECIMAL, Value: obj }\n  }\n  if (typeof obj === 'boolean') return { Prop: BOOLEAN, Value: obj }\n  if (typeof obj === 'object') {\n    if (Object.keys(obj).length === 1 && obj.type && props[obj.type]) {\n      return { Prop: props[obj.type] }\n    } else if (Object.keys(obj).length === 2 && obj.type && props[obj.type] && obj.value !== undefined) {\n      return { Prop: props[obj.type], Value: obj.value }\n    } else {\n      return { Prop: OBJECT, Value: obj }\n    }\n  }\n  if (obj === null) throw new SchemaError('A NULL value cannot be parsed in a Schema')\n  throw new SchemaError(`Schema could not parse the entry ${obj}`)\n}\n\nconst schema = s => {\n  if (s instanceof Array) {\n    if (!s.length) throw new SchemaError('An Array in a schema must contain a sub-schema for the containing objects')\n    return s.map(i => schema(i))\n  }\n  if (s.isObservable) return s\n  const structure = Object.keys(s).reduce((acc, key) => {\n    const { Prop, Value } = getProp(s[key])\n    acc[key] = { Prop, Value }\n    if (acc[key].Prop === OBJECT) {\n      acc[key] = schema(s[key])\n    }\n    return acc\n  }, {})\n  return structure\n}\nconst TypeSchema = s => {\n  if (s instanceof Array) {\n    return s.map(TypeSchema)\n  }\n  if (s.isObservable) return s\n  return Object.keys(s).reduce((acc, key) => {\n    if (s[key] instanceof Array) {\n      acc[key] = s[key].map(TypeSchema)\n    } else {\n      const { Prop } = s[key]\n      if (!Prop) {\n        acc[key] = TypeSchema(s[key])\n      } else {\n        acc[key] = Prop\n      }\n    }\n    return acc\n  }, {})\n}\nconst ValueSchema = s => {\n  if (s instanceof Array) {\n    return s.map(ValueSchema)\n  }\n  return Object.keys(s).reduce((acc, key) => {\n    if (s[key]) {\n      if (s[key] instanceof Array) {\n        acc[key] = s[key].map(ValueSchema)\n      } else {\n        const { Prop, Value } = s[key]\n        if (!Prop) {\n          acc[key] = ValueSchema(s[key])\n        } else {\n          acc[key] = Value\n        }\n      }\n    }\n    return acc\n  }, {})\n}\nconst TypesAndValues = s => {\n  // console.log(s)\n  const TAV = schema(s)\n  // console.log(TAV)\n  return [TypeSchema(TAV), ValueSchema(TAV)]\n}\nexport default TypesAndValues\n",
+    "content": "import SchemaError from './SchemaError.js'\nimport props from '../index.js'\nimport INTEGER from '../Integer.js'\nimport BOOLEAN from '../Boolean.js'\nimport DATE from '../Date.js'\nimport DECIMAL from '../Decimal.js'\nimport STRING from '../String.js'\nimport ARRAY from '../Array.js'\nimport OBJECT from '../Object.js'\n// import TEXT from './Text.js'\nconst getProp = obj => {\n  if (obj.isProp) return { Prop: obj }\n  if (obj.isObservable) {\n    return { Prop: obj }\n  }\n  if (typeof obj === 'string' && props[obj]) return { Prop: props[obj] }\n  if (typeof obj === 'string') return { Prop: STRING, Value: obj }\n  if (obj instanceof Date) return { Prop: DATE, Value: obj }\n  if (typeof obj === 'number') {\n    if (obj === parseInt(obj)) return { Prop: INTEGER, Value: obj }\n    return { Prop: DECIMAL, Value: obj }\n  }\n  if (typeof obj === 'boolean') return { Prop: BOOLEAN, Value: obj }\n  if (typeof obj === 'object') {\n    if (Object.keys(obj).length === 1 && obj.type && props[obj.type]) {\n      return { Prop: props[obj.type] }\n    } else if (Object.keys(obj).length === 2 && obj.type && props[obj.type] && obj.value !== undefined) {\n      return { Prop: props[obj.type], Value: obj.value }\n    } else {\n      return { Prop: OBJECT, Value: obj }\n    }\n  }\n  if (obj === null) throw new SchemaError('A NULL value cannot be parsed in a Schema')\n  throw new SchemaError(`Schema could not parse the entry ${obj}`)\n}\n\nconst schema = s => {\n  if (s instanceof Array) {\n    if (!s.length) throw new SchemaError('An Array in a schema must contain a sub-schema for the containing objects')\n    return s.map(i => schema(i))\n  }\n  if (s.isObservable) return s\n  const structure = Object.keys(s).reduce((acc, key) => {\n    const { Prop, Value } = getProp(s[key])\n    acc[key] = { Prop, Value }\n    if (acc[key].Prop === OBJECT) {\n      acc[key] = schema(s[key])\n    }\n    return acc\n  }, {})\n  return structure\n}\nconst TypeSchema = s => {\n  if (s instanceof Array) {\n    return s.map(TypeSchema)\n  }\n  if (s.isObservable) return s\n  return Object.keys(s).reduce((acc, key) => {\n    if (s[key] instanceof Array) {\n      acc[key] = s[key].map(TypeSchema)\n    } else {\n      const { Prop } = s[key]\n      if (!Prop) {\n        acc[key] = TypeSchema(s[key])\n      } else {\n        acc[key] = Prop\n      }\n    }\n    return acc\n  }, {})\n}\nconst ValueSchema = s => {\n  if (s instanceof Array) {\n    return s.map(ValueSchema)\n  }\n  return Object.keys(s).reduce((acc, key) => {\n    if (s[key]) {\n      if (s[key] instanceof Array) {\n        acc[key] = s[key].map(ValueSchema)\n      } else {\n        const { Prop, Value } = s[key]\n        if (!Prop) {\n          acc[key] = ValueSchema(s[key])\n        } else {\n          acc[key] = Value\n        }\n      }\n    }\n    return acc\n  }, {})\n}\nconst TypesAndValues = s => {\n  // console.log(s)\n  const TAV = schema(s)\n  // console.log(TAV)\n  return [TypeSchema(TAV), ValueSchema(TAV)]\n}\nexport default TypesAndValues\n",
     "static": true,
     "longname": "/home/paul/Observables/props/classes/schema.js",
     "access": "public",
@@ -2634,7 +3912,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 137,
+    "__docId__": 185,
     "kind": "function",
     "name": "getProp",
     "memberof": "props/classes/schema.js",
@@ -2644,7 +3922,7 @@
     "longname": "props/classes/schema.js~getProp",
     "access": "public",
     "export": false,
-    "importPath": "Observables/props/classes/schema.js",
+    "importPath": "observabubble/props/classes/schema.js",
     "importStyle": null,
     "description": null,
     "lineNumber": 11,
@@ -2665,7 +3943,7 @@
     "ignore": true
   },
   {
-    "__docId__": 138,
+    "__docId__": 186,
     "kind": "function",
     "name": "schema",
     "memberof": "props/classes/schema.js",
@@ -2675,7 +3953,7 @@
     "longname": "props/classes/schema.js~schema",
     "access": "public",
     "export": false,
-    "importPath": "Observables/props/classes/schema.js",
+    "importPath": "observabubble/props/classes/schema.js",
     "importStyle": null,
     "description": null,
     "lineNumber": 37,
@@ -2696,7 +3974,7 @@
     "ignore": true
   },
   {
-    "__docId__": 139,
+    "__docId__": 187,
     "kind": "function",
     "name": "TypeSchema",
     "memberof": "props/classes/schema.js",
@@ -2706,7 +3984,7 @@
     "longname": "props/classes/schema.js~TypeSchema",
     "access": "public",
     "export": false,
-    "importPath": "Observables/props/classes/schema.js",
+    "importPath": "observabubble/props/classes/schema.js",
     "importStyle": null,
     "description": null,
     "lineNumber": 53,
@@ -2727,7 +4005,7 @@
     "ignore": true
   },
   {
-    "__docId__": 140,
+    "__docId__": 188,
     "kind": "function",
     "name": "ValueSchema",
     "memberof": "props/classes/schema.js",
@@ -2737,7 +4015,7 @@
     "longname": "props/classes/schema.js~ValueSchema",
     "access": "public",
     "export": false,
-    "importPath": "Observables/props/classes/schema.js",
+    "importPath": "observabubble/props/classes/schema.js",
     "importStyle": null,
     "description": null,
     "lineNumber": 72,
@@ -2758,7 +4036,7 @@
     "ignore": true
   },
   {
-    "__docId__": 141,
+    "__docId__": 189,
     "kind": "function",
     "name": "TypesAndValues",
     "memberof": "props/classes/schema.js",
@@ -2768,7 +4046,7 @@
     "longname": "props/classes/schema.js~TypesAndValues",
     "access": "public",
     "export": true,
-    "importPath": "Observables/props/classes/schema.js",
+    "importPath": "observabubble/props/classes/schema.js",
     "importStyle": "TypesAndValues",
     "description": null,
     "lineNumber": 92,
@@ -2788,7 +4066,7 @@
     }
   },
   {
-    "__docId__": 142,
+    "__docId__": 190,
     "kind": "file",
     "name": "props/containers/models.js",
     "content": "const store = {}\nconst listeners = {}\nclass Store {\n  constructor (name, model) {\n    this.name = name\n    this.Model = model\n    this.models = {}\n    this._referenceListeners = (listeners[this.name] && listeners[this.name].referenceModel instanceof Array) ? listeners[this.name].referenceModel : []\n    delete listeners[this.name]\n  }\n\n  add (items = []) {\n    while (items.length) {\n      const item = items.shift()\n      if (item instanceof this.Model && item._pKey) {\n        this.models[item[item._pKey].toString()] = item\n        const listeners = this._referenceListeners.filter(listener => listener.id === item._pKey)\n        while (listeners.length) {\n          const listener = listeners.shift()\n          listener.resolve(item)\n        }\n        this._referenceListeners = this._referenceListeners.filter(listener => listener.id !== item._pKey)\n      }\n    }\n  }\n\n  filter (predictate) {\n    return Object.values(this.models).filter(predictate)\n  }\n\n  findByPKey (id) {\n    if (this.models[id.toString()]) return this.models[id.toString()]\n    return null\n  }\n\n  referenceModel (id, resolve = () => {}) {\n    if (!id) return resolve(null)\n    if (resolve) {\n      if (this.models[id.toString()]) {\n        resolve(this.models[id.toString()])\n      } else {\n        this._referenceListeners.push({ id: id.toString(), resolve })\n      }\n    } else {\n      if (this.models[id.toString()]) {\n        return this.models[id.toString()]\n      } else {\n        return new Promise((resolve) => {\n          this._referenceListeners.push({ id: id.toString(), resolve })\n        })\n      }\n    }\n  }\n}\nexport const register = (models) => {\n  try {\n    Object.keys(models).forEach(name => {\n      if (!store[name]) store[name] = new Store(name, models[name])\n    })\n  } catch (_e) {}\n  return store\n}\nexport const referenceModel = (model, id) => {\n  // console.log(model, id)\n  if (store[model]) {\n    return new Promise((resolve, reject) => {\n      store[model].referenceModel(id, resolve)\n    })\n  } else {\n    return new Promise((resolve, reject) => {\n      if (!listeners[model]) listeners[model] = {}\n      if (!listeners[model].referenceModel) listeners[model].referenceModel = []\n      listeners[model].referenceModel.push({ id: id.toString(), resolve })\n    })\n  }\n}\nexport default store\n",
@@ -2799,7 +4077,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 143,
+    "__docId__": 191,
     "kind": "variable",
     "name": "listeners",
     "memberof": "props/containers/models.js",
@@ -2807,7 +4085,7 @@
     "longname": "props/containers/models.js~listeners",
     "access": "public",
     "export": false,
-    "importPath": "Observables/props/containers/models.js",
+    "importPath": "observabubble/props/containers/models.js",
     "importStyle": null,
     "description": null,
     "lineNumber": 2,
@@ -2820,7 +4098,7 @@
     "ignore": true
   },
   {
-    "__docId__": 144,
+    "__docId__": 192,
     "kind": "class",
     "name": "Store",
     "memberof": "props/containers/models.js",
@@ -2828,7 +4106,7 @@
     "longname": "props/containers/models.js~Store",
     "access": "public",
     "export": false,
-    "importPath": "Observables/props/containers/models.js",
+    "importPath": "observabubble/props/containers/models.js",
     "importStyle": null,
     "description": null,
     "lineNumber": 3,
@@ -2837,7 +4115,7 @@
     "ignore": true
   },
   {
-    "__docId__": 145,
+    "__docId__": 193,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "props/containers/models.js~Store",
@@ -2851,7 +4129,7 @@
     "undocument": true
   },
   {
-    "__docId__": 146,
+    "__docId__": 194,
     "kind": "member",
     "name": "name",
     "memberof": "props/containers/models.js~Store",
@@ -2868,7 +4146,7 @@
     }
   },
   {
-    "__docId__": 147,
+    "__docId__": 195,
     "kind": "member",
     "name": "Model",
     "memberof": "props/containers/models.js~Store",
@@ -2885,7 +4163,7 @@
     }
   },
   {
-    "__docId__": 148,
+    "__docId__": 196,
     "kind": "member",
     "name": "models",
     "memberof": "props/containers/models.js~Store",
@@ -2902,7 +4180,7 @@
     }
   },
   {
-    "__docId__": 149,
+    "__docId__": 197,
     "kind": "member",
     "name": "_referenceListeners",
     "memberof": "props/containers/models.js~Store",
@@ -2919,7 +4197,7 @@
     }
   },
   {
-    "__docId__": 150,
+    "__docId__": 198,
     "kind": "method",
     "name": "add",
     "memberof": "props/containers/models.js~Store",
@@ -2945,7 +4223,7 @@
     "return": null
   },
   {
-    "__docId__": 152,
+    "__docId__": 200,
     "kind": "method",
     "name": "filter",
     "memberof": "props/containers/models.js~Store",
@@ -2972,7 +4250,7 @@
     }
   },
   {
-    "__docId__": 153,
+    "__docId__": 201,
     "kind": "method",
     "name": "findByPKey",
     "memberof": "props/containers/models.js~Store",
@@ -2999,7 +4277,7 @@
     }
   },
   {
-    "__docId__": 154,
+    "__docId__": 202,
     "kind": "method",
     "name": "referenceModel",
     "memberof": "props/containers/models.js~Store",
@@ -3033,7 +4311,7 @@
     }
   },
   {
-    "__docId__": 155,
+    "__docId__": 203,
     "kind": "function",
     "name": "register",
     "memberof": "props/containers/models.js",
@@ -3043,7 +4321,7 @@
     "longname": "props/containers/models.js~register",
     "access": "public",
     "export": true,
-    "importPath": "Observables/props/containers/models.js",
+    "importPath": "observabubble/props/containers/models.js",
     "importStyle": "{register}",
     "description": null,
     "lineNumber": 55,
@@ -3063,7 +4341,7 @@
     }
   },
   {
-    "__docId__": 156,
+    "__docId__": 204,
     "kind": "function",
     "name": "referenceModel",
     "memberof": "props/containers/models.js",
@@ -3073,7 +4351,7 @@
     "longname": "props/containers/models.js~referenceModel",
     "access": "public",
     "export": true,
-    "importPath": "Observables/props/containers/models.js",
+    "importPath": "observabubble/props/containers/models.js",
     "importStyle": "{referenceModel}",
     "description": null,
     "lineNumber": 63,
@@ -3099,7 +4377,7 @@
     }
   },
   {
-    "__docId__": 157,
+    "__docId__": 205,
     "kind": "variable",
     "name": "store",
     "memberof": "props/containers/models.js",
@@ -3107,7 +4385,7 @@
     "longname": "props/containers/models.js~store",
     "access": "public",
     "export": true,
-    "importPath": "Observables/props/containers/models.js",
+    "importPath": "observabubble/props/containers/models.js",
     "importStyle": "store",
     "description": null,
     "lineNumber": 1,
@@ -3119,7 +4397,7 @@
     }
   },
   {
-    "__docId__": 158,
+    "__docId__": 206,
     "kind": "file",
     "name": "props/events/events.js",
     "content": "export const CHANGE = 'change'\nexport const LOAD = 'load'\n\nexport default {\n  CHANGE,\n  LOAD\n}\n",
@@ -3130,7 +4408,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 159,
+    "__docId__": 207,
     "kind": "variable",
     "name": "CHANGE",
     "memberof": "props/events/events.js",
@@ -3138,7 +4416,7 @@
     "longname": "props/events/events.js~CHANGE",
     "access": "public",
     "export": true,
-    "importPath": "Observables/props/events/events.js",
+    "importPath": "observabubble/props/events/events.js",
     "importStyle": "{CHANGE}",
     "description": null,
     "lineNumber": 1,
@@ -3150,7 +4428,7 @@
     }
   },
   {
-    "__docId__": 160,
+    "__docId__": 208,
     "kind": "variable",
     "name": "LOAD",
     "memberof": "props/events/events.js",
@@ -3158,7 +4436,7 @@
     "longname": "props/events/events.js~LOAD",
     "access": "public",
     "export": true,
-    "importPath": "Observables/props/events/events.js",
+    "importPath": "observabubble/props/events/events.js",
     "importStyle": "{LOAD}",
     "description": null,
     "lineNumber": 2,
@@ -3170,10 +4448,10 @@
     }
   },
   {
-    "__docId__": 161,
+    "__docId__": 209,
     "kind": "file",
     "name": "props/index.js",
-    "content": "\nimport BOOLEAN from './Boolean.js'\nimport DATE from './Date.js'\nimport DECIMAL from './Decimal.js'\nimport INTEGER from './Integer.js'\nimport STRING from './String.js'\nimport TEXT from './Text.js'\nimport REFERENCE from './Reference.js'\n/**\n * @ignore\n */\nconst props = {\n  Boolean: BOOLEAN,\n  Date: DATE,\n  Decimal: DECIMAL,\n  Integer: INTEGER,\n  String: STRING,\n  Text: TEXT\n}\n/**\n * @ignore\n */\nexport const typesFoundInSchema = [\n  INTEGER,\n  BOOLEAN,\n  DATE,\n  DECIMAL,\n  STRING,\n  TEXT,\n  REFERENCE\n]\n/**\n * @ignore\n */\nexport default props\n",
+    "content": "\nimport BOOLEAN from './Boolean.js'\nimport DATE from './Date.js'\nimport DECIMAL from './Decimal.js'\nimport INTEGER from './Integer.js'\nimport STRING from './String.js'\nimport TEXT from './Text.js'\nimport REFERENCE from './Reference.js'\n/**\n * @ignore\n */\nconst props = {\n  Boolean: BOOLEAN,\n  Date: DATE,\n  Decimal: DECIMAL,\n  Integer: INTEGER,\n  String: STRING,\n  Text: TEXT\n}\n/**\n * @ignore\n */\n// export const typesFoundInSchema = [\n//   INTEGER,\n//   BOOLEAN,\n//   DATE,\n//   DECIMAL,\n//   STRING,\n//   TEXT,\n//   REFERENCE\n// ]\n/**\n * @ignore\n */\nexport default props\n",
     "static": true,
     "longname": "/home/paul/Observables/props/index.js",
     "access": "public",
@@ -3181,27 +4459,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 162,
-    "kind": "variable",
-    "name": "typesFoundInSchema",
-    "memberof": "props/index.js",
-    "static": true,
-    "longname": "props/index.js~typesFoundInSchema",
-    "access": "public",
-    "export": true,
-    "importPath": "Observables/props/index.js",
-    "importStyle": "{typesFoundInSchema}",
-    "description": null,
-    "lineNumber": 23,
-    "undocument": true,
-    "type": {
-      "types": [
-        "undefined[]"
-      ]
-    }
-  },
-  {
-    "__docId__": 163,
+    "__docId__": 210,
     "kind": "variable",
     "name": "props",
     "memberof": "props/index.js",
@@ -3209,7 +4467,7 @@
     "longname": "props/index.js~props",
     "access": "public",
     "export": true,
-    "importPath": "Observables/props/index.js",
+    "importPath": "observabubble/props/index.js",
     "importStyle": "props",
     "description": "",
     "lineNumber": 12,
@@ -3221,7 +4479,7 @@
     }
   },
   {
-    "__docId__": 164,
+    "__docId__": 211,
     "kind": "file",
     "name": "props/react/mountedState.js",
     "content": "import { CHANGE } from '../classes/events.js'\nconst mountedState = (observable, componentClass) => {\n  if (!observable.isObservable) throw new Error('Provided Object is not observable')\n  const initialState = {}\n  componentClass.state = initialState\n  const watcher = () => {\n    componentClass.setState(observable._value)\n  }\n  const mount = () => {\n    observable.on(CHANGE, watcher)\n  }\n  const unmount = () => {\n    observable.off(CHANGE, watcher)\n  }\n  return { mount, unmount }\n}\n\nexport default mountedState\n",
@@ -3232,7 +4490,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 165,
+    "__docId__": 212,
     "kind": "function",
     "name": "mountedState",
     "memberof": "props/react/mountedState.js",
@@ -3242,7 +4500,7 @@
     "longname": "props/react/mountedState.js~mountedState",
     "access": "public",
     "export": true,
-    "importPath": "Observables/props/react/mountedState.js",
+    "importPath": "observabubble/props/react/mountedState.js",
     "importStyle": "mountedState",
     "description": null,
     "lineNumber": 2,
@@ -3268,7 +4526,7 @@
     }
   },
   {
-    "__docId__": 166,
+    "__docId__": 213,
     "kind": "file",
     "name": "props/react/stateOnEffect.js",
     "content": "import { CHANGE } from '../events/events.js'\n\nconst stateOnEffect = (observable = {}, { useState, useEffect }) => {\n  if (!observable.isObservable) throw new Error('Provided Object is not observable')\n  const [value, setValue] = useState(observable.toJSON())\n  // console.log(value)\n  useEffect(() => {\n    // console.log({ watcher: observable.toJSON() })\n    const watcher = () => {\n      setValue(observable.toJSON())\n    }\n\n    observable.on(CHANGE, watcher)\n    return () => {\n      observable.off(CHANGE, watcher)\n    }\n  })\n  return value\n}\n\nexport default stateOnEffect\n",
@@ -3279,7 +4537,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 167,
+    "__docId__": 214,
     "kind": "function",
     "name": "stateOnEffect",
     "memberof": "props/react/stateOnEffect.js",
@@ -3289,7 +4547,7 @@
     "longname": "props/react/stateOnEffect.js~stateOnEffect",
     "access": "public",
     "export": true,
-    "importPath": "Observables/props/react/stateOnEffect.js",
+    "importPath": "observabubble/props/react/stateOnEffect.js",
     "importStyle": "stateOnEffect",
     "description": null,
     "lineNumber": 3,
@@ -3323,7 +4581,7 @@
     }
   },
   {
-    "__docId__": 168,
+    "__docId__": 215,
     "kind": "file",
     "name": "props/sample/User.js",
     "content": "import OBJECT from '../Object.js'\nimport INTEGER from '../Integer.js'\nimport STRING from '../String.js'\nimport { register } from '../containers/models.js'\nimport UserRef from './UserReference.js'\nconst schema = {\n  id: INTEGER,\n  name: STRING,\n  address: STRING,\n  friend: UserRef\n}\nclass User extends OBJECT {\n  constructor (values) {\n    super(schema, { values })\n    store.User.add([this])\n  }\n}\nconst store = register({ User })\nexport default User\n",
@@ -3334,7 +4592,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 169,
+    "__docId__": 216,
     "kind": "variable",
     "name": "schema",
     "memberof": "props/sample/User.js",
@@ -3342,7 +4600,7 @@
     "longname": "props/sample/User.js~schema",
     "access": "public",
     "export": false,
-    "importPath": "Observables/props/sample/User.js",
+    "importPath": "observabubble/props/sample/User.js",
     "importStyle": null,
     "description": null,
     "lineNumber": 6,
@@ -3355,7 +4613,7 @@
     "ignore": true
   },
   {
-    "__docId__": 170,
+    "__docId__": 217,
     "kind": "variable",
     "name": "store",
     "memberof": "props/sample/User.js",
@@ -3363,7 +4621,7 @@
     "longname": "props/sample/User.js~store",
     "access": "public",
     "export": false,
-    "importPath": "Observables/props/sample/User.js",
+    "importPath": "observabubble/props/sample/User.js",
     "importStyle": null,
     "description": null,
     "lineNumber": 18,
@@ -3376,7 +4634,7 @@
     "ignore": true
   },
   {
-    "__docId__": 171,
+    "__docId__": 218,
     "kind": "class",
     "name": "User",
     "memberof": "props/sample/User.js",
@@ -3384,7 +4642,7 @@
     "longname": "props/sample/User.js~User",
     "access": "public",
     "export": true,
-    "importPath": "Observables/props/sample/User.js",
+    "importPath": "observabubble/props/sample/User.js",
     "importStyle": "User",
     "description": null,
     "lineNumber": 12,
@@ -3395,7 +4653,7 @@
     ]
   },
   {
-    "__docId__": 172,
+    "__docId__": 219,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "props/sample/User.js~User",
@@ -3409,7 +4667,7 @@
     "undocument": true
   },
   {
-    "__docId__": 173,
+    "__docId__": 220,
     "kind": "file",
     "name": "props/sample/UserReference.js",
     "content": "import REFERENCE from '../Reference.js'\nimport User from './User.js'\nclass UserRef extends REFERENCE {\n  constructor (id, { parent, name } = {}) {\n    super({ User }, { id, parent, name })\n  }\n}\n\nexport default UserRef\n",
@@ -3420,7 +4678,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 174,
+    "__docId__": 221,
     "kind": "class",
     "name": "UserRef",
     "memberof": "props/sample/UserReference.js",
@@ -3428,7 +4686,7 @@
     "longname": "props/sample/UserReference.js~UserRef",
     "access": "public",
     "export": true,
-    "importPath": "Observables/props/sample/UserReference.js",
+    "importPath": "observabubble/props/sample/UserReference.js",
     "importStyle": "UserRef",
     "description": null,
     "lineNumber": 3,
@@ -3439,7 +4697,7 @@
     ]
   },
   {
-    "__docId__": 175,
+    "__docId__": 222,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "props/sample/UserReference.js~UserRef",
@@ -3454,7 +4712,7 @@
   },
   {
     "kind": "index",
-    "content": "# Observables\nA package of observables properties, objects and arrays\n\n##\n\n\n",
+    "content": "# Observabubble\nA package of observable properties, objects and arrays\n\n## Install\n\n```\nyarn add observabubble\n```\n\n## Primitive\n\nFor use as an Observable primitive\n\n```\nimport {INTEGER, EVENTS} from 'observabubble'\nconst myInt = new INTEGER(3)\nmyInt.on(EVENTS.CHANGE, target => {\n  console.log(target == 4)\n})\nmyInt._set(4)\n```\n\n## Object\n\nAn Object is defined by a Schema which is assigned an Observable type to a key, as below.\nThe values can be assigned in the constructor, in the *values* parameter of the second argument.\nAs this is an Object, the Observable string *name* is exposed to that object and can therefore be assigned to.\n\n```\nimport {OBJECT, STRING, INTEGER, EVENTS} from 'observabubble'\nconst myObject = new OBJECT(\n  {\n    name: STRING,\n    age: INTEGER\n  },{\n    values:{\n      name: 'Anna',\n      age:20\n    }\n  }\n)\nmyObject.name.on(EVENTS.CHANGE, target => {\n  console.log(`Name has changed to ${target}`)\n})\nmyObject.name = 'Harry'\n```\n\n\n## Objects extended\n\nTo create an custom version of an Object, the class can be extended.\n\n```\nimport {OBJECT, INTEGER, STRING} from 'observabubble'\nconst schema = {\n  id: INTEGER,\n  name: STRING,\n  age: INTEGER\n}\nclass User extends OBJECT {\n  constructor (values) {\n    super(schema, { values })\n  }\n}\nconst anna = new User({\n  id:1,\n  name:'Anna',\n  age: 20\n})\nconsole.log(`${anna.name} is ${anna.age} years old`)\n```\n\n## Objects referencing Objects\n\nTo allow for referencing Objects, the model store is needed for recording each model and for discovering the referenced model.\n\nDefine the *User* model:\n```\nimport {OBJECT, INTEGER, STRING, REFERENCE, STORE, registerInStore} from 'observabubble'\n\nclass UserRef extends REFERENCE {\n  constructor (id, { parent, name } = {}) {\n    super({ User }, { id, parent, name })\n  }\n}\n\nconst schema = {\n  id: INTEGER,\n  name: STRING,\n  address: STRING,\n  friend: UserRef\n}\nclass User extends OBJECT {\n  constructor (values) {\n    super(schema, { values })\n    STORE.User.add([this])\n  }\n}\nregisterInStore({ User })\n\n```\n\n*UserRef* extends REFERENCE to tie an *id* to a User stored in *STORE*\n\nThe schema for the User model is then using this user reference type for the *friend* property.\n\nIn the constructor of the User, the new instance of the model is added to the STORE, with:\n```\nSTORE.User.add([this])\n```\n\nThe *registerInStore* method let's the STORE know which models it shall be using. Ensure the syntax is:\n```\nregisterInStore({ User })\n```\nThis is important for the name and model to be assigned together.\n\nA REFERENCE type is asynchronous, as the referred model may not be available in the store yet. The REFERENCE will listen for it to be added, and once added, the REFERENCE will receive it and store in:\n```\nuser.friend._ref\n// or\nuser._friend\n```\n\nAn example of how this may work:\n```\nimport {EVENTS} from 'observabubble'\nconst {LOAD} = EVENTS\nconst model = new User({\n  id: 1,\n  name: 'Paul',\n  friend: 2\n})\nmodel.friend.on(LOAD, () => {\n  console.log(`${model._friend.name} should be Frank`)\n  console.log(`${model.friend._ref.name} should be Frank`)\n})\nconst model2 = new User({\n  id: 2,\n  name: 'Frank'\n})\n```\n\nIf the models are being created around the same time, a Promise on the model can be used:\n```\nimport {EVENTS} from 'observabubble'\nconst {LOAD} = EVENTS\nconst model = new User({\n  id: 1,\n  name: 'Paul',\n  friend: 2\n})\nmodel.friend.getRef().then(friend => {\n  console.log(`${friend.name} should be Frank`)\n})\nconst model2 = new User({\n  id: 2,\n  name: 'Frank'\n})\n```\n\n## ARRAY\n\nThe Array observable exposes many native Array methods, but just wraps it an object for observing it.\n\nWhen defined, the schema for the items is suggested. As with OBJECTS, the schema can be derived from the provided values, but this is not recommended. The provision of a Schema makes for more robust data.\n\n### Without a Schema\n```\nconst model = new ARRAY([{\n  name: 'Paul',\n  age: 21,\n  today: new Date()\n}, {\n  name: 'John',\n  age: 20,\n  today: new Date()\n}])\nconst data = [...model]\nconsole.log(`${data[0].name} should be Paul`)\n```\n\n### With a Schema\n\n```\nconst model = new ARRAY(\n  {\n    name: STRING,\n    age: INTEGER,\n    today: DATE\n  }, {\n    values:[\n      {\n        name: 'John',\n        age: 20,\n        today: new Date()\n      }\n    ]\n  }\n)\nconst data = [...model]\nconsole.log(`${data[0].name} should be Paul`)\n```\n\n### Watching\n\n```\nimport {EVENTS, ARRAY, STRING, INTEGER, DATE } from 'observabubble'\nconst {CHANGE} = EVENTS\nconst people = new ARRAY(\n  {\n    name: STRING,\n    age: INTEGER,\n    today: DATE\n  }, {\n    values:[\n      {\n        name: 'John',\n        age: 20,\n        today: new Date()\n      }\n    ]\n  }\n)\npeople.on(CHANGE,target => {\n  console.log(JSON.stringify(target,null,2))\n})\npeople.push({\n  name: 'Bobby',\n  age: 30,\n  today: new Date()\n})\n```",
     "longname": "/home/paul/Observables/README.md",
     "name": "./README.md",
     "static": true,
@@ -3462,7 +4720,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"Observables\",\n  \"version\": \"1.0.0\",\n  \"description\": \"Package of Observable parameters\",\n  \"main\": \"index.js\",\n  \"type\": \"module\",\n  \"repository\": \"https://github.com/pauliclark/Observables.git\",\n  \"author\": \"pauliclark <paul@venuescanner.com>\",\n  \"license\": \"MIT\",\n  \"private\": false,\n  \"scripts\": {\n    \"test\": \"NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest\",\n    \"test:file\": \"NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest \\\"model\\\\.test\\\\.js\\\"  --watchAll\",\n    \"docs:build\": \"node --trace-warnings ./node_modules/.bin/esdoc\",\n    \"docs\": \"node --trace-warnings ./docs.js\"\n  },\n  \"dependencies\": {\n    \"luxon\": \"^2.0.2\"\n  },\n  \"devDependencies\": {\n    \"@babel/preset-env\": \"^7.15.0\",\n    \"@babel/preset-react\": \"^7.14.5\",\n    \"babel-jest\": \"^27.0.6\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^7.32.0\",\n    \"eslint-config-standard\": \"^16.0.2\",\n    \"eslint-plugin-import\": \"^2.22.1\",\n    \"eslint-plugin-node\": \"^11.1.0\",\n    \"eslint-plugin-promise\": \"^4.2.1\",\n    \"express\": \"^4.17.1\",\n    \"jest\": \"^27.0.6\",\n    \"jsdom\": \"^17.0.0\",\n    \"react\": \"^17.0.2\",\n    \"react-dom\": \"^17.0.2\",\n    \"react-test-renderer\": \"^17.0.2\",\n    \"regenerator-runtime\": \"^0.13.9\"\n  },\n  \"jest\": {\n    \"testEnvironment\": \"jsdom\",\n    \"setupFilesAfterEnv\": [\n      \"./tests/setupTests.js\"\n    ]\n  }\n}",
+    "content": "{\n  \"name\": \"observabubble\",\n  \"version\": \"0.0.1\",\n  \"description\": \"Package of Observable parameters\",\n  \"main\": \"index.js\",\n  \"type\": \"module\",\n  \"repository\": \"https://github.com/pauliclark/Observables.git\",\n  \"homepage\": \"https://pauliclark.github.io/Observables/\",\n  \"author\": \"pauliclark <paul@venuescanner.com>\",\n  \"license\": \"MIT\",\n  \"private\": false,\n  \"scripts\": {\n    \"test\": \"NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest\",\n    \"test:file\": \"NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest \\\"object\\\\.test\\\\.js\\\"  --watchAll\",\n    \"docs:build\": \"node --trace-warnings ./node_modules/.bin/esdoc\",\n    \"docs\": \"node --trace-warnings ./docs.js\"\n  },\n  \"dependencies\": {\n    \"luxon\": \"^2.0.2\"\n  },\n  \"devDependencies\": {\n    \"@babel/preset-env\": \"^7.15.0\",\n    \"@babel/preset-react\": \"^7.14.5\",\n    \"babel-jest\": \"^27.0.6\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^7.32.0\",\n    \"eslint-config-standard\": \"^16.0.2\",\n    \"eslint-plugin-import\": \"^2.22.1\",\n    \"eslint-plugin-node\": \"^11.1.0\",\n    \"eslint-plugin-promise\": \"^4.2.1\",\n    \"express\": \"^4.17.1\",\n    \"jest\": \"^27.0.6\",\n    \"jsdom\": \"^17.0.0\",\n    \"react\": \"^17.0.2\",\n    \"react-dom\": \"^17.0.2\",\n    \"react-test-renderer\": \"^17.0.2\",\n    \"regenerator-runtime\": \"^0.13.9\"\n  },\n  \"jest\": {\n    \"testEnvironment\": \"jsdom\",\n    \"setupFilesAfterEnv\": [\n      \"./tests/setupTests.js\"\n    ]\n  }\n}",
     "longname": "/home/paul/Observables/package.json",
     "name": "package.json",
     "static": true,

@@ -1,6 +1,6 @@
 
 import PropEvents from './classes/PropEvents.js'
-import props, { typesFoundInSchema } from './index.js'
+// import props from './index.js'
 import { CHANGE } from './events/events.js'
 import OBJECT from './Object.js'
 import schemaBuilder from './classes/schema.js'
@@ -69,7 +69,7 @@ class ARRAY extends PropEvents {
   [Symbol.iterator] () { return makeIterator(this._values) }
 
   _itemProp () {
-    if (typesFoundInSchema.includes(this._schema) || this._schema.isObservable) {
+    if (this._schema.isObservable) {
       return this._schema
     } else if (this._schema instanceof Array) {
       return ARRAY
@@ -84,7 +84,7 @@ class ARRAY extends PropEvents {
     // console.log({ Prop, values })
     this._values = values.map(val => {
       if (Prop) {
-        if (typesFoundInSchema.includes(this._schema) || this._schema.isObservable) {
+        if (this._schema.isObservable) {
           return new Prop(val, { parent: this })
         } else if (Prop === ARRAY) {
           return new ARRAY(this._schema[0], { parent: this, values: val })
@@ -100,7 +100,7 @@ class ARRAY extends PropEvents {
   _newItem (props) {
     if (this._schema) {
       const Prop = this._itemProp()
-      if (typesFoundInSchema.includes(this._schema)) {
+      if (this._schema.isObservable) {
         return new Prop(props, { parent: this })
       } else if (Prop === ARRAY) {
         return new ARRAY(this._schema[0], { parent: this, values: props })

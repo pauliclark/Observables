@@ -1,7 +1,7 @@
 {
-  "coverage": "24.5%",
-  "expectCount": 102,
-  "actualCount": 25,
+  "coverage": "35.17%",
+  "expectCount": 145,
+  "actualCount": 51,
   "files": {
     "props/Array.js": {
       "expectCount": 34,
@@ -20,47 +20,55 @@
       ]
     },
     "props/Boolean.js": {
-      "expectCount": 4,
-      "actualCount": 0,
+      "expectCount": 5,
+      "actualCount": 2,
       "undocumentLines": [
-        3,
-        4,
-        8,
-        12
+        7,
+        27,
+        31
+      ]
+    },
+    "props/Date.js": {
+      "expectCount": 16,
+      "actualCount": 9,
+      "undocumentLines": [
+        5,
+        6,
+        16,
+        18,
+        111,
+        114,
+        119
       ]
     },
     "props/Decimal.js": {
-      "expectCount": 2,
-      "actualCount": 0,
+      "expectCount": 3,
+      "actualCount": 2,
       "undocumentLines": [
-        3,
-        4
+        17
       ]
     },
     "props/Integer.js": {
-      "expectCount": 4,
-      "actualCount": 0,
+      "expectCount": 5,
+      "actualCount": 2,
       "undocumentLines": [
-        3,
-        4,
-        8,
-        13
+        17,
+        21,
+        26
       ]
     },
     "props/Object.js": {
       "expectCount": 10,
-      "actualCount": 0,
+      "actualCount": 2,
       "undocumentLines": [
-        12,
-        13,
-        17,
-        27,
-        37,
-        44,
-        54,
-        58,
-        59,
-        85
+        26,
+        36,
+        46,
+        53,
+        63,
+        67,
+        68,
+        94
       ]
     },
     "props/Reference.js": {
@@ -93,6 +101,34 @@
       "undocumentLines": [
         2,
         3
+      ]
+    },
+    "props/classes/Prop.js": {
+      "expectCount": 14,
+      "actualCount": 2,
+      "undocumentLines": [
+        17,
+        36,
+        37,
+        40,
+        50,
+        54,
+        58,
+        62,
+        66,
+        70,
+        74,
+        86
+      ]
+    },
+    "props/classes/PropEvents.js": {
+      "expectCount": 11,
+      "actualCount": 7,
+      "undocumentLines": [
+        11,
+        12,
+        14,
+        28
       ]
     },
     "props/classes/SchemaError.js": {
@@ -144,11 +180,9 @@
       ]
     },
     "props/index.js": {
-      "expectCount": 2,
+      "expectCount": 1,
       "actualCount": 1,
-      "undocumentLines": [
-        23
-      ]
+      "undocumentLines": []
     },
     "props/react/mountedState.js": {
       "expectCount": 1,

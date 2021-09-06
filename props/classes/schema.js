@@ -1,5 +1,5 @@
 import SchemaError from './SchemaError.js'
-import props, { typesFoundInSchema } from '../index.js'
+import props from '../index.js'
 import INTEGER from '../Integer.js'
 import BOOLEAN from '../Boolean.js'
 import DATE from '../Date.js'
@@ -9,7 +9,7 @@ import ARRAY from '../Array.js'
 import OBJECT from '../Object.js'
 // import TEXT from './Text.js'
 const getProp = obj => {
-  if (typesFoundInSchema.includes(obj)) return { Prop: obj }
+  if (obj.isProp) return { Prop: obj }
   if (obj.isObservable) {
     return { Prop: obj }
   }

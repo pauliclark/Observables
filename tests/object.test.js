@@ -5,99 +5,99 @@ import { CHANGE } from '../props/events/events.js'
 import { fn } from 'jest-mock'
 import waitFor from './waitFor.js'
 describe('Objects', () => {
-  it('Compare model strings', () => {
-    const model = new OBJECT({
-      name: 'Paul',
-      age: 21,
-      today: new Date()
-    })
-    const model2 = new OBJECT({
-      name: 'Paul',
-      age: 22,
-      today: new Date()
-    })
-    expect(model.name == 'Paul').toBe(true)
-    expect(model.name.toString() == model2.name.toString()).toBe(true)
-  })
+  // it('Compare model strings', () => {
+  //   const model = new OBJECT({
+  //     name: 'Paul',
+  //     age: 21,
+  //     today: new Date()
+  //   })
+  //   const model2 = new OBJECT({
+  //     name: 'Paul',
+  //     age: 22,
+  //     today: new Date()
+  //   })
+  //   expect(model.name == 'Paul').toBe(true)
+  //   expect(model.name.toString() == model2.name.toString()).toBe(true)
+  // })
 
-  it('Compare model numbers', () => {
-    const model = new OBJECT({
-      name: 'Paul',
-      age: 20,
-      today: new Date()
-    })
-    const model2 = new OBJECT({
-      name: 'Paul',
-      age: 10,
-      today: new Date()
-    })
-    const model3 = new OBJECT({
-      name: 'Tami',
-      age: 10,
-      male: false,
-      today: new Date()
-    })
-    expect(model.age == 20).toBe(true)
-    expect(model3.age * 1 == model2.age).toBe(true)
-    expect(model.age > model2.age).toBe(true)
-    expect(model.age + model2.age).toBe(30)
-    expect(model.age / model2.age).toBe(2)
-    expect(model.age * model2.age).toBe(200)
-  })
+  // it('Compare model numbers', () => {
+  //   const model = new OBJECT({
+  //     name: 'Paul',
+  //     age: 20,
+  //     today: new Date()
+  //   })
+  //   const model2 = new OBJECT({
+  //     name: 'Paul',
+  //     age: 10,
+  //     today: new Date()
+  //   })
+  //   const model3 = new OBJECT({
+  //     name: 'Tami',
+  //     age: 10,
+  //     male: false,
+  //     today: new Date()
+  //   })
+  //   expect(model.age == 20).toBe(true)
+  //   expect(model3.age * 1 == model2.age).toBe(true)
+  //   expect(model.age > model2.age).toBe(true)
+  //   expect(model.age + model2.age).toBe(30)
+  //   expect(model.age / model2.age).toBe(2)
+  //   expect(model.age * model2.age).toBe(200)
+  // })
 
-  it('Compare model booleans', () => {
-    const model = new OBJECT({
-      name: 'Paul',
-      age: 20,
-      male: true,
-      today: new Date()
-    })
-    const model2 = new OBJECT({
-      name: 'Paul',
-      age: 10,
-      male: true,
-      today: new Date()
-    })
-    const model3 = new OBJECT({
-      name: 'Tami',
-      age: 10,
-      male: false,
-      today: new Date()
-    })
-    expect(model.male == true).toBe(true)
-    expect(!!model.male == model2.male).toBe(true)
-    expect(!!model.male === model2.male).toBe(false)
-    expect(!!model.male == model3.male).toBe(false)
-  })
+  // it('Compare model booleans', () => {
+  //   const model = new OBJECT({
+  //     name: 'Paul',
+  //     age: 20,
+  //     male: true,
+  //     today: new Date()
+  //   })
+  //   const model2 = new OBJECT({
+  //     name: 'Paul',
+  //     age: 10,
+  //     male: true,
+  //     today: new Date()
+  //   })
+  //   const model3 = new OBJECT({
+  //     name: 'Tami',
+  //     age: 10,
+  //     male: false,
+  //     today: new Date()
+  //   })
+  //   expect(model.male == true).toBe(true)
+  //   expect(!!model.male == model2.male).toBe(true)
+  //   expect(!!model.male === model2.male).toBe(false)
+  //   expect(!!model.male == model3.male).toBe(false)
+  // })
 
-  it('Compare nested objects', () => {
-    const model = new OBJECT({
-      name: 'Paul',
-      details: {
-        age: 20,
-        male: true
-      }
-    })
-    const model2 = new OBJECT({
-      name: 'Paul',
-      details: {
-        age: 10,
-        male: true
-      }
-    })
-    const model3 = new OBJECT({
-      name: 'Tami',
-      details: {
-        age: 10,
-        male: false
-      }
-    })
-    // console.log(model.details.male)
-    expect(model.details.male == true).toBe(true)
-    expect(!!model.details.male == model2.details.male).toBe(true)
-    expect(!!model.details.male === model2.details.male).toBe(false)
-    expect(!!model.details.male == model3.details.male).toBe(false)
-  })
+  // it('Compare nested objects', () => {
+  //   const model = new OBJECT({
+  //     name: 'Paul',
+  //     details: {
+  //       age: 20,
+  //       male: true
+  //     }
+  //   })
+  //   const model2 = new OBJECT({
+  //     name: 'Paul',
+  //     details: {
+  //       age: 10,
+  //       male: true
+  //     }
+  //   })
+  //   const model3 = new OBJECT({
+  //     name: 'Tami',
+  //     details: {
+  //       age: 10,
+  //       male: false
+  //     }
+  //   })
+  //   // console.log(model.details.male)
+  //   expect(model.details.male == true).toBe(true)
+  //   expect(!!model.details.male == model2.details.male).toBe(true)
+  //   expect(!!model.details.male === model2.details.male).toBe(false)
+  //   expect(!!model.details.male == model3.details.male).toBe(false)
+  // })
 
   it('Listen for changes', async () => {
     const model = new OBJECT({
@@ -115,7 +115,7 @@ describe('Objects', () => {
     model.details.age.on(CHANGE, ageCallback)
     model.details.age++
     await waitFor(() => {
-      return mainCallback.mock.calls.length
+      return mainCallback.mock.calls.length && detailsCallback.mock.calls.length && ageCallback.mock.calls.length
     })
 
     expect(model.details.age.valueOf()).toBe(21)

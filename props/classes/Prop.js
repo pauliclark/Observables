@@ -1,7 +1,17 @@
 import { CHANGE } from '../events/events.js'
 import PropEvents from './PropEvents.js'
 
+/**
+ * The Observable Prop Class
+ */
 class Prop extends PropEvents {
+
+  /**
+ * @param {any} value - The initial value of the property
+ * @param {Object} options
+ * @param {OBJECT} options.parent - The Parent Object to which this Property is a member of
+ * @param {String} options.name -The Name/key in the Parent Object to which this Property is assigned
+ */
   constructor (value, { parent, name, options = {} } = {}) {
     super(parent)
     this.name = name
@@ -16,11 +26,12 @@ class Prop extends PropEvents {
         }
       })
     }
-    if (this.setOptions) {
-      this.setOptions(options)
+    if (this._setOptions) {
+      this._setOptions(options)
     }
     this._set(value, { preventEvent: true })
   }
+
 
   static isProp = true
   _set (value, { preventEvent = false } = {}) {

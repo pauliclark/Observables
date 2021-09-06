@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href>
-  <title data-ice="title">Source | Observables</title>
+  <title data-ice="title">Source | observabubble</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="Package of Observable parameters"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Observables"><meta property="twitter:description" content="Package of Observable parameters"></head>
+<meta name="description" content="Package of Observable parameters"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="observabubble"><meta property="twitter:description" content="Package of Observable parameters"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -31,14 +31,16 @@
     
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Array.js~ARRAY.html">ARRAY</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Boolean.js~BOOLEAN.html">BOOLEAN</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Date.js~DATE.html">DATE</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Decimal.js~DECIMAL.html">DECIMAL</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Integer.js~INTEGER.html">INTEGER</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Object.js~OBJECT.html">OBJECT</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Reference.js~REFERENCE.html">REFERENCE</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/String.js~STRING.html">STRING</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Text.js~TEXT.html">TEXT</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-typesFoundInSchema">typesFoundInSchema</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#classes">classes</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/classes/SchemaError.js~SchemaError.html">SchemaError</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#classes">classes</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/classes/Prop.js~Prop.html">Prop</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/classes/PropEvents.js~PropEvents.html">PropEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/classes/SchemaError.js~SchemaError.html">SchemaError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-TypesAndValues">TypesAndValues</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#containers">containers</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-referenceModel">referenceModel</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-register">register</a></span></span></li>
@@ -53,7 +55,7 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">25/102</span></h1>
+<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">51/145</span></h1>
 
 <table class="files-summary" data-ice="files" data-use-coverage="true">
   <thead>
@@ -72,49 +74,57 @@
       <td data-ice="filePath"><span><a href="file/props/Array.js.html#errorLines=100,113,317,35,36,46,69,7,71,81">props/Array.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/props/Array.js~ARRAY.html">ARRAY</a></span></td>
       <td class="coverage"><span data-ice="coverage">70 %</span><span data-ice="coverageCount" class="coverage-count">24/34</span></td>
-      <td style="display: none;" data-ice="size">14105 byte</td>
+      <td style="display: none;" data-ice="size">13978 byte</td>
       <td style="display: none;" data-ice="lines">434</td>
-      <td style="display: none;" data-ice="updated">2021-08-01 14:56:42 (UTC)</td>
+      <td style="display: none;" data-ice="updated">2021-09-02 14:23:12 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/props/Boolean.js.html#errorLines=12,3,4,8">props/Boolean.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/props/Boolean.js.html#errorLines=27,31,7">props/Boolean.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/props/Boolean.js~BOOLEAN.html">BOOLEAN</a></span></td>
-      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/4</span></td>
-      <td style="display: none;" data-ice="size">262 byte</td>
-      <td style="display: none;" data-ice="lines">17</td>
-      <td style="display: none;" data-ice="updated">2021-08-07 14:41:37 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">40 %</span><span data-ice="coverageCount" class="coverage-count">2/5</span></td>
+      <td style="display: none;" data-ice="size">939 byte</td>
+      <td style="display: none;" data-ice="lines">36</td>
+      <td style="display: none;" data-ice="updated">2021-09-02 09:34:19 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/props/Decimal.js.html#errorLines=3,4">props/Decimal.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/props/Date.js.html#errorLines=111,114,119,16,18,5,6">props/Date.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/props/Date.js~DATE.html">DATE</a></span></td>
+      <td class="coverage"><span data-ice="coverage">56 %</span><span data-ice="coverageCount" class="coverage-count">9/16</span></td>
+      <td style="display: none;" data-ice="size">4132 byte</td>
+      <td style="display: none;" data-ice="lines">195</td>
+      <td style="display: none;" data-ice="updated">2021-09-02 14:13:54 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/props/Decimal.js.html#errorLines=17">props/Decimal.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/props/Decimal.js~DECIMAL.html">DECIMAL</a></span></td>
-      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
-      <td style="display: none;" data-ice="size">167 byte</td>
-      <td style="display: none;" data-ice="lines">9</td>
-      <td style="display: none;" data-ice="updated">2021-08-07 14:41:37 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">66 %</span><span data-ice="coverageCount" class="coverage-count">2/3</span></td>
+      <td style="display: none;" data-ice="size">584 byte</td>
+      <td style="display: none;" data-ice="lines">22</td>
+      <td style="display: none;" data-ice="updated">2021-09-02 14:36:44 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/props/Integer.js.html#errorLines=13,3,4,8">props/Integer.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/props/Integer.js.html#errorLines=17,21,26">props/Integer.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/props/Integer.js~INTEGER.html">INTEGER</a></span></td>
-      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/4</span></td>
-      <td style="display: none;" data-ice="size">324 byte</td>
-      <td style="display: none;" data-ice="lines">19</td>
-      <td style="display: none;" data-ice="updated">2021-08-01 14:56:29 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">40 %</span><span data-ice="coverageCount" class="coverage-count">2/5</span></td>
+      <td style="display: none;" data-ice="size">741 byte</td>
+      <td style="display: none;" data-ice="lines">32</td>
+      <td style="display: none;" data-ice="updated">2021-09-02 14:37:04 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/props/Object.js.html#errorLines=12,13,17,27,37,44,54,58,59,85">props/Object.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/props/Object.js.html#errorLines=26,36,46,53,63,67,68,94">props/Object.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/props/Object.js~OBJECT.html">OBJECT</a></span></td>
-      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/10</span></td>
-      <td style="display: none;" data-ice="size">2360 byte</td>
-      <td style="display: none;" data-ice="lines">89</td>
-      <td style="display: none;" data-ice="updated">2021-08-01 14:56:17 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">20 %</span><span data-ice="coverageCount" class="coverage-count">2/10</span></td>
+      <td style="display: none;" data-ice="size">2649 byte</td>
+      <td style="display: none;" data-ice="lines">98</td>
+      <td style="display: none;" data-ice="updated">2021-09-02 14:37:49 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/props/Reference.js.html#errorLines=10,26,37,4,49,5,54,58,8,9">props/Reference.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/props/Reference.js~REFERENCE.html">REFERENCE</a></span></td>
       <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/10</span></td>
-      <td style="display: none;" data-ice="size">1434 byte</td>
+      <td style="display: none;" data-ice="size">1435 byte</td>
       <td style="display: none;" data-ice="lines">63</td>
-      <td style="display: none;" data-ice="updated">2021-08-01 14:56:40 (UTC)</td>
+      <td style="display: none;" data-ice="updated">2021-09-02 14:15:35 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/props/String.js.html#errorLines=3,4">props/String.js</a></span></td>
@@ -133,6 +143,22 @@
       <td style="display: none;" data-ice="updated">2021-08-07 14:41:37 (UTC)</td>
     </tr>
 <tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/props/classes/Prop.js.html#errorLines=17,36,37,40,50,54,58,62,66,70,74,86">props/classes/Prop.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/props/classes/Prop.js~Prop.html">Prop</a></span></td>
+      <td class="coverage"><span data-ice="coverage">14 %</span><span data-ice="coverageCount" class="coverage-count">2/14</span></td>
+      <td style="display: none;" data-ice="size">1941 byte</td>
+      <td style="display: none;" data-ice="lines">91</td>
+      <td style="display: none;" data-ice="updated">2021-09-02 14:26:24 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/props/classes/PropEvents.js.html#errorLines=11,12,14,28">props/classes/PropEvents.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/props/classes/PropEvents.js~PropEvents.html">PropEvents</a></span></td>
+      <td class="coverage"><span data-ice="coverage">63 %</span><span data-ice="coverageCount" class="coverage-count">7/11</span></td>
+      <td style="display: none;" data-ice="size">2998 byte</td>
+      <td style="display: none;" data-ice="lines">87</td>
+      <td style="display: none;" data-ice="updated">2021-09-02 14:33:17 (UTC)</td>
+    </tr>
+<tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/props/classes/SchemaError.js.html#errorLines=1,2,4">props/classes/SchemaError.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/props/classes/SchemaError.js~SchemaError.html">SchemaError</a></span></td>
       <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/3</span></td>
@@ -144,9 +170,9 @@
       <td data-ice="filePath"><span><a href="file/props/classes/schema.js.html#errorLines=11,37,53,72,92">props/classes/schema.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-TypesAndValues">TypesAndValues</a></span></td>
       <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/5</span></td>
-      <td style="display: none;" data-ice="size">2979 byte</td>
+      <td style="display: none;" data-ice="size">2933 byte</td>
       <td style="display: none;" data-ice="lines">98</td>
-      <td style="display: none;" data-ice="updated">2021-08-01 14:23:04 (UTC)</td>
+      <td style="display: none;" data-ice="updated">2021-09-02 14:18:52 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/props/containers/models.js.html#errorLines=1,12,2,27,3,31,36,4,5,55,6,63,7,8">props/containers/models.js</a></span></td>
@@ -168,12 +194,12 @@
       <td style="display: none;" data-ice="updated">2021-08-01 14:56:04 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/props/index.js.html#errorLines=23">props/index.js</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-typesFoundInSchema">typesFoundInSchema</a></span></td>
-      <td class="coverage"><span data-ice="coverage">50 %</span><span data-ice="coverageCount" class="coverage-count">1/2</span></td>
-      <td style="display: none;" data-ice="size">546 byte</td>
+      <td data-ice="filePath"><span><a href="file/props/index.js.html">props/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">1/1</span></td>
+      <td style="display: none;" data-ice="size">573 byte</td>
       <td style="display: none;" data-ice="lines">35</td>
-      <td style="display: none;" data-ice="updated">2021-08-07 16:21:41 (UTC)</td>
+      <td style="display: none;" data-ice="updated">2021-09-02 14:15:09 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/props/react/mountedState.js.html#errorLines=2">props/react/mountedState.js</a></span></td>
@@ -181,7 +207,7 @@
       <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
       <td style="display: none;" data-ice="size">515 byte</td>
       <td style="display: none;" data-ice="lines">18</td>
-      <td style="display: none;" data-ice="updated">2021-08-01 15:50:49 (UTC)</td>
+      <td style="display: none;" data-ice="updated">2021-09-02 13:46:08 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/props/react/stateOnEffect.js.html#errorLines=3">props/react/stateOnEffect.js</a></span></td>
@@ -189,7 +215,7 @@
       <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
       <td style="display: none;" data-ice="size">577 byte</td>
       <td style="display: none;" data-ice="lines">21</td>
-      <td style="display: none;" data-ice="updated">2021-08-01 14:56:22 (UTC)</td>
+      <td style="display: none;" data-ice="updated">2021-09-02 13:46:01 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/props/sample/User.js.html#errorLines=12,13,18,6">props/sample/User.js</a></span></td>

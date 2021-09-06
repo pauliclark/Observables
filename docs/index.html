@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl">
-  <title data-ice="title">Home | Observables</title>
+  <title data-ice="title">Home | observabubble</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="Package of Observable parameters"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Observables"><meta property="twitter:description" content="Package of Observable parameters"></head>
+<meta name="description" content="Package of Observable parameters"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="observabubble"><meta property="twitter:description" content="Package of Observable parameters"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -31,14 +31,16 @@
     
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Array.js~ARRAY.html">ARRAY</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Boolean.js~BOOLEAN.html">BOOLEAN</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Date.js~DATE.html">DATE</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Decimal.js~DECIMAL.html">DECIMAL</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Integer.js~INTEGER.html">INTEGER</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Object.js~OBJECT.html">OBJECT</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Reference.js~REFERENCE.html">REFERENCE</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/String.js~STRING.html">STRING</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/Text.js~TEXT.html">TEXT</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-typesFoundInSchema">typesFoundInSchema</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#classes">classes</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/classes/SchemaError.js~SchemaError.html">SchemaError</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#classes">classes</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/classes/Prop.js~Prop.html">Prop</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/classes/PropEvents.js~PropEvents.html">PropEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/props/classes/SchemaError.js~SchemaError.html">SchemaError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-TypesAndValues">TypesAndValues</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#containers">containers</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-referenceModel">referenceModel</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-register">register</a></span></span></li>
@@ -53,9 +55,174 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="observables">Observables</h1><p>A package of observables properties, objects and arrays</p>
-<p>##</p>
-</div>
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="observabubble">Observabubble</h1><p>A package of observable properties, objects and arrays</p>
+<h2 id="install">Install</h2><pre><code><code class="source-code prettyprint">yarn add observabubble</code>
+</code></pre><h2 id="primitive">Primitive</h2><p>For use as an Observable primitive</p>
+<pre><code><code class="source-code prettyprint">import {INTEGER, EVENTS} from &apos;observabubble&apos;
+const myInt = new INTEGER(3)
+myInt.on(EVENTS.CHANGE, target =&gt; {
+  console.log(target == 4)
+})
+myInt._set(4)</code>
+</code></pre><h2 id="object">Object</h2><p>An Object is defined by a Schema which is assigned an Observable type to a key, as below.
+The values can be assigned in the constructor, in the <em>values</em> parameter of the second argument.
+As this is an Object, the Observable string <em>name</em> is exposed to that object and can therefore be assigned to.</p>
+<pre><code><code class="source-code prettyprint">import {OBJECT, STRING, INTEGER, EVENTS} from &apos;observabubble&apos;
+const myObject = new OBJECT(
+  {
+    name: STRING,
+    age: INTEGER
+  },{
+    values:{
+      name: &apos;Anna&apos;,
+      age:20
+    }
+  }
+)
+myObject.name.on(EVENTS.CHANGE, target =&gt; {
+  console.log(`Name has changed to ${target}`)
+})
+myObject.name = &apos;Harry&apos;</code>
+</code></pre><h2 id="objects-extended">Objects extended</h2><p>To create an custom version of an Object, the class can be extended.</p>
+<pre><code><code class="source-code prettyprint">import {OBJECT, INTEGER, STRING} from &apos;observabubble&apos;
+const schema = {
+  id: INTEGER,
+  name: STRING,
+  age: INTEGER
+}
+class User extends OBJECT {
+  constructor (values) {
+    super(schema, { values })
+  }
+}
+const anna = new User({
+  id:1,
+  name:&apos;Anna&apos;,
+  age: 20
+})
+console.log(`${anna.name} is ${anna.age} years old`)</code>
+</code></pre><h2 id="objects-referencing-objects">Objects referencing Objects</h2><p>To allow for referencing Objects, the model store is needed for recording each model and for discovering the referenced model.</p>
+<p>Define the <em>User</em> model:</p>
+<pre><code><code class="source-code prettyprint">import {OBJECT, INTEGER, STRING, REFERENCE, STORE, registerInStore} from &apos;observabubble&apos;
+
+class UserRef extends REFERENCE {
+  constructor (id, { parent, name } = {}) {
+    super({ User }, { id, parent, name })
+  }
+}
+
+const schema = {
+  id: INTEGER,
+  name: STRING,
+  address: STRING,
+  friend: UserRef
+}
+class User extends OBJECT {
+  constructor (values) {
+    super(schema, { values })
+    STORE.User.add([this])
+  }
+}
+registerInStore({ User })
+</code>
+</code></pre><p><em>UserRef</em> extends REFERENCE to tie an <em>id</em> to a User stored in <em>STORE</em></p>
+<p>The schema for the User model is then using this user reference type for the <em>friend</em> property.</p>
+<p>In the constructor of the User, the new instance of the model is added to the STORE, with:</p>
+<pre><code><code class="source-code prettyprint">STORE.User.add([this])</code>
+</code></pre><p>The <em>registerInStore</em> method let&apos;s the STORE know which models it shall be using. Ensure the syntax is:</p>
+<pre><code><code class="source-code prettyprint">registerInStore({ User })</code>
+</code></pre><p>This is important for the name and model to be assigned together.</p>
+<p>A REFERENCE type is asynchronous, as the referred model may not be available in the store yet. The REFERENCE will listen for it to be added, and once added, the REFERENCE will receive it and store in:</p>
+<pre><code><code class="source-code prettyprint">user.friend._ref
+// or
+user._friend</code>
+</code></pre><p>An example of how this may work:</p>
+<pre><code><code class="source-code prettyprint">import {EVENTS} from &apos;observabubble&apos;
+const {LOAD} = EVENTS
+const model = new User({
+  id: 1,
+  name: &apos;Paul&apos;,
+  friend: 2
+})
+model.friend.on(LOAD, () =&gt; {
+  console.log(`${model._friend.name} should be Frank`)
+  console.log(`${model.friend._ref.name} should be Frank`)
+})
+const model2 = new User({
+  id: 2,
+  name: &apos;Frank&apos;
+})</code>
+</code></pre><p>If the models are being created around the same time, a Promise on the model can be used:</p>
+<pre><code><code class="source-code prettyprint">import {EVENTS} from &apos;observabubble&apos;
+const {LOAD} = EVENTS
+const model = new User({
+  id: 1,
+  name: &apos;Paul&apos;,
+  friend: 2
+})
+model.friend.getRef().then(friend =&gt; {
+  console.log(`${friend.name} should be Frank`)
+})
+const model2 = new User({
+  id: 2,
+  name: &apos;Frank&apos;
+})</code>
+</code></pre><h2 id="array">ARRAY</h2><p>The Array observable exposes many native Array methods, but just wraps it an object for observing it.</p>
+<p>When defined, the schema for the items is suggested. As with OBJECTS, the schema can be derived from the provided values, but this is not recommended. The provision of a Schema makes for more robust data.</p>
+<h3 id="without-a-schema">Without a Schema</h3><pre><code><code class="source-code prettyprint">const model = new ARRAY([{
+  name: &apos;Paul&apos;,
+  age: 21,
+  today: new Date()
+}, {
+  name: &apos;John&apos;,
+  age: 20,
+  today: new Date()
+}])
+const data = [...model]
+console.log(`${data[0].name} should be Paul`)</code>
+</code></pre><h3 id="with-a-schema">With a Schema</h3><pre><code><code class="source-code prettyprint">const model = new ARRAY(
+  {
+    name: STRING,
+    age: INTEGER,
+    today: DATE
+  }, {
+    values:[
+      {
+        name: &apos;John&apos;,
+        age: 20,
+        today: new Date()
+      }
+    ]
+  }
+)
+const data = [...model]
+console.log(`${data[0].name} should be Paul`)</code>
+</code></pre><h3 id="watching">Watching</h3><pre><code><code class="source-code prettyprint">import {EVENTS, ARRAY, STRING, INTEGER, DATE } from &apos;observabubble&apos;
+const {CHANGE} = EVENTS
+const people = new ARRAY(
+  {
+    name: STRING,
+    age: INTEGER,
+    today: DATE
+  }, {
+    values:[
+      {
+        name: &apos;John&apos;,
+        age: 20,
+        today: new Date()
+      }
+    ]
+  }
+)
+people.on(CHANGE,target =&gt; {
+  console.log(JSON.stringify(target,null,2))
+})
+people.push({
+  name: &apos;Bobby&apos;,
+  age: 30,
+  today: new Date()
+})</code>
+</code></pre></div>
 </div>
 
 <footer class="footer">

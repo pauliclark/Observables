@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">props/classes/schema.js | observabubble</title>
+  <title data-ice="title">props/classes/PropEvents.js | observabubble</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -55,105 +55,94 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">props/classes/schema.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import SchemaError from &apos;./SchemaError.js&apos;
-import props from &apos;../index.js&apos;
-import INTEGER from &apos;../Integer.js&apos;
-import BOOLEAN from &apos;../Boolean.js&apos;
-import DATE from &apos;../Date.js&apos;
-import DECIMAL from &apos;../Decimal.js&apos;
-import STRING from &apos;../String.js&apos;
-import ARRAY from &apos;../Array.js&apos;
-import OBJECT from &apos;../Object.js&apos;
-// import TEXT from &apos;./Text.js&apos;
-const getProp = obj =&gt; {
-  if (obj.isProp) return { Prop: obj }
-  if (obj.isObservable) {
-    return { Prop: obj }
+<div class="content" data-ice="content"><h1 data-ice="title">props/classes/PropEvents.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import events from &apos;../events/events.js&apos;
+/**
+ * The Prop Event Class
+ */
+class PropEvents {
+  /**
+ * @param {any} value - The initial value of the property
+ * @param {OBJECT} parent - The Parent Object to which this Property is a member of ({@link Object})
+ */
+  constructor (parent) {
+    this.parent = parent
+    this._event = {}
+    // this.isObservable = true
+    this.eventCallbacks = Object.values(events).reduce((acc, key) =&gt; {
+      acc[key] = []
+      return acc
+    }, {})
+    Object.values(events).forEach(eventName =&gt; {
+      this._event[eventName] = (target = this) =&gt; {
+        this._processEvent(eventName, target)
+      }
+    })
   }
-  if (typeof obj === &apos;string&apos; &amp;&amp; props[obj]) return { Prop: props[obj] }
-  if (typeof obj === &apos;string&apos;) return { Prop: STRING, Value: obj }
-  if (obj instanceof Date) return { Prop: DATE, Value: obj }
-  if (typeof obj === &apos;number&apos;) {
-    if (obj === parseInt(obj)) return { Prop: INTEGER, Value: obj }
-    return { Prop: DECIMAL, Value: obj }
-  }
-  if (typeof obj === &apos;boolean&apos;) return { Prop: BOOLEAN, Value: obj }
-  if (typeof obj === &apos;object&apos;) {
-    if (Object.keys(obj).length === 1 &amp;&amp; obj.type &amp;&amp; props[obj.type]) {
-      return { Prop: props[obj.type] }
-    } else if (Object.keys(obj).length === 2 &amp;&amp; obj.type &amp;&amp; props[obj.type] &amp;&amp; obj.value !== undefined) {
-      return { Prop: props[obj.type], Value: obj.value }
-    } else {
-      return { Prop: OBJECT, Value: obj }
-    }
-  }
-  if (obj === null) throw new SchemaError(&apos;A NULL value cannot be parsed in a Schema&apos;)
-  throw new SchemaError(`Schema could not parse the entry ${obj}`)
-}
+  /**
+ * @ignore
+ */
+  static isObservable = true
+  isObservable = true
 
-const schema = s =&gt; {
-  if (s instanceof Array) {
-    if (!s.length) throw new SchemaError(&apos;An Array in a schema must contain a sub-schema for the containing objects&apos;)
-    return s.map(i =&gt; schema(i))
+  // static isObservable () {
+  //   return true
+  // }
+
+  /**
+   * Bind an event listener
+ * @param {Event} eventName - The event being listening to, enumerated in the events file
+ * @param {Function} callback - The method called when the event is fired
+ */
+  on (eventName, callback) {
+    if (!(Object.values(events).includes(eventName))) throw new Error(`${eventName} is not a valid event`)
+    if (!(callback instanceof Function)) throw new Error(&apos;Event listener is not a function&apos;)
+    this.eventCallbacks[eventName].push(callback)
   }
-  if (s.isObservable) return s
-  const structure = Object.keys(s).reduce((acc, key) =&gt; {
-    const { Prop, Value } = getProp(s[key])
-    acc[key] = { Prop, Value }
-    if (acc[key].Prop === OBJECT) {
-      acc[key] = schema(s[key])
-    }
-    return acc
-  }, {})
-  return structure
-}
-const TypeSchema = s =&gt; {
-  if (s instanceof Array) {
-    return s.map(TypeSchema)
+
+  /**
+   * Unbinds an event listener
+ * @param {Event} eventName - The event being listening to, enumerated in the events file
+ * @param {Function} callback - The method called when the event is fired
+ */
+  off (eventName, callback) {
+    const idx = this.eventCallbacks[eventName].indexOf(callback)
+    if (idx &gt;= 0) this.eventCallbacks[eventName].splice(idx, 1)
   }
-  if (s.isObservable) return s
-  return Object.keys(s).reduce((acc, key) =&gt; {
-    if (s[key] instanceof Array) {
-      acc[key] = s[key].map(TypeSchema)
-    } else {
-      const { Prop } = s[key]
-      if (!Prop) {
-        acc[key] = TypeSchema(s[key])
-      } else {
-        acc[key] = Prop
+
+  /**
+   * Calls event bubbling on the parent Observable
+ * @param {Event} eventName - The event being listening to, enumerated in the events file
+ * @param {Prop} target - The Prop that was the source of the Event
+ */
+  _bubble (eventName, target) {
+    this._processEvent(eventName, target, { bubble: true })
+  }
+
+  /**
+   * Calls the listeners for the Event triggered
+ * @param {Event} eventName - The event being listening to, enumerated in the events file
+ * @param {Prop} target - The Prop that was the source of the Event
+ * @param {Object} [additional]
+ * @param {Boolean} [additional.bubble = false] - A boolean that indicates that the event firing is bubbled from a child Prop
+ */
+  async _processEvent (eventName, target, { bubble = false } = { }) {
+    if (!this.eventCallbacks[eventName]) throw new Error(`Cannot process event ${eventName}`)
+    for (let c = this.eventCallbacks[eventName].length - 1; c &gt;= 0; c--) {
+      try {
+        // console.log(eventName,target.toJSON())
+        const response = await this.eventCallbacks[eventName][c](target, bubble)
+        if (response === false) this.eventCallbacks[eventName].splice(c, 1)
+      } catch (e) {
+        this.eventCallbacks[eventName].splice(c, 1)
       }
     }
-    return acc
-  }, {})
-}
-const ValueSchema = s =&gt; {
-  if (s instanceof Array) {
-    return s.map(ValueSchema)
-  }
-  return Object.keys(s).reduce((acc, key) =&gt; {
-    if (s[key]) {
-      if (s[key] instanceof Array) {
-        acc[key] = s[key].map(ValueSchema)
-      } else {
-        const { Prop, Value } = s[key]
-        if (!Prop) {
-          acc[key] = ValueSchema(s[key])
-        } else {
-          acc[key] = Value
-        }
-      }
+    if (this.parent &amp;&amp; this.parent._bubble) {
+      this.parent._bubble(eventName, target)
     }
-    return acc
-  }, {})
+  }
 }
-const TypesAndValues = s =&gt; {
-  // console.log(s)
-  const TAV = schema(s)
-  // console.log(TAV)
-  return [TypeSchema(TAV), ValueSchema(TAV)]
-}
-export default TypesAndValues
+export default PropEvents
 </code></pre>
 
 </div>

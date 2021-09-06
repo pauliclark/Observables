@@ -1,122 +1,134 @@
 window.esdocSearchIndex = [
   [
-    "observables/props/array.js~array",
+    "observabubble/props/array.js~array",
     "class/props/Array.js~ARRAY.html",
-    "<span>ARRAY</span> <span class=\"search-result-import-path\">Observables/props/Array.js</span>",
+    "<span>ARRAY</span> <span class=\"search-result-import-path\">observabubble/props/Array.js</span>",
     "class"
   ],
   [
-    "observables/props/boolean.js~boolean",
+    "observabubble/props/boolean.js~boolean",
     "class/props/Boolean.js~BOOLEAN.html",
-    "<span>BOOLEAN</span> <span class=\"search-result-import-path\">Observables/props/Boolean.js</span>",
+    "<span>BOOLEAN</span> <span class=\"search-result-import-path\">observabubble/props/Boolean.js</span>",
     "class"
   ],
   [
-    "observables/props/events/events.js~change",
+    "observabubble/props/events/events.js~change",
     "variable/index.html#static-variable-CHANGE",
-    "<span>CHANGE</span> <span class=\"search-result-import-path\">Observables/props/events/events.js</span>",
+    "<span>CHANGE</span> <span class=\"search-result-import-path\">observabubble/props/events/events.js</span>",
     "variable"
   ],
   [
-    "observables/props/decimal.js~decimal",
+    "observabubble/props/date.js~date",
+    "class/props/Date.js~DATE.html",
+    "<span>DATE</span> <span class=\"search-result-import-path\">observabubble/props/Date.js</span>",
+    "class"
+  ],
+  [
+    "observabubble/props/decimal.js~decimal",
     "class/props/Decimal.js~DECIMAL.html",
-    "<span>DECIMAL</span> <span class=\"search-result-import-path\">Observables/props/Decimal.js</span>",
+    "<span>DECIMAL</span> <span class=\"search-result-import-path\">observabubble/props/Decimal.js</span>",
     "class"
   ],
   [
-    "observables/props/integer.js~integer",
+    "observabubble/props/integer.js~integer",
     "class/props/Integer.js~INTEGER.html",
-    "<span>INTEGER</span> <span class=\"search-result-import-path\">Observables/props/Integer.js</span>",
+    "<span>INTEGER</span> <span class=\"search-result-import-path\">observabubble/props/Integer.js</span>",
     "class"
   ],
   [
-    "observables/props/events/events.js~load",
+    "observabubble/props/events/events.js~load",
     "variable/index.html#static-variable-LOAD",
-    "<span>LOAD</span> <span class=\"search-result-import-path\">Observables/props/events/events.js</span>",
+    "<span>LOAD</span> <span class=\"search-result-import-path\">observabubble/props/events/events.js</span>",
     "variable"
   ],
   [
-    "observables/props/object.js~object",
+    "observabubble/props/object.js~object",
     "class/props/Object.js~OBJECT.html",
-    "<span>OBJECT</span> <span class=\"search-result-import-path\">Observables/props/Object.js</span>",
+    "<span>OBJECT</span> <span class=\"search-result-import-path\">observabubble/props/Object.js</span>",
     "class"
   ],
   [
-    "observables/props/reference.js~reference",
+    "observabubble/props/classes/prop.js~prop",
+    "class/props/classes/Prop.js~Prop.html",
+    "<span>Prop</span> <span class=\"search-result-import-path\">observabubble/props/classes/Prop.js</span>",
+    "class"
+  ],
+  [
+    "observabubble/props/classes/propevents.js~propevents",
+    "class/props/classes/PropEvents.js~PropEvents.html",
+    "<span>PropEvents</span> <span class=\"search-result-import-path\">observabubble/props/classes/PropEvents.js</span>",
+    "class"
+  ],
+  [
+    "observabubble/props/reference.js~reference",
     "class/props/Reference.js~REFERENCE.html",
-    "<span>REFERENCE</span> <span class=\"search-result-import-path\">Observables/props/Reference.js</span>",
+    "<span>REFERENCE</span> <span class=\"search-result-import-path\">observabubble/props/Reference.js</span>",
     "class"
   ],
   [
-    "observables/props/string.js~string",
+    "observabubble/props/string.js~string",
     "class/props/String.js~STRING.html",
-    "<span>STRING</span> <span class=\"search-result-import-path\">Observables/props/String.js</span>",
+    "<span>STRING</span> <span class=\"search-result-import-path\">observabubble/props/String.js</span>",
     "class"
   ],
   [
-    "observables/props/classes/schemaerror.js~schemaerror",
+    "observabubble/props/classes/schemaerror.js~schemaerror",
     "class/props/classes/SchemaError.js~SchemaError.html",
-    "<span>SchemaError</span> <span class=\"search-result-import-path\">Observables/props/classes/SchemaError.js</span>",
+    "<span>SchemaError</span> <span class=\"search-result-import-path\">observabubble/props/classes/SchemaError.js</span>",
     "class"
   ],
   [
-    "observables/props/text.js~text",
+    "observabubble/props/text.js~text",
     "class/props/Text.js~TEXT.html",
-    "<span>TEXT</span> <span class=\"search-result-import-path\">Observables/props/Text.js</span>",
+    "<span>TEXT</span> <span class=\"search-result-import-path\">observabubble/props/Text.js</span>",
     "class"
   ],
   [
-    "observables/props/classes/schema.js~typesandvalues",
+    "observabubble/props/classes/schema.js~typesandvalues",
     "function/index.html#static-function-TypesAndValues",
-    "<span>TypesAndValues</span> <span class=\"search-result-import-path\">Observables/props/classes/schema.js</span>",
+    "<span>TypesAndValues</span> <span class=\"search-result-import-path\">observabubble/props/classes/schema.js</span>",
     "function"
   ],
   [
-    "observables/props/sample/user.js~user",
+    "observabubble/props/sample/user.js~user",
     "class/props/sample/User.js~User.html",
-    "<span>User</span> <span class=\"search-result-import-path\">Observables/props/sample/User.js</span>",
+    "<span>User</span> <span class=\"search-result-import-path\">observabubble/props/sample/User.js</span>",
     "class"
   ],
   [
-    "observables/props/sample/userreference.js~userref",
+    "observabubble/props/sample/userreference.js~userref",
     "class/props/sample/UserReference.js~UserRef.html",
-    "<span>UserRef</span> <span class=\"search-result-import-path\">Observables/props/sample/UserReference.js</span>",
+    "<span>UserRef</span> <span class=\"search-result-import-path\">observabubble/props/sample/UserReference.js</span>",
     "class"
   ],
   [
-    "observables/props/react/mountedstate.js~mountedstate",
+    "observabubble/props/react/mountedstate.js~mountedstate",
     "function/index.html#static-function-mountedState",
-    "<span>mountedState</span> <span class=\"search-result-import-path\">Observables/props/react/mountedState.js</span>",
+    "<span>mountedState</span> <span class=\"search-result-import-path\">observabubble/props/react/mountedState.js</span>",
     "function"
   ],
   [
-    "observables/props/containers/models.js~referencemodel",
+    "observabubble/props/containers/models.js~referencemodel",
     "function/index.html#static-function-referenceModel",
-    "<span>referenceModel</span> <span class=\"search-result-import-path\">Observables/props/containers/models.js</span>",
+    "<span>referenceModel</span> <span class=\"search-result-import-path\">observabubble/props/containers/models.js</span>",
     "function"
   ],
   [
-    "observables/props/containers/models.js~register",
+    "observabubble/props/containers/models.js~register",
     "function/index.html#static-function-register",
-    "<span>register</span> <span class=\"search-result-import-path\">Observables/props/containers/models.js</span>",
+    "<span>register</span> <span class=\"search-result-import-path\">observabubble/props/containers/models.js</span>",
     "function"
   ],
   [
-    "observables/props/react/stateoneffect.js~stateoneffect",
+    "observabubble/props/react/stateoneffect.js~stateoneffect",
     "function/index.html#static-function-stateOnEffect",
-    "<span>stateOnEffect</span> <span class=\"search-result-import-path\">Observables/props/react/stateOnEffect.js</span>",
+    "<span>stateOnEffect</span> <span class=\"search-result-import-path\">observabubble/props/react/stateOnEffect.js</span>",
     "function"
   ],
   [
-    "observables/props/containers/models.js~store",
+    "observabubble/props/containers/models.js~store",
     "variable/index.html#static-variable-store",
-    "<span>store</span> <span class=\"search-result-import-path\">Observables/props/containers/models.js</span>",
-    "variable"
-  ],
-  [
-    "observables/props/index.js~typesfoundinschema",
-    "variable/index.html#static-variable-typesFoundInSchema",
-    "<span>typesFoundInSchema</span> <span class=\"search-result-import-path\">Observables/props/index.js</span>",
+    "<span>store</span> <span class=\"search-result-import-path\">observabubble/props/containers/models.js</span>",
     "variable"
   ],
   [
@@ -606,6 +618,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "props/boolean.js~boolean#constructor",
+    "class/props/Boolean.js~BOOLEAN.html#instance-constructor-constructor",
+    "props/Boolean.js~BOOLEAN#constructor",
+    "method"
+  ],
+  [
     "props/boolean.js~boolean#format",
     "class/props/Boolean.js~BOOLEAN.html#instance-method-format",
     "props/Boolean.js~BOOLEAN#format",
@@ -624,10 +642,52 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "props/date.js",
+    "file/props/Date.js.html",
+    "props/Date.js",
+    "file"
+  ],
+  [
+    "props/date.js~date#[localmethod]",
+    "class/props/Date.js~DATE.html#instance-member-[localMethod]",
+    "props/Date.js~DATE#[localMethod]",
+    "member"
+  ],
+  [
+    "props/date.js~date#_options",
+    "class/props/Date.js~DATE.html#instance-member-_options",
+    "props/Date.js~DATE#_options",
+    "member"
+  ],
+  [
+    "props/date.js~date#constructor",
+    "class/props/Date.js~DATE.html#instance-constructor-constructor",
+    "props/Date.js~DATE#constructor",
+    "method"
+  ],
+  [
+    "props/date.js~date#parse",
+    "class/props/Date.js~DATE.html#instance-method-parse",
+    "props/Date.js~DATE#parse",
+    "method"
+  ],
+  [
+    "props/date.js~date#value",
+    "class/props/Date.js~DATE.html#instance-member-value",
+    "props/Date.js~DATE#value",
+    "member"
+  ],
+  [
     "props/decimal.js",
     "file/props/Decimal.js.html",
     "props/Decimal.js",
     "file"
+  ],
+  [
+    "props/decimal.js~decimal#constructor",
+    "class/props/Decimal.js~DECIMAL.html#instance-constructor-constructor",
+    "props/Decimal.js~DECIMAL#constructor",
+    "method"
   ],
   [
     "props/decimal.js~decimal#parse",
@@ -640,6 +700,12 @@ window.esdocSearchIndex = [
     "file/props/Integer.js.html",
     "props/Integer.js",
     "file"
+  ],
+  [
+    "props/integer.js~integer#constructor",
+    "class/props/Integer.js~INTEGER.html#instance-constructor-constructor",
+    "props/Integer.js~INTEGER#constructor",
+    "method"
   ],
   [
     "props/integer.js~integer#decrement",
@@ -802,6 +868,150 @@ window.esdocSearchIndex = [
     "class/props/Text.js~TEXT.html#instance-method-parse",
     "props/Text.js~TEXT#parse",
     "method"
+  ],
+  [
+    "props/classes/prop.js",
+    "file/props/classes/Prop.js.html",
+    "props/classes/Prop.js",
+    "file"
+  ],
+  [
+    "props/classes/prop.js~prop#[symbol.toprimitive]",
+    "class/props/classes/Prop.js~Prop.html#instance-method-[Symbol.toPrimitive]",
+    "props/classes/Prop.js~Prop#[Symbol.toPrimitive]",
+    "method"
+  ],
+  [
+    "props/classes/prop.js~prop#_set",
+    "class/props/classes/Prop.js~Prop.html#instance-method-_set",
+    "props/classes/Prop.js~Prop#_set",
+    "method"
+  ],
+  [
+    "props/classes/prop.js~prop#constructor",
+    "class/props/classes/Prop.js~Prop.html#instance-constructor-constructor",
+    "props/classes/Prop.js~Prop#constructor",
+    "method"
+  ],
+  [
+    "props/classes/prop.js~prop#equals",
+    "class/props/classes/Prop.js~Prop.html#instance-method-equals",
+    "props/classes/Prop.js~Prop#equals",
+    "method"
+  ],
+  [
+    "props/classes/prop.js~prop#format",
+    "class/props/classes/Prop.js~Prop.html#instance-method-format",
+    "props/classes/Prop.js~Prop#format",
+    "method"
+  ],
+  [
+    "props/classes/prop.js~prop#get",
+    "class/props/classes/Prop.js~Prop.html#instance-method-get",
+    "props/classes/Prop.js~Prop#get",
+    "method"
+  ],
+  [
+    "props/classes/prop.js~prop#name",
+    "class/props/classes/Prop.js~Prop.html#instance-member-name",
+    "props/classes/Prop.js~Prop#name",
+    "member"
+  ],
+  [
+    "props/classes/prop.js~prop#parse",
+    "class/props/classes/Prop.js~Prop.html#instance-method-parse",
+    "props/classes/Prop.js~Prop#parse",
+    "method"
+  ],
+  [
+    "props/classes/prop.js~prop#tojson",
+    "class/props/classes/Prop.js~Prop.html#instance-method-toJSON",
+    "props/classes/Prop.js~Prop#toJSON",
+    "method"
+  ],
+  [
+    "props/classes/prop.js~prop#tostring",
+    "class/props/classes/Prop.js~Prop.html#instance-method-toString",
+    "props/classes/Prop.js~Prop#toString",
+    "method"
+  ],
+  [
+    "props/classes/prop.js~prop#value",
+    "class/props/classes/Prop.js~Prop.html#instance-member-value",
+    "props/classes/Prop.js~Prop#value",
+    "member"
+  ],
+  [
+    "props/classes/prop.js~prop#valueof",
+    "class/props/classes/Prop.js~Prop.html#instance-method-valueOf",
+    "props/classes/Prop.js~Prop#valueOf",
+    "method"
+  ],
+  [
+    "props/classes/prop.js~prop.isprop",
+    "class/props/classes/Prop.js~Prop.html#static-member-isProp",
+    "props/classes/Prop.js~Prop.isProp",
+    "member"
+  ],
+  [
+    "props/classes/propevents.js",
+    "file/props/classes/PropEvents.js.html",
+    "props/classes/PropEvents.js",
+    "file"
+  ],
+  [
+    "props/classes/propevents.js~propevents#_bubble",
+    "class/props/classes/PropEvents.js~PropEvents.html#instance-method-_bubble",
+    "props/classes/PropEvents.js~PropEvents#_bubble",
+    "method"
+  ],
+  [
+    "props/classes/propevents.js~propevents#_event",
+    "class/props/classes/PropEvents.js~PropEvents.html#instance-member-_event",
+    "props/classes/PropEvents.js~PropEvents#_event",
+    "member"
+  ],
+  [
+    "props/classes/propevents.js~propevents#_processevent",
+    "class/props/classes/PropEvents.js~PropEvents.html#instance-method-_processEvent",
+    "props/classes/PropEvents.js~PropEvents#_processEvent",
+    "method"
+  ],
+  [
+    "props/classes/propevents.js~propevents#constructor",
+    "class/props/classes/PropEvents.js~PropEvents.html#instance-constructor-constructor",
+    "props/classes/PropEvents.js~PropEvents#constructor",
+    "method"
+  ],
+  [
+    "props/classes/propevents.js~propevents#eventcallbacks",
+    "class/props/classes/PropEvents.js~PropEvents.html#instance-member-eventCallbacks",
+    "props/classes/PropEvents.js~PropEvents#eventCallbacks",
+    "member"
+  ],
+  [
+    "props/classes/propevents.js~propevents#isobservable",
+    "class/props/classes/PropEvents.js~PropEvents.html#instance-member-isObservable",
+    "props/classes/PropEvents.js~PropEvents#isObservable",
+    "member"
+  ],
+  [
+    "props/classes/propevents.js~propevents#off",
+    "class/props/classes/PropEvents.js~PropEvents.html#instance-method-off",
+    "props/classes/PropEvents.js~PropEvents#off",
+    "method"
+  ],
+  [
+    "props/classes/propevents.js~propevents#on",
+    "class/props/classes/PropEvents.js~PropEvents.html#instance-method-on",
+    "props/classes/PropEvents.js~PropEvents#on",
+    "method"
+  ],
+  [
+    "props/classes/propevents.js~propevents#parent",
+    "class/props/classes/PropEvents.js~PropEvents.html#instance-member-parent",
+    "props/classes/PropEvents.js~PropEvents#parent",
+    "member"
   ],
   [
     "props/classes/schemaerror.js",

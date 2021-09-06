@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">props/classes/schema.js | observabubble</title>
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">props/Date.js | observabubble</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -55,105 +55,202 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">props/classes/schema.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import SchemaError from &apos;./SchemaError.js&apos;
-import props from &apos;../index.js&apos;
-import INTEGER from &apos;../Integer.js&apos;
-import BOOLEAN from &apos;../Boolean.js&apos;
-import DATE from &apos;../Date.js&apos;
-import DECIMAL from &apos;../Decimal.js&apos;
-import STRING from &apos;../String.js&apos;
-import ARRAY from &apos;../Array.js&apos;
-import OBJECT from &apos;../Object.js&apos;
-// import TEXT from &apos;./Text.js&apos;
-const getProp = obj =&gt; {
-  if (obj.isProp) return { Prop: obj }
-  if (obj.isObservable) {
-    return { Prop: obj }
+<div class="content" data-ice="content"><h1 data-ice="title">props/Date.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">
+import Prop from &apos;./classes/Prop.js&apos;
+import { DateTime } from &apos;luxon&apos;
+import { CHANGE } from &apos;./events/events.js&apos;
+const defaultParser = &apos;fromJSDate&apos;
+const parseMatcher = [
+  {
+    match: val =&gt; val instanceof Date,
+    parse: &apos;fromJSDate&apos;
+  },
+  {
+    match: val =&gt; val &amp;&amp; val.match(/\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+/),
+    parse: &apos;fromISO&apos;
   }
-  if (typeof obj === &apos;string&apos; &amp;&amp; props[obj]) return { Prop: props[obj] }
-  if (typeof obj === &apos;string&apos;) return { Prop: STRING, Value: obj }
-  if (obj instanceof Date) return { Prop: DATE, Value: obj }
-  if (typeof obj === &apos;number&apos;) {
-    if (obj === parseInt(obj)) return { Prop: INTEGER, Value: obj }
-    return { Prop: DECIMAL, Value: obj }
+]
+const defaultOptions = {
+}
+const luxonMethods = [
+  [&apos;getUnit&apos;, &apos;get&apos;],
+  &apos;isValid&apos;,
+  &apos;invalidReason&apos;,
+  &apos;invalidExplanation&apos;,
+  &apos;locale&apos;,
+  &apos;numberingSystem&apos;,
+  &apos;outputCalendar&apos;,
+  &apos;zone&apos;,
+  &apos;zoneName&apos;,
+  &apos;year&apos;,
+  &apos;quarter&apos;,
+  &apos;month&apos;,
+  &apos;day&apos;,
+  &apos;hour&apos;,
+  &apos;minute&apos;,
+  &apos;second&apos;,
+  &apos;millisecond&apos;,
+  &apos;weekYear&apos;,
+  &apos;weekNumber&apos;,
+  &apos;weekday&apos;,
+  &apos;ordinal&apos;,
+  &apos;monthShort&apos;,
+  &apos;monthLong&apos;,
+  &apos;weekdayShort&apos;,
+  &apos;weekdayLong&apos;,
+  &apos;offset&apos;,
+  &apos;offsetNameShort&apos;,
+  &apos;offsetNameLong&apos;,
+  &apos;isOffsetFixed&apos;,
+  &apos;isInDST&apos;,
+  &apos;isInLeapYear&apos;,
+  &apos;daysInMonth&apos;,
+  &apos;daysInYear&apos;,
+  &apos;weeksInWeekYear&apos;,
+  &apos;resolvedLocaleOptions&apos;,
+  &apos;toUTC&apos;,
+  &apos;toLocal&apos;,
+  &apos;setZone&apos;,
+  &apos;reconfigure&apos;,
+  &apos;setLocale&apos;,
+  &apos;set&apos;,
+  &apos;plus&apos;,
+  &apos;minus&apos;,
+  &apos;startOf&apos;,
+  &apos;endOf&apos;,
+  &apos;toFormat&apos;,
+  &apos;toLocaleString&apos;,
+  &apos;toLocaleParts&apos;,
+  &apos;toISO&apos;,
+  &apos;toISODate&apos;,
+  &apos;toISOWeekDate&apos;,
+  &apos;toISOTime&apos;,
+  &apos;toRFC2822&apos;,
+  &apos;toHTTP&apos;,
+  &apos;toSQLDate&apos;,
+  &apos;toSQLTime&apos;,
+  &apos;toSQL&apos;,
+  &apos;toString&apos;,
+  &apos;valueOf&apos;,
+  &apos;toMillis&apos;,
+  &apos;toSeconds&apos;,
+  &apos;toJSON&apos;,
+  &apos;toBSON&apos;,
+  &apos;toObject&apos;,
+  &apos;toJSDate&apos;,
+  &apos;diff&apos;,
+  &apos;diffNow&apos;,
+  &apos;until&apos;,
+  &apos;hasSame&apos;,
+  &apos;equals&apos;,
+  &apos;toRelative&apos;,
+  &apos;toRelativeCalendar&apos;
+]
+
+/**
+ * The Observable DATE Class
+ */
+class DATE extends Prop {
+  /**
+ * @param {Date} value - The initial value of the Date
+ * @param {Object} options
+ * @param {OBJECT} options.parent - The Parent Object to which this Date is a member of
+ * @param {String} options.name -The Name/key in the Parent Object to which this Date is assigned
+ */
+  constructor (value, { parent, name } = {}) {
+    super(value, { parent, name })
   }
-  if (typeof obj === &apos;boolean&apos;) return { Prop: BOOLEAN, Value: obj }
-  if (typeof obj === &apos;object&apos;) {
-    if (Object.keys(obj).length === 1 &amp;&amp; obj.type &amp;&amp; props[obj.type]) {
-      return { Prop: props[obj.type] }
-    } else if (Object.keys(obj).length === 2 &amp;&amp; obj.type &amp;&amp; props[obj.type] &amp;&amp; obj.value !== undefined) {
-      return { Prop: props[obj.type], Value: obj.value }
-    } else {
-      return { Prop: OBJECT, Value: obj }
+
+  /**
+   * @ignore
+ */
+  _setOptions (options = {}) {
+    this._options = { ...defaultOptions, ...options }
+    luxonMethods.forEach(method =&gt; {
+      const [localMethod, dateMethod] = (method instanceof Array) ? method : [method, method]
+      this[localMethod] = (...args) =&gt; {
+        if (!this || !this.value) return
+        const oldValue = this.value
+        const newValue = this.value[dateMethod](...args)
+        if (newValue instanceof DateTime) {
+          this.value = newValue
+          // console.log(oldValue.toJSDate(), newValue.toJSDate(), newValue.equals(oldValue))
+          if (!newValue.equals(oldValue)) {
+            // console.log(CHANGE)
+            this._event[CHANGE]()
+          }
+        }
+        // console.log(newValue)
+        return newValue
+      }
+    })
+  }
+
+  /**
+   * @ignore
+ */
+  [Symbol.toPrimitive] (hint) {
+    switch (hint) {
+      case &apos;number&apos;:
+        return this.value.toJSDate ? this.value.toJSDate().getTime() : this.value
+      case &apos;string&apos;:
+        return this.toString()
+      case &apos;default&apos;:
+        return this.value.toJSDate ? this.value.toJSDate().getTime() : this.value
+    }
+    return this.get()
+  }
+
+  /**
+   * @ignore
+ */
+  _set (value, { preventEvent = false } = {}) {
+    const oldValue = this.value
+    const newValue = this.parse(value)
+    this.value = newValue
+    if (!preventEvent &amp;&amp; !newValue.equals(oldValue)) {
+      this._event[CHANGE]()
     }
   }
-  if (obj === null) throw new SchemaError(&apos;A NULL value cannot be parsed in a Schema&apos;)
-  throw new SchemaError(`Schema could not parse the entry ${obj}`)
+
+  /**
+   * Parses the Date
+ * @param {any} value - The value to be parsed
+ * @returns {Date} - The parsed Date
+ */
+  parse (value) {
+    const parser = parseMatcher.find(p =&gt; p.match(value))
+    const method = parser ? parser.parse : defaultParser
+    // console.log(method)
+    const val = DateTime[method](value)
+    // console.log(val)
+    return val
+  }
+
+  /**
+   * @ignore
+ */
+  toJSON () {
+    return (this.value &amp;&amp; this.value.toJSDate) ? this.value.toJSDate() : this.value
+  }
+
+  /**
+   * @ignore
+ */
+  valueOf () {
+    return (this.value &amp;&amp; this.value.toJSDate) ? this.value.toJSDate() : this.value
+  }
+
+  /**
+   * @ignore
+ */
+  toString () {
+    return this.value ? (this.value.toJSDate ? this.value.toJSDate().toString() : this.value.toString()) : this.value
+  }
 }
 
-const schema = s =&gt; {
-  if (s instanceof Array) {
-    if (!s.length) throw new SchemaError(&apos;An Array in a schema must contain a sub-schema for the containing objects&apos;)
-    return s.map(i =&gt; schema(i))
-  }
-  if (s.isObservable) return s
-  const structure = Object.keys(s).reduce((acc, key) =&gt; {
-    const { Prop, Value } = getProp(s[key])
-    acc[key] = { Prop, Value }
-    if (acc[key].Prop === OBJECT) {
-      acc[key] = schema(s[key])
-    }
-    return acc
-  }, {})
-  return structure
-}
-const TypeSchema = s =&gt; {
-  if (s instanceof Array) {
-    return s.map(TypeSchema)
-  }
-  if (s.isObservable) return s
-  return Object.keys(s).reduce((acc, key) =&gt; {
-    if (s[key] instanceof Array) {
-      acc[key] = s[key].map(TypeSchema)
-    } else {
-      const { Prop } = s[key]
-      if (!Prop) {
-        acc[key] = TypeSchema(s[key])
-      } else {
-        acc[key] = Prop
-      }
-    }
-    return acc
-  }, {})
-}
-const ValueSchema = s =&gt; {
-  if (s instanceof Array) {
-    return s.map(ValueSchema)
-  }
-  return Object.keys(s).reduce((acc, key) =&gt; {
-    if (s[key]) {
-      if (s[key] instanceof Array) {
-        acc[key] = s[key].map(ValueSchema)
-      } else {
-        const { Prop, Value } = s[key]
-        if (!Prop) {
-          acc[key] = ValueSchema(s[key])
-        } else {
-          acc[key] = Value
-        }
-      }
-    }
-    return acc
-  }, {})
-}
-const TypesAndValues = s =&gt; {
-  // console.log(s)
-  const TAV = schema(s)
-  // console.log(TAV)
-  return [TypeSchema(TAV), ValueSchema(TAV)]
-}
-export default TypesAndValues
+export default DATE
 </code></pre>
 
 </div>

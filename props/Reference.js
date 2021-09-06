@@ -48,7 +48,7 @@ class REFERENCE extends Prop {
 
   _attachRef (ref) {
     this._ref = ref
-    this.processEvent(LOAD, this, { bubble: true })
+    this._processEvent(LOAD, this, { bubble: true })
   }
 
   get () {

@@ -89,9 +89,26 @@ const luxonMethods = [
   'toRelative',
   'toRelativeCalendar'
 ]
+
+/**
+ * The Observable DATE Class
+ */
 class DATE extends Prop {
-  setOptions (options) {
-    this.options = { ...defaultOptions, ...options }
+  /**
+ * @param {Date} value - The initial value of the Date
+ * @param {Object} options
+ * @param {OBJECT} options.parent - The Parent Object to which this Date is a member of
+ * @param {String} options.name -The Name/key in the Parent Object to which this Date is assigned
+ */
+  constructor (value, { parent, name } = {}) {
+    super(value, { parent, name })
+  }
+
+  /**
+   * @ignore
+ */
+  _setOptions (options = {}) {
+    this._options = { ...defaultOptions, ...options }
     luxonMethods.forEach(method => {
       const [localMethod, dateMethod] = (method instanceof Array) ? method : [method, method]
       this[localMethod] = (...args) => {
@@ -112,6 +129,9 @@ class DATE extends Prop {
     })
   }
 
+  /**
+   * @ignore
+ */
   [Symbol.toPrimitive] (hint) {
     switch (hint) {
       case 'number':
@@ -124,6 +144,9 @@ class DATE extends Prop {
     return this.get()
   }
 
+  /**
+   * @ignore
+ */
   _set (value, { preventEvent = false } = {}) {
     const oldValue = this.value
     const newValue = this.parse(value)
@@ -133,6 +156,11 @@ class DATE extends Prop {
     }
   }
 
+  /**
+   * Parses the Date
+ * @param {any} value - The value to be parsed
+ * @returns {Date} - The parsed Date
+ */
   parse (value) {
     const parser = parseMatcher.find(p => p.match(value))
     const method = parser ? parser.parse : defaultParser
@@ -142,14 +170,23 @@ class DATE extends Prop {
     return val
   }
 
+  /**
+   * @ignore
+ */
   toJSON () {
     return (this.value && this.value.toJSDate) ? this.value.toJSDate() : this.value
   }
 
+  /**
+   * @ignore
+ */
   valueOf () {
     return (this.value && this.value.toJSDate) ? this.value.toJSDate() : this.value
   }
 
+  /**
+   * @ignore
+ */
   toString () {
     return this.value ? (this.value.toJSDate ? this.value.toJSDate().toString() : this.value.toString()) : this.value
   }

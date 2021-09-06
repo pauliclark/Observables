@@ -20,15 +20,15 @@ const props = {
 /**
  * @ignore
  */
-export const typesFoundInSchema = [
-  INTEGER,
-  BOOLEAN,
-  DATE,
-  DECIMAL,
-  STRING,
-  TEXT,
-  REFERENCE
-]
+// export const typesFoundInSchema = [
+//   INTEGER,
+//   BOOLEAN,
+//   DATE,
+//   DECIMAL,
+//   STRING,
+//   TEXT,
+//   REFERENCE
+// ]
 /**
  * @ignore
  */
